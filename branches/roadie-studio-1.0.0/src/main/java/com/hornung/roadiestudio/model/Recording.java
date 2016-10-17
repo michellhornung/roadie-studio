@@ -35,17 +35,17 @@ public class Recording implements Serializable {
 
 	//bi-directional many-to-one association to Band
 	@ManyToOne
-	@JoinColumn(name="COD_RECORDING")
+	@JoinColumn(name="COD_RECORDING", insertable=false, updatable=false)
 	private Band enBand;
 
 	//bi-directional many-to-one association to Room
 	@ManyToOne
-	@JoinColumn(name="COD_RECORDING")
+	@JoinColumn(name="COD_RECORDING", insertable=false, updatable=false)
 	private Room enRoom;
 
 	//bi-directional many-to-one association to Stock
 	@ManyToOne
-	@JoinColumn(name="COD_RECORDING")
+	@JoinColumn(name="COD_RECORDING", insertable=false, updatable=false)
 	private Stock enStock;
 
 	public Recording() {

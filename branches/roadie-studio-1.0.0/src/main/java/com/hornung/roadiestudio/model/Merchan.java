@@ -16,7 +16,7 @@ public class Merchan implements Serializable {
 
 	@Id
 	@SequenceGenerator(name="EN_MERCHAN_CODMERCHAN_GENERATOR" )
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EN_MERCHAN_CODMERCHAN_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="EN_MERCHAN_CODMERCHAN_GENERATOR")
 	@Column(name="COD_MERCHAN")
 	private int codMerchan;
 

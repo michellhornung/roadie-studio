@@ -17,7 +17,7 @@ public class Room implements Serializable {
 
 	@Id
 	@SequenceGenerator(name="EN_ROOM_CODROOM_GENERATOR" )
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EN_ROOM_CODROOM_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="EN_ROOM_CODROOM_GENERATOR")
 	@Column(name="COD_ROOM")
 	private int codRoom;
 

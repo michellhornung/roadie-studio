@@ -17,7 +17,7 @@ public class Sale implements Serializable {
 
 	@Id
 	@SequenceGenerator(name="EN_SALES_CODSALES_GENERATOR" )
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EN_SALES_CODSALES_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="EN_SALES_CODSALES_GENERATOR")
 	@Column(name="COD_SALES")
 	private int codSales;
 

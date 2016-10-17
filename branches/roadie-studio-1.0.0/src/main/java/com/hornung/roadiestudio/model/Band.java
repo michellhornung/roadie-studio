@@ -17,7 +17,7 @@ public class Band implements Serializable {
 
 	@Id
 	@SequenceGenerator(name="EN_BAND_CODBAND_GENERATOR" )
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EN_BAND_CODBAND_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="EN_BAND_CODBAND_GENERATOR")
 	@Column(name="COD_BAND")
 	private int codBand;
 

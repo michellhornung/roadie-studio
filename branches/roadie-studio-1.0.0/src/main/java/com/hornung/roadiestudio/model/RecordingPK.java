@@ -12,7 +12,7 @@ public class RecordingPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="COD_RECORDING", insertable=false, updatable=false)
+	@Column(name="COD_RECORDING")
 	private int codRecording;
 
 	@Column(name="HOUR_QUANTITY")

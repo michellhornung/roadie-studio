@@ -16,7 +16,7 @@ public class Logo implements Serializable {
 
 	@Id
 	@SequenceGenerator(name="EN_LOGO_CODLOGO_GENERATOR" )
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EN_LOGO_CODLOGO_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="EN_LOGO_CODLOGO_GENERATOR")
 	@Column(name="COD_LOGO")
 	private int codLogo;
 

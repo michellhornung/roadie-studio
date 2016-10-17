@@ -16,7 +16,7 @@ public class RoleType implements Serializable {
 
 	@Id
 	@SequenceGenerator(name="EN_ROLE_TYPE_CODROLETYPE_GENERATOR" )
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EN_ROLE_TYPE_CODROLETYPE_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="EN_ROLE_TYPE_CODROLETYPE_GENERATOR")
 	@Column(name="COD_ROLE_TYPE")
 	private int codRoleType;
 

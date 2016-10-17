@@ -16,7 +16,7 @@ public class StockType implements Serializable {
 
 	@Id
 	@SequenceGenerator(name="EN_STOCK_TYPE_CODSTOCKTYPE_GENERATOR" )
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EN_STOCK_TYPE_CODSTOCKTYPE_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="EN_STOCK_TYPE_CODSTOCKTYPE_GENERATOR")
 	@Column(name="COD_STOCK_TYPE")
 	private int codStockType;
 

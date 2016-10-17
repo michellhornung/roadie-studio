@@ -17,7 +17,7 @@ public class User implements Serializable {
 
 	@Id
 	@SequenceGenerator(name="EN_USER_CODUSER_GENERATOR" )
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EN_USER_CODUSER_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="EN_USER_CODUSER_GENERATOR")
 	@Column(name="COD_USER")
 	private int codUser;
 
@@ -157,6 +157,28 @@ public class User implements Serializable {
 
 	public void setEnRoleType(RoleType enRoleType) {
 		this.enRoleType = enRoleType;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + codUser;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (codUser != other.codUser)
+			return false;
+		return true;
 	}
 
 }

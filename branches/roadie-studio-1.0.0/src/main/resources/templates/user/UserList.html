@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/DefaultLayout">
+	
+<head>
+	<title>RoadieStudio</title>
+</head>
+
+<body>
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10">
+					<h1>
+						Lista de usuários
+					</h1>
+				</div>
+			
+				<div class="col-xs-2">
+					<div class="aw-page-header-controls">
+						<a class="btn btn-primary" th:href="@{/user/new}">
+							<i class="fa  fa-plus-circle"></i> <span class="hidden-xs  hidden-sm">Novo produto</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+
+		<div class="row  aw-datatable-toolbar">
+			<div class="col-xs-8">
+				<button class="btn btn-default  btn-sm">
+					<i class="fa fa-trash"></i> <span class="visible-md-inline  visible-lg-inline">Excluir</span>
+				</button>
+	
+				<div class="btn-group">
+				  <button type="button" class="btn  btn-default  btn-sm  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+				    <i class="fa  fa-arrow-circle-down  visible-md-inline  visible-lg-inline"></i> <span>Exportar</span>
+				    <span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu" role="menu">
+				    <li><a href="#">Para arquivo Excel</a></li>
+				    <li><a href="#">Para arquivo CSV</a></li>
+				    <li><a href="#">Para arquivo XML</a></li>
+				  </ul>
+				</div>
+				
+				<div class="btn-group">
+				  <button type="button" class="btn btn-default  btn-sm  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+				    <span>Mais</span>
+				    <span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu" role="menu">
+				    <li><a href="#">Ativar</a></li>
+				    <li><a href="#">Desativar</a></li>
+				  </ul>
+				</div>
+			</div>
+			
+			<div class="col-xs-4">
+				<div class="btn-toolbar  pull-right" role="toolbar">
+					<div class="btn-group" role="group">
+						<button type="button" class="btn  btn-default  btn-sm"><i class="fa fa-th-large"></i></button>
+						<button type="button" class="btn  btn-default  btn-sm  active"><i class="fa fa-bars"></i></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="table-responsive">
+			<table id="user-table" class="table  table-striped  table-bordered  table-hover  table-condensed  js-sticky-table">
+				<thead class="aw-table-header-solid">
+					<tr>
+						<th class="aw-table-checkbox">
+							<input type="checkbox"/>
+						</th>
+						<th>Cód</th>
+						<th>Nome</th>
+						<th>Sobrenome</th>
+						<th>Nome usuário</th>
+						<th>E-mail</th>
+						<th>Última atualização</th>
+						<th>Status</th>
+						<th class="table-pesq-produto-col-acoes">Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="user : ${users}"> 
+						<td class="aw-table-checkbox"><input type="checkbox"/></td>
+						<td th:text="${user.codUser}">1</td>
+						<td th:text="${user.firstName}">Michell</td>
+						<td th:text="${user.lastName}">Hornung</td>
+						<td th:text="${user.username}">michellhornung</td>
+						<td th:text="${user.email}">michellhornung@gmail.com</td>
+						<td th:text="${user.latestUpdate}">12/12/2012 14:45:32</td>
+						<td class="table-pesq-produto-col-status"><span class="label label-success">Ativo</span></td>					
+						<td class="table-pesq-produto-col-acoes">
+						
+							<div class="btn-group">
+								<button class="btn  btn-default btn-xs">
+									<i class="fa  fa-pencil"></i>
+								</button>
+								
+								<button class="btn  btn-default btn-xs">
+									<i class="fa  fa-trash"></i>
+								</button>
+							</div>
+							
+						</td>
+					</tr>
+					<tr th:if="${users.empty}">
+						<td colspan="9">Nenhum registro encontrado</td>
+					</tr>
+					
+				</tbody>
+			</table>
+		</div>
+			
+		<div class="row">
+			<div class="col-xs-12  col-md-8  aw-text-xs-center  aw-text-md-left">
+				<nav>
+					<ul class="pagination  pagination-sm">
+						<li><a href="#"><i class="fa  fa-angle-double-left"></i></a></li>
+						<li class="active"><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+						<li><a href="#"><i class="fa  fa-angle-double-right"></i></a></li>
+					</ul>
+				</nav>
+			</div>
+			<div class="col-xs-12  col-md-4  aw-text-xs-center  aw-text-md-right">
+				<span class="aw-pagination-info">
+					102 produtos encontrados
+				</span>
+			</div>
+	
+		</div>
+	</div>
+
+</section>
+</body>
+</html>

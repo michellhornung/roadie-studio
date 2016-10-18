@@ -45,7 +45,7 @@ public class User implements Serializable {
 	private byte[] photo;
 
 	@Column(name="USERNAME")
-	private String username;
+	private String userName;
 
 	//bi-directional one-to-one association to Band
 	@OneToOne(mappedBy="enUser")
@@ -128,11 +128,11 @@ public class User implements Serializable {
 	}
 
 	public String getUsername() {
-		return this.username;
+		return this.userName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUsername(String userName) {
+		this.userName = userName;
 	}
 
 	public Band getEnBand() {

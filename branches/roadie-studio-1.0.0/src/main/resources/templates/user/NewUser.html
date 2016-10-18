@@ -2,10 +2,10 @@
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layout/LayoutPadrao">
+	layout:decorator="layout/DefaultLayout">
 	
 <head>
-	<title>AlgaWorks</title>
+	<title>Cadastro de usuário</title>
 </head>
 
 <body>
@@ -14,7 +14,7 @@
 	<div class="page-header">
 		<div class="container-fluid">
 			<h1>
-				Cadastro de produto
+				Cadastro de usuário
 			</h1>
 		</div>
 	</div>
@@ -23,41 +23,79 @@
 	
 		<div class="alert  alert-danger  alert-dismissible" role="alert">
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<i class="fa  fa-exclamation-circle"></i> Já existe um produto com o nome informado.
+			<i class="fa  fa-exclamation-circle"></i> Já existe um usuário com o nome informado.
 		</div>
 	
-		<form method="get" class="form-vertical  js-form-loading">
-			
-			<div class="form-group">
-				<label for="input-produto-nome">Nome</label>
-				<input id="input-produto-nome" type="text" class="form-control"/>
+		<form method="POST" th:object="${user}" class="form-vertical  js-form-loading" th:action="@{/user/new}">
+			<div class="alert  alert-danger  alert-dismissible" role="alert" th:if="${#fields.hasAnyErrors()}">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<th:block th:each="erro : ${#fields.detailedErrors()}">
+					<div>
+						<i class="fa  fa-exclamation-circle"></i> 
+						<span th:text="${erro.message}">Já existe um usuário com o nome informado.</span>
+					</div>
+				</th:block>
 			</div>
-	
-			<div class="form-group">
-				<label for="input-produto-descricao">Descrição</label>
-				<textarea id="input-produto-descricao" rows="3" class="form-control"></textarea>
+			
+			<div class="form-group" th:classappend="${#fields.hasErrors('userName')} ? has-error">
+				<label for="userName" class="control-label">Username</label>
+				<input id="userName" type="text" class="form-control" th:field="*{userName}"/>
+			</div>
+			
+			<div class="form-group" th:classappend="${#fields.hasErrors('email')} ? has-error">
+				<label for="email" class="control-label">E-mail</label>
+				<input id="email" type="text" class="form-control" th:field="*{email}"/>
 			</div>
 	
 			<div class="row">
-				<div class="col-sm-3">
-					<div class="form-group">
-						<label for="input-produto-preco">Preço unitário</label>
-						<input id="input-produto-preco" type="text" class="form-control" placeholder="R$"/>
-					</div>
+				<div class="col-sm-6  form-group" th:classappend="${#fields.hasErrors('firstName')} ? has-error">
+					<label for="firstName" class="control-label">Nome</label>
+					<input id="firstName" type="text" class="form-control" th:field="*{firstName}"/>
 				</div>
 				
-				<div class="col-sm-3">
-					<div class="form-group">
-						<label for="input-produto-estoque">Estoque</label>
-						<input id="input-produto-estoque" type="text" class="form-control" placeholder="Unidades"/>
-					</div>
+				<div class="col-sm-6  form-group" th:classappend="${#fields.hasErrors('lastName')} ? has-error">
+					<label for="lastName" class="control-label">Sobrenome</label>
+					<input id="lastName" type="text" class="form-control" th:field="*{lastName}"/>
 				</div>
 			</div>
 			
+			<div class="row">
+				<div class="col-sm-6  form-group" th:classappend="${#fields.hasErrors('password')} ? has-error">
+					<label for="password" class="control-label">Senha</label>
+					<input id="password" type="password" class="form-control" th:field="*{password}"/>
+				</div>
+				
+				<div class="col-sm-6  form-group" th:classappend="${#fields.hasErrors('re-password')} ? has-error">
+					<label for="re-password" class="control-label">Repete senha</label>
+					<input id="re-password" type="password" class="form-control" th:field="*{re-password}"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 form-group aw-table-checkbox" th:classappend="${#fields.hasErrors('isActive')} ? has-error">
+					<label for="isActive" class="control-label">Ativo?</label>
+					<input id="isActive" type="checkbox"  class="form-control" th:checked="*{isActive}"/>
+				</div>
+				<div class="col-sm-6  form-group" th:classappend="${#fields.hasErrors('latestUpdate')} ? has-error">
+					<label for="latestUpdate" class="control-label">Última atualização</label>
+					<input id="latestUpdate" type="datetime" class="form-control" th:field="*{latestUpdate}"/>
+				</div>
+			</div>
+			
+			<div class="form-group" th:classappend="${#fields.hasErrors('photo')} ? has-error">
+				<label for="photo" class="control-label">Foto do perfil</label>
+				<input id="photo" type="file" class="form-control" th:field="*{photo}"/>
+			</div>
+			
+			<div class="form-group" th:classappend="${#fields.hasErrors('role')} ? has-error">
+				<label for="role" class="control-label">Role</label>
+				<select id="role" class="form-control" th:field="*{role}">
+					<option value="">Selecione a role</option>
+					<option th:each="role : ${roles}" th:value="${role}" th:text="${role.description}"></option>
+				</select>
+			</div>
+				
 			<div class="form-group">
 				<button class="btn  btn-primary" type="submit">Salvar</button>
-				<a href="#" class="btn  btn-default">Cancelar</a>
-				<a href="#" class="btn  btn-link  aw-btn-link-danger">Excluir este produto</a>
 			</div>
 	
 		</form>

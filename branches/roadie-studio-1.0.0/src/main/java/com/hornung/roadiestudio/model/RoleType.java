@@ -54,4 +54,9 @@ public class RoleType implements Serializable {
 		this.enUser = enUser;
 	}
 
+	public static Object values() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

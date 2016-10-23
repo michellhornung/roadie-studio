@@ -20,10 +20,9 @@
 	</div>
 
 	<div class="container-fluid">
-	
-		<div class="alert  alert-danger  alert-dismissible" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<i class="fa  fa-exclamation-circle"></i> Já existe um usuário com o nome informado.
+		<div class="alert  alert-success  alert-dismissible" role="alert" th:if="${not #strings.isEmpty(message)}" >
+			<button type="button" class="close" data-dismiss="alert" ><span aria-hidden="true">&times;</span></button>
+			<span th:text="${message}"></span>
 		</div>
 	
 		<form method="POST" th:object="${user}" class="form-vertical  js-form-loading" th:action="@{/user/new}">
@@ -32,68 +31,78 @@
 				<th:block th:each="erro : ${#fields.detailedErrors()}">
 					<div>
 						<i class="fa  fa-exclamation-circle"></i> 
-						<span th:text="${erro.message}">Já existe um usuário com o nome informado.</span>
+						<span th:text="${erro.message}"></span>
 					</div>
 				</th:block>
 			</div>
 			
-			<div class="form-group" th:classappend="${#fields.hasErrors('userName')} ? has-error">
-				<label for="userName" class="control-label">Username</label>
-				<input id="userName" type="text" class="form-control" th:field="*{userName}"/>
+			<div class="row">
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('username')} ? has-error">
+					<label for="username" class="control-label">Username</label>
+					<input id="username" type="text" class="form-control" th:field="*{username}" autofocus="autofocus" />
+				</div>
+			
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('email')} ? has-error">
+					<label for="email" class="control-label">E-mail</label>
+					<input id="email" type="email" class="form-control" th:field="*{email}"/>
+				</div>
 			</div>
 			
-			<div class="form-group" th:classappend="${#fields.hasErrors('email')} ? has-error">
-				<label for="email" class="control-label">E-mail</label>
-				<input id="email" type="text" class="form-control" th:field="*{email}"/>
-			</div>
-	
 			<div class="row">
 				<div class="col-sm-6  form-group" th:classappend="${#fields.hasErrors('firstName')} ? has-error">
 					<label for="firstName" class="control-label">Nome</label>
-					<input id="firstName" type="text" class="form-control" th:field="*{firstName}"/>
+					<input id="firstName" type="text" class="form-control" th:field="*{firstName}" />
 				</div>
 				
 				<div class="col-sm-6  form-group" th:classappend="${#fields.hasErrors('lastName')} ? has-error">
 					<label for="lastName" class="control-label">Sobrenome</label>
-					<input id="lastName" type="text" class="form-control" th:field="*{lastName}"/>
+					<input id="lastName" type="text" class="form-control" th:field="*{lastName}" />
 				</div>
 			</div>
 			
 			<div class="row">
 				<div class="col-sm-6  form-group" th:classappend="${#fields.hasErrors('password')} ? has-error">
 					<label for="password" class="control-label">Senha</label>
-					<input id="password" type="password" class="form-control" th:field="*{password}"/>
+					<input id="password" type="password" class="form-control" th:field="*{password}" />
 				</div>
 				
-				<div class="col-sm-6  form-group" th:classappend="${#fields.hasErrors('re-password')} ? has-error">
+				<div class="col-sm-6  form-group" th:classappend="${#fields.hasErrors('password')} ? has-error">
 					<label for="re-password" class="control-label">Repete senha</label>
-					<input id="re-password" type="password" class="form-control" th:field="*{re-password}"/>
+					<input id="re-password" type="password" class="form-control"/>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-6 form-group aw-table-checkbox" th:classappend="${#fields.hasErrors('isActive')} ? has-error">
-					<label for="isActive" class="control-label">Ativo?</label>
-					<input id="isActive" type="checkbox"  class="form-control" th:checked="*{isActive}"/>
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('isActive')} ? has-error">
+					<label for="isActive" class="control-label">Ativa o usuário?</label>
+					<input id="isActive" type="checkbox" class="form-control" th:checked="*{isActive}"/>
 				</div>
-				<div class="col-sm-6  form-group" th:classappend="${#fields.hasErrors('latestUpdate')} ? has-error">
-					<label for="latestUpdate" class="control-label">Última atualização</label>
-					<input id="latestUpdate" type="datetime" class="form-control" th:field="*{latestUpdate}"/>
-				</div>
-			</div>
-			
-			<div class="form-group" th:classappend="${#fields.hasErrors('photo')} ? has-error">
-				<label for="photo" class="control-label">Foto do perfil</label>
-				<input id="photo" type="file" class="form-control" th:field="*{photo}"/>
-			</div>
-			
-			<div class="form-group" th:classappend="${#fields.hasErrors('role')} ? has-error">
-				<label for="role" class="control-label">Role</label>
-				<select id="role" class="form-control" th:field="*{role}">
+				
+			<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('RoleType')} ? has-error">
+				<label for="allRoles" class="control-label">Role</label>
+				<select id="allRoles" class="form-control" th:field="*{RoleType}">
 					<option value="">Selecione a role</option>
-					<option th:each="role : ${roles}" th:value="${role}" th:text="${role.description}"></option>
+					<option th:each="RoleType : ${allRoles}" th:value="${RoleType.codRoleType}" th:text="${RoleType.description}"></option>
 				</select>
 			</div>
+			</div>
+			
+						
+ 
+			<div class="row">
+				<div class=" col-sm-6 form-group" th:classappend="${#fields.hasErrors('photo')} ? has-error">
+					<label for="photo" class="control-label">Foto do perfil</label>
+					<input id="photo" type="file" class="form-control" th:field="*{photo}"/>
+				</div>
 				
+				<div class=" col-sm-6 form-group" th:classappend="${#fields.hasErrors('latestUpdate')} ? has-error">
+					<label for="latestUpdate" class="control-label">Última atualização</label>
+					<input class="form-control" name="latestUpdate" id="latestUpdate" type="text" readonly="readonly"
+                			th:value="${#dates.format(#dates.createNow() , 'dd/MM/yyyy HH:mm')}" />
+				</div>
+				
+				
+			</div>
+			
 			<div class="form-group">
 				<button class="btn  btn-primary" type="submit">Salvar</button>
 			</div>

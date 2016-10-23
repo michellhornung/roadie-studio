@@ -2,34 +2,41 @@ package com.hornung.roadiestudio.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.util.Date;
 
 
 /**
- * The persistent class for the EN_USER database table.
+ * The persistent class for the en_user database table.
  * 
  */
 @Entity
-@Table(name="EN_USER")
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+@Table(name="en_user")
+@NamedQuery(name="User.findAll", query="SELECT e FROM User e")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="EN_USER_CODUSER_GENERATOR" )
-	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="EN_USER_CODUSER_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="COD_USER")
 	private int codUser;
-
+	
+	@NotBlank(message = "E-mail é obrigatório.")
 	@Column(name="EMAIL")
 	private String email;
-
+	
+	@NotBlank(message = "Nome é obrigatório.")
 	@Column(name="FIRST_NAME")
 	private String firstName;
 
+	@NotNull(message = "Informe se usuário é ativo no sistema.")
 	@Column(name="IS_ACTIVE")
 	private byte isActive;
 
+	@NotBlank(message = "Sobrenome é obrigatório.")
 	@Column(name="LAST_NAME")
 	private String lastName;
 
@@ -37,6 +44,7 @@ public class User implements Serializable {
 	@Column(name="LATEST_UPDATE")
 	private Date latestUpdate;
 
+	@NotBlank(message = "Senha é obrigatório.")
 	@Column(name="PASSWORD")
 	private String password;
 
@@ -44,21 +52,14 @@ public class User implements Serializable {
 	@Column(name="PHOTO")
 	private byte[] photo;
 
+	@NotBlank(message = "Username é obrigatório.")
 	@Column(name="USERNAME")
-	private String userName;
+	private String username;
 
-	//bi-directional one-to-one association to Band
-	@OneToOne(mappedBy="enUser")
-	private Band enBand;
-
-	//bi-directional one-to-one association to Sale
-	@OneToOne(mappedBy="enUser")
-	private Sale enSale;
-
-	//bi-directional one-to-one association to RoleType
-	@OneToOne
-	@JoinColumn(name="COD_USER")
-	private RoleType enRoleType;
+	//bi-directional many-to-one association to RoleType
+	@ManyToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name="COD_ROLE_TYPE")
+	private RoleType RoleType;
 
 	public User() {
 	}
@@ -128,57 +129,19 @@ public class User implements Serializable {
 	}
 
 	public String getUsername() {
-		return this.userName;
+		return this.username;
 	}
 
-	public void setUsername(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public Band getEnBand() {
-		return this.enBand;
+	public RoleType getRoleType() {
+		return this.RoleType;
 	}
 
-	public void setEnBand(Band enBand) {
-		this.enBand = enBand;
-	}
-
-	public Sale getEnSale() {
-		return this.enSale;
-	}
-
-	public void setEnSale(Sale enSale) {
-		this.enSale = enSale;
-	}
-
-	public RoleType getEnRoleType() {
-		return this.enRoleType;
-	}
-
-	public void setEnRoleType(RoleType enRoleType) {
-		this.enRoleType = enRoleType;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + codUser;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (codUser != other.codUser)
-			return false;
-		return true;
+	public void setRoleType(RoleType RoleType) {
+		this.RoleType = RoleType;
 	}
 
 }

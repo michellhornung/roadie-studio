@@ -10,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -31,7 +30,7 @@ public class UsersController {
 	private RolesType rolesType;
 	
 	@Autowired
-	private UserService newUserService;
+	private UserService userService;
 	
 	@RequestMapping
 	public ModelAndView usersList() {
@@ -54,27 +53,26 @@ public class UsersController {
 		if (result.hasErrors()) {
 			return newUser(user);
 		}
-		newUserService.save(user);
+		userService.save(user);
 		attributes.addFlashAttribute("message", "Usuário salvo com sucesso!");
 		return new ModelAndView("redirect:/user/new");
 		
 	}
-	
-	/*@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public ModelAndView delete(String codUser, BindingResult result, RedirectAttributes attributes){
+
+	@RequestMapping("/delete/{codUser}")
+	public String delete(@PathVariable int codUser, RedirectAttributes attributes) {
 		
-		newUserService.deleteUserById(Long.parseLong(codUser));
-		attributes.addFlashAttribute("message", "Usuário" + "'" + codUser + "'" + " salvo com sucesso!");
-		return new ModelAndView("redirect:/user/new");
-	}
-	*/
-	@RequestMapping("/user/delete/{codUser}")
-	public String delete(@RequestParam int codUser, BindingResult result, RedirectAttributes attributes) {
-		
-		newUserService.delete(codUser);
-		attributes.addFlashAttribute("message", "Usuário" + "'" + codUser + "'" + " salvo com sucesso!");
-		return "redirect:/user/new";
+		userService.delete(codUser);
+		attributes.addFlashAttribute("message", "Usuário " + "'" + codUser + "'" + " deletado com sucesso!");
+		return "redirect:/user";
 	
 	}
+	
+/*	@RequestMapping("/edit/{codUser}")
+	public String edit(@PathVariable int codUser, Model model) {
+		
+		model.addAttribute("user", userService.);
+		return "admin/post/postForm";
+	}*/
 	
 }

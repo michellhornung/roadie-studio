@@ -35,10 +35,7 @@
 
 		<div class="row  aw-datatable-toolbar">
 			<div class="col-xs-8">
-				<button class="btn btn-default  btn-sm">
-					<i class="fa fa-trash"></i> <span class="visible-md-inline  visible-lg-inline">Excluir</span>
-				</button>
-	
+
 				<div class="btn-group">
 				  <button type="button" class="btn  btn-default  btn-sm  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 				    <i class="fa  fa-arrow-circle-down  visible-md-inline  visible-lg-inline"></i> <span>Exportar</span>
@@ -46,31 +43,10 @@
 				  </button>
 				  <ul class="dropdown-menu" role="menu">
 				    <li><a href="#">Para arquivo Excel</a></li>
-				    <li><a href="#">Para arquivo CSV</a></li>
-				    <li><a href="#">Para arquivo XML</a></li>
-				  </ul>
-				</div>
-				
-				<div class="btn-group">
-				  <button type="button" class="btn btn-default  btn-sm  dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-				    <span>Mais</span>
-				    <span class="caret"></span>
-				  </button>
-				  <ul class="dropdown-menu" role="menu">
-				    <li><a href="#">Ativar</a></li>
-				    <li><a href="#">Desativar</a></li>
 				  </ul>
 				</div>
 			</div>
 			
-			<div class="col-xs-4">
-				<div class="btn-toolbar  pull-right" role="toolbar">
-					<div class="btn-group" role="group">
-						<button type="button" class="btn  btn-default  btn-sm"><i class="fa fa-th-large"></i></button>
-						<button type="button" class="btn  btn-default  btn-sm  active"><i class="fa fa-bars"></i></button>
-					</div>
-				</div>
-			</div>
 		</div>
 		
 		<div class="table-responsive">
@@ -99,7 +75,12 @@
 						<td th:text="${allUsers.username}"></td>
 						<td th:text="${allUsers.email}"></td>
 						<td th:text="${allUsers.latestUpdate}"></td>
-						<td class="table-pesq-produto-col-status"><span class="label label-success">Ativo</span></td>					
+						<td class="table-pesq-produto-col-status" th:if="${allUsers.isActive == 1} ">
+							<span class="label label-success">Ativo</span>
+						</td>
+						<td class="table-pesq-produto-col-status" th:if="${allUsers.isActive == 0} ">
+							<span class="label label-danger">Inativo</span>
+						</td>					
 						<td class="table-pesq-produto-col-acoes">
 						
 							<div class="btn-group">
@@ -109,7 +90,9 @@
 								
 								<button class="btn  btn-default btn-xs">
 									<i class="fa  fa-trash"></i>
+									
 								</button>
+								 <a href="#" th:href="@{'/user/delete/__${allUsers.codUser}__'}">Delete</a>
 							</div>
 							
 						</td>

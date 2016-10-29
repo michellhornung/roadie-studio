@@ -7,16 +7,18 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hornung.roadiestudio.model.RoleType;
 import com.hornung.roadiestudio.model.User;
-import com.hornung.roadiestudio.repository.Users;
 import com.hornung.roadiestudio.repository.RolesType;
-import com.hornung.roadiestudio.service.NewUserService;
+import com.hornung.roadiestudio.repository.Users;
+import com.hornung.roadiestudio.service.UserService;
 
 @Controller
 @RequestMapping("/user")
@@ -29,7 +31,7 @@ public class UsersController {
 	private RolesType rolesType;
 	
 	@Autowired
-	private NewUserService newUserService;
+	private UserService newUserService;
 	
 	@RequestMapping
 	public ModelAndView usersList() {
@@ -56,6 +58,23 @@ public class UsersController {
 		attributes.addFlashAttribute("message", "Usuário salvo com sucesso!");
 		return new ModelAndView("redirect:/user/new");
 		
+	}
+	
+	/*@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(String codUser, BindingResult result, RedirectAttributes attributes){
+		
+		newUserService.deleteUserById(Long.parseLong(codUser));
+		attributes.addFlashAttribute("message", "Usuário" + "'" + codUser + "'" + " salvo com sucesso!");
+		return new ModelAndView("redirect:/user/new");
+	}
+	*/
+	@RequestMapping("/user/delete/{codUser}")
+	public String delete(@RequestParam int codUser, BindingResult result, RedirectAttributes attributes) {
+		
+		newUserService.delete(codUser);
+		attributes.addFlashAttribute("message", "Usuário" + "'" + codUser + "'" + " salvo com sucesso!");
+		return "redirect:/user/new";
+	
 	}
 	
 }

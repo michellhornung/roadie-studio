@@ -85,21 +85,15 @@
 						<td class="table-pesq-produto-col-status" th:if="${allUsers.isActive == 0} ">
 							<span class="label label-danger">Inativo</span>
 						</td>					
-						<td class="table-pesq-produto-col-acoes">
-						
-							<div class="btn-group">
-								<button class="btn  btn-default btn-xs">
-									<i class="fa  fa-pencil"></i>
-								</button>
-								
-								<!--  <a href="#" th:href="@{/user/edit/} + ${allUser.codUser}">Edit</a> -->
-								
-								<button class="btn  btn-default btn-xs" onclick="@{/user/delete/} + ${allUsers.codUser}">
-									<i class="fa  fa-trash"></i>
-								</button>
-									<a href="#" th:href="@{/user/delete/} + ${allUsers.codUser}">Delete</a>
-							</div>
-							
+						<td class="text-center">
+							<a class="btn  btn-link  btn-xs" title="Editar"
+								th:href="@{/user/edit/{codUser}(codUser=${allUsers.codUser})}">
+								<i class="glyphicon glyphicon-pencil"></i>
+							</a>
+							<a class="btn  btn-link  btn-xs" title="Excluir"
+								th:href="@{/user/delete/} + ${allUsers.codUser}">
+								<i class="glyphicon glyphicon-remove"></i>
+							</a>
 						</td>
 					</tr>
 					<tr th:if="${allUsers.empty}">

@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -61,18 +62,18 @@ public class UsersController {
 
 	@RequestMapping("/delete/{codUser}")
 	public String delete(@PathVariable int codUser, RedirectAttributes attributes) {
-		
 		userService.delete(codUser);
 		attributes.addFlashAttribute("message", "Usuário " + "'" + codUser + "'" + " deletado com sucesso!");
 		return "redirect:/user";
-	
 	}
 	
-/*	@RequestMapping("/edit/{codUser}")
-	public String edit(@PathVariable int codUser, Model model) {
+	@GetMapping("/edit/{codUser}")
+	public ModelAndView editar(@PathVariable int codUser) {
+		User user = users.findOne(codUser);
+		ModelAndView mv = newUser(user);
+		mv.addObject(user);
+		return mv;
 		
-		model.addAttribute("user", userService.);
-		return "admin/post/postForm";
-	}*/
+	}
 	
 }

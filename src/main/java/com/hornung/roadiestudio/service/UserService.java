@@ -18,13 +18,9 @@ public class UserService {
 		this.users.save(user);
 	}
 	
-	public void deleteUserById(Long codUser){
-		this.users.deleteUserById(codUser);
-	}
-	
 	public void delete(int codUser) {
 		this.users.delete(codUser);
 	}
-	
+
 
 }

@@ -57,7 +57,7 @@ public class User implements Serializable {
 	private String username;
 
 	//bi-directional many-to-one association to RoleType
-	@ManyToOne(cascade={CascadeType.ALL})
+	@ManyToOne
 	@JoinColumn(name="COD_ROLE_TYPE")
 	private RoleType RoleType;
 

@@ -36,6 +36,8 @@
 				</th:block>
 			</div>
 			
+			<input type="hidden" th:field="*{codUser}"/>
+			
 			<div class="row">
 				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('username')} ? has-error">
 					<label for="username" class="control-label">Username</label>

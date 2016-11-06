@@ -23,7 +23,7 @@
 				<div class="col-xs-2">
 					<div class="aw-page-header-controls">
 						<a class="btn btn-primary" th:href="@{/user/new}">
-							<i class="fa  fa-plus-circle"></i> <span class="hidden-xs  hidden-sm">Novo produto</span>
+							<i class="fa  fa-plus-circle"></i> <span class="hidden-xs  hidden-sm">Novo usuário</span>
 						</a>
 					</div>
 				</div>
@@ -91,7 +91,8 @@
 								<i class="glyphicon glyphicon-pencil"></i>
 							</a>
 							<a class="btn  btn-link  btn-xs" title="Excluir"
-								th:href="@{/user/delete/} + ${allUsers.codUser}">
+								th:href="@{/user/delete/} + ${allUsers.codUser}" 
+								onclick="return confirm('Deseja realmente deletar o usuário?');">
 								<i class="glyphicon glyphicon-remove"></i>
 							</a>
 						</td>

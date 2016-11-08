@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/DefaultLayout">
+	
+<head>
+	<title>RoadieStudio</title>
+</head>
+
+<body>
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10">
+					<h1>
+						Lista de gêneros de banda
+					</h1>
+				</div>
+			
+				<div class="col-xs-2">
+					<div class="aw-page-header-controls">
+						<a class="btn btn-primary" th:href="@{/bandGenre/new}">
+							<i class="fa  fa-plus-circle"></i> <span class="hidden-xs  hidden-sm">Novo gênero</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+	<div class="alert  alert-success  alert-dismissible" role="alert" th:if="${not #strings.isEmpty(message)}" >
+		<button type="button" class="close" data-dismiss="alert" ><span aria-hidden="true">&times;</span></button>
+		<span th:text="${message}"></span>
+	</div>
+
+		<div class="table-responsive">
+			<table id="user-table" class="table  table-striped  table-bordered  table-hover  table-condensed  js-sticky-table">
+				<thead class="aw-table-header-solid">
+					<tr>
+						<th>Cód</th>
+						<th>Descrição</th>
+						<th class="table-pesq-produto-col-acoes">Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="allBandGenres : ${allBandGenres}"> 
+						<td th:text="${allBandGenres.codBandGenre}"></td>
+						<td th:text="${allBandGenres.description}"></td>
+						<td class="text-center">
+							<a class="btn  btn-link  btn-xs" title="Editar"
+								th:href="@{/bandGenre/edit/{codBandGenre}(codBandGenre=${allBandGenres.codBandGenre})}">
+								<i class="glyphicon glyphicon-pencil"></i>
+							</a>
+							<a class="btn  btn-link  btn-xs" title="Excluir"
+								th:href="@{/bandGenre/delete/} + ${allBandGenres.codBandGenre}" 
+								onclick="return confirm('Deseja realmente deletar o gênero?');">
+								<i class="glyphicon glyphicon-remove"></i>
+							</a>
+						</td>
+					</tr>
+					<tr th:if="${allBandGenres.empty}">
+						<td colspan="9">Nenhum registro encontrado</td>
+					</tr>
+					
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+
+</section>
+</body>
+</html>

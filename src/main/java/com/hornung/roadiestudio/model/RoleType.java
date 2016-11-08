@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="en_role_type")
-@NamedQuery(name="RoleType.findAll", query="SELECT e FROM RoleType e")
+@NamedQuery(name="RoleType.findAll", query="SELECT r FROM RoleType r")
 public class RoleType implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -23,7 +23,7 @@ public class RoleType implements Serializable {
 	@Column(name="DESCRIPTION")
 	private String description;
 
-	//bi-directional many-to-one association to EnUser
+	//bi-directional many-to-one association to User
 	@OneToMany(mappedBy="RoleType")
 	private List<User> Users;
 
@@ -54,11 +54,11 @@ public class RoleType implements Serializable {
 		this.Users = Users;
 	}
 
-	public User addEnUser(User enUser) {
-		getUsers().add(enUser);
-		enUser.setRoleType(this);
+	public User addUser(User User) {
+		getUsers().add(User);
+		User.setRoleType(this);
 
-		return enUser;
+		return User;
 	}
 
 	public User removeUser(User User) {

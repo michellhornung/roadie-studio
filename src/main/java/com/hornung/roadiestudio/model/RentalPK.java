@@ -4,7 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 /**
- * The primary key class for the EN_RENTAL database table.
+ * The primary key class for the en_rental database table.
  * 
  */
 @Embeddable
@@ -12,7 +12,7 @@ public class RentalPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="COD_RENTAL", insertable=false, updatable=false)
+	@Column(name="COD_RENTAL")
 	private int codRental;
 
 	@Column(name="HOUR_QUANTITY")

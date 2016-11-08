@@ -6,11 +6,11 @@ import java.math.BigDecimal;
 
 
 /**
- * The persistent class for the EN_RENTAL database table.
+ * The persistent class for the en_rental database table.
  * 
  */
 @Entity
-@Table(name="EN_RENTAL")
+@Table(name="en_rental")
 @NamedQuery(name="Rental.findAll", query="SELECT r FROM Rental r")
 public class Rental implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -35,18 +35,18 @@ public class Rental implements Serializable {
 
 	//bi-directional many-to-one association to Band
 	@ManyToOne
-	@JoinColumn(name="COD_RENTAL", insertable=false, updatable=false)
-	private Band enBand;
+	@JoinColumn(name="COD_BAND")
+	private Band Band;
 
 	//bi-directional many-to-one association to Room
 	@ManyToOne
-	@JoinColumn(name="COD_RENTAL", insertable=false, updatable=false)
-	private Room enRoom;
+	@JoinColumn(name="COD_ROOM")
+	private Room Room;
 
 	//bi-directional many-to-one association to Stock
 	@ManyToOne
-	@JoinColumn(name="COD_RENTAL", insertable=false, updatable=false)
-	private Stock enStock;
+	@JoinColumn(name="COD_STOCK")
+	private Stock Stock;
 
 	public Rental() {
 	}
@@ -99,28 +99,28 @@ public class Rental implements Serializable {
 		this.isToFix = isToFix;
 	}
 
-	public Band getEnBand() {
-		return this.enBand;
+	public Band getBand() {
+		return this.Band;
 	}
 
-	public void setEnBand(Band enBand) {
-		this.enBand = enBand;
+	public void setBand(Band Band) {
+		this.Band = Band;
 	}
 
-	public Room getEnRoom() {
-		return this.enRoom;
+	public Room getRoom() {
+		return this.Room;
 	}
 
-	public void setEnRoom(Room enRoom) {
-		this.enRoom = enRoom;
+	public void setRoom(Room Room) {
+		this.Room = Room;
 	}
 
-	public Stock getEnStock() {
-		return this.enStock;
+	public Stock getStock() {
+		return this.Stock;
 	}
 
-	public void setEnStock(Stock enStock) {
-		this.enStock = enStock;
+	public void setStock(Stock Stock) {
+		this.Stock = Stock;
 	}
 
 }

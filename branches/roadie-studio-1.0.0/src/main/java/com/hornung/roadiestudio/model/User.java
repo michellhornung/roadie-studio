@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -55,6 +56,10 @@ public class User implements Serializable {
 	@NotBlank(message = "Username é obrigatório.")
 	@Column(name="USERNAME")
 	private String username;
+	
+	//bi-directional many-to-one association to Sale
+	@OneToMany(mappedBy="User")
+	private List<Sale> sales;
 
 	//bi-directional many-to-one association to RoleType
 	@ManyToOne
@@ -134,6 +139,28 @@ public class User implements Serializable {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	public List<Sale> getSales() {
+		return this.sales;
+	}
+
+	public void setSales(List<Sale> sales) {
+		this.sales = sales;
+	}
+
+	public Sale addSale(Sale sale) {
+		getSales().add(sale);
+		sale.setUser(this);
+
+		return sale;
+	}
+
+	public Sale removeSale(Sale enSale) {
+		getSales().remove(enSale);
+		enSale.setUser(null);
+
+		return enSale;
 	}
 
 	public RoleType getRoleType() {

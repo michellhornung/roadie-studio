@@ -2,23 +2,26 @@ package com.hornung.roadiestudio.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
- * The persistent class for the EN_STOCK_TYPE database table.
+ * The persistent class for the en_stock_type database table.
  * 
  */
 @Entity
-@Table(name="EN_STOCK_TYPE")
+@Table(name="en_stock_type")
 @NamedQuery(name="StockType.findAll", query="SELECT s FROM StockType s")
 public class StockType implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="EN_STOCK_TYPE_CODSTOCKTYPE_GENERATOR" )
-	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="EN_STOCK_TYPE_CODSTOCKTYPE_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="COD_STOCK_TYPE")
 	private int codStockType;
+
+	@Column(name="BRAND")
+	private String brand;
 
 	@Column(name="DESCRIPTION")
 	private String description;
@@ -26,9 +29,9 @@ public class StockType implements Serializable {
 	@Column(name="NAME")
 	private String name;
 
-	//bi-directional one-to-one association to Stock
-	@OneToOne(mappedBy="enStockType")
-	private Stock enStock;
+	//bi-directional many-to-one association to Stock
+	@OneToMany(mappedBy="StockType")
+	private List<Stock> Stocks;
 
 	public StockType() {
 	}
@@ -39,6 +42,14 @@ public class StockType implements Serializable {
 
 	public void setCodStockType(int codStockType) {
 		this.codStockType = codStockType;
+	}
+
+	public String getBrand() {
+		return this.brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 
 	public String getDescription() {
@@ -57,12 +68,26 @@ public class StockType implements Serializable {
 		this.name = name;
 	}
 
-	public Stock getEnStock() {
-		return this.enStock;
+	public List<Stock> getStocks() {
+		return this.Stocks;
 	}
 
-	public void setEnStock(Stock enStock) {
-		this.enStock = enStock;
+	public void setStocks(List<Stock> Stocks) {
+		this.Stocks = Stocks;
+	}
+
+	public Stock addStock(Stock Stock) {
+		getStocks().add(Stock);
+		Stock.setStockType(this);
+
+		return Stock;
+	}
+
+	public Stock removeStock(Stock Stock) {
+		getStocks().remove(Stock);
+		Stock.setStockType(null);
+
+		return Stock;
 	}
 
 }

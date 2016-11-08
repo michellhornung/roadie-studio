@@ -4,7 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 /**
- * The primary key class for the EN_RECORDINGS database table.
+ * The primary key class for the en_recordings database table.
  * 
  */
 @Embeddable

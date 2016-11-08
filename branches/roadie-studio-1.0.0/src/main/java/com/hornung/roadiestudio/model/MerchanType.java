@@ -2,30 +2,30 @@ package com.hornung.roadiestudio.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
- * The persistent class for the EN_MERCHAN_TYPE database table.
+ * The persistent class for the en_merchan_type database table.
  * 
  */
 @Entity
-@Table(name="EN_MERCHAN_TYPE")
+@Table(name="en_merchan_type")
 @NamedQuery(name="MerchanType.findAll", query="SELECT m FROM MerchanType m")
 public class MerchanType implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="EN_MERCHAN_TYPE_CODMERCHANTYPE_GENERATOR" )
-	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="EN_MERCHAN_TYPE_CODMERCHANTYPE_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="COD_MERCHAN_TYPE")
 	private int codMerchanType;
 
 	@Column(name="DESCRIPTION")
 	private String description;
 
-	//bi-directional one-to-one association to Merchan
-	@OneToOne(mappedBy="enMerchanType")
-	private Merchan enMerchan;
+	//bi-directional many-to-one association to Merchan
+	@OneToMany(mappedBy="MerchanType")
+	private List<Merchan> Merchans;
 
 	public MerchanType() {
 	}
@@ -46,12 +46,26 @@ public class MerchanType implements Serializable {
 		this.description = description;
 	}
 
-	public Merchan getEnMerchan() {
-		return this.enMerchan;
+	public List<Merchan> getMerchans() {
+		return this.Merchans;
 	}
 
-	public void setEnMerchan(Merchan enMerchan) {
-		this.enMerchan = enMerchan;
+	public void setMerchans(List<Merchan> Merchans) {
+		this.Merchans = Merchans;
+	}
+
+	public Merchan addMerchan(Merchan Merchan) {
+		getMerchans().add(Merchan);
+		Merchan.setMerchanType(this);
+
+		return Merchan;
+	}
+
+	public Merchan removeMerchan(Merchan Merchan) {
+		getMerchans().remove(Merchan);
+		Merchan.setMerchanType(null);
+
+		return Merchan;
 	}
 
 }

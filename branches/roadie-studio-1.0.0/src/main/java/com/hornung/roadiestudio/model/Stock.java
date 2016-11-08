@@ -6,18 +6,17 @@ import java.util.List;
 
 
 /**
- * The persistent class for the EN_STOCK database table.
+ * The persistent class for the en_stock database table.
  * 
  */
 @Entity
-@Table(name="EN_STOCK")
+@Table(name="en_stock")
 @NamedQuery(name="Stock.findAll", query="SELECT s FROM Stock s")
 public class Stock implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="EN_STOCK_CODSTOCK_GENERATOR" )
-	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="EN_STOCK_CODSTOCK_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="COD_STOCK")
 	private int codStock;
 
@@ -28,21 +27,21 @@ public class Stock implements Serializable {
 	private int quantity;
 
 	//bi-directional many-to-one association to Recording
-	@OneToMany(mappedBy="enStock")
-	private List<Recording> enRecordings;
+	@OneToMany(mappedBy="Stock")
+	private List<Recording> Recordings;
 
 	//bi-directional many-to-one association to Rental
-	@OneToMany(mappedBy="enStock")
-	private List<Rental> enRentals;
+	@OneToMany(mappedBy="Stock")
+	private List<Rental> Rentals;
 
-	//bi-directional one-to-one association to Sale
-	@OneToOne(mappedBy="enStock")
-	private Sale enSale;
+	//bi-directional many-to-one association to Sale
+	@OneToMany(mappedBy="Stock")
+	private List<Sale> Sales;
 
-	//bi-directional one-to-one association to StockType
-	@OneToOne
-	@JoinColumn(name="COD_STOCK")
-	private StockType enStockType;
+	//bi-directional many-to-one association to StockType
+	@ManyToOne
+	@JoinColumn(name="COD_STOCK_TYPE")
+	private StockType StockType;
 
 	public Stock() {
 	}
@@ -71,64 +70,78 @@ public class Stock implements Serializable {
 		this.quantity = quantity;
 	}
 
-	public List<Recording> getEnRecordings() {
-		return this.enRecordings;
+	public List<Recording> getRecordings() {
+		return this.Recordings;
 	}
 
-	public void setEnRecordings(List<Recording> enRecordings) {
-		this.enRecordings = enRecordings;
+	public void setRecordings(List<Recording> Recordings) {
+		this.Recordings = Recordings;
 	}
 
-	public Recording addEnRecording(Recording enRecording) {
-		getEnRecordings().add(enRecording);
-		enRecording.setEnStock(this);
+	public Recording addRecording(Recording Recording) {
+		getRecordings().add(Recording);
+		Recording.setStock(this);
 
-		return enRecording;
+		return Recording;
 	}
 
-	public Recording removeEnRecording(Recording enRecording) {
-		getEnRecordings().remove(enRecording);
-		enRecording.setEnStock(null);
+	public Recording removeRecording(Recording Recording) {
+		getRecordings().remove(Recording);
+		Recording.setStock(null);
 
-		return enRecording;
+		return Recording;
 	}
 
-	public List<Rental> getEnRentals() {
-		return this.enRentals;
+	public List<Rental> getRentals() {
+		return this.Rentals;
 	}
 
-	public void setEnRentals(List<Rental> enRentals) {
-		this.enRentals = enRentals;
+	public void setRentals(List<Rental> Rentals) {
+		this.Rentals = Rentals;
 	}
 
-	public Rental addEnRental(Rental enRental) {
-		getEnRentals().add(enRental);
-		enRental.setEnStock(this);
+	public Rental addRental(Rental Rental) {
+		getRentals().add(Rental);
+		Rental.setStock(this);
 
-		return enRental;
+		return Rental;
 	}
 
-	public Rental removeEnRental(Rental enRental) {
-		getEnRentals().remove(enRental);
-		enRental.setEnStock(null);
+	public Rental removeRental(Rental Rental) {
+		getRentals().remove(Rental);
+		Rental.setStock(null);
 
-		return enRental;
+		return Rental;
 	}
 
-	public Sale getEnSale() {
-		return this.enSale;
+	public List<Sale> getSales() {
+		return this.Sales;
 	}
 
-	public void setEnSale(Sale enSale) {
-		this.enSale = enSale;
+	public void setSales(List<Sale> Sales) {
+		this.Sales = Sales;
 	}
 
-	public StockType getEnStockType() {
-		return this.enStockType;
+	public Sale addSale(Sale Sale) {
+		getSales().add(Sale);
+		Sale.setStock(this);
+
+		return Sale;
 	}
 
-	public void setEnStockType(StockType enStockType) {
-		this.enStockType = enStockType;
+	public Sale removeSale(Sale Sale) {
+		getSales().remove(Sale);
+		Sale.setStock(null);
+
+		return Sale;
+	}
+
+	public StockType getStockType() {
+		return this.StockType;
+	}
+
+	public void setStockType(StockType StockType) {
+		this.StockType = StockType;
 	}
 
 }

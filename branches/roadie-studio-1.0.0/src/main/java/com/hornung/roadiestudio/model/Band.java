@@ -6,26 +6,31 @@ import java.util.List;
 
 
 /**
- * The persistent class for the EN_BAND database table.
+ * The persistent class for the en_band database table.
  * 
  */
 @Entity
-@Table(name="EN_BAND")
+@Table(name="en_band")
 @NamedQuery(name="Band.findAll", query="SELECT b FROM Band b")
 public class Band implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="EN_BAND_CODBAND_GENERATOR" )
-	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="EN_BAND_CODBAND_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="COD_BAND")
 	private int codBand;
 
+	@Column(name="COD_BAND_GENRE")
+	private int codBandGenre;
+
+	@Column(name="COD_LOGO")
+	private int codLogo;
+
+	@Column(name="COD_USER")
+	private int codUser;
+
 	@Column(name="DESCRIPTION")
 	private String description;
-
-	@Column(name="GENRE")
-	private String genre;
 
 	@Column(name="NAME")
 	private String name;
@@ -33,26 +38,17 @@ public class Band implements Serializable {
 	@Column(name="XP")
 	private int xp;
 
-	//bi-directional one-to-one association to User
-	@OneToOne
-	@JoinColumn(name="COD_BAND")
-	private User enUser;
-
-	//bi-directional one-to-one association to Logo
-	@OneToOne(mappedBy="enBand")
-	private Logo enLogo;
-
 	//bi-directional many-to-one association to Recording
-	@OneToMany(mappedBy="enBand")
-	private List<Recording> enRecordings;
+	@OneToMany(mappedBy="Band")
+	private List<Recording> Recordings;
 
 	//bi-directional many-to-one association to Rental
-	@OneToMany(mappedBy="enBand")
-	private List<Rental> enRentals;
+	@OneToMany(mappedBy="Band")
+	private List<Rental> Rentals;
 
-	//bi-directional one-to-one association to Sale
-	@OneToOne(mappedBy="enBand")
-	private Sale enSale;
+	//bi-directional many-to-one association to Sale
+	@OneToMany(mappedBy="Band")
+	private List<Sale> Sales;
 
 	public Band() {
 	}
@@ -65,20 +61,36 @@ public class Band implements Serializable {
 		this.codBand = codBand;
 	}
 
+	public int getCodBandGenre() {
+		return this.codBandGenre;
+	}
+
+	public void setCodBandGenre(int codBandGenre) {
+		this.codBandGenre = codBandGenre;
+	}
+
+	public int getCodLogo() {
+		return this.codLogo;
+	}
+
+	public void setCodLogo(int codLogo) {
+		this.codLogo = codLogo;
+	}
+
+	public int getCodUser() {
+		return this.codUser;
+	}
+
+	public void setCodUser(int codUser) {
+		this.codUser = codUser;
+	}
+
 	public String getDescription() {
 		return this.description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public String getGenre() {
-		return this.genre;
-	}
-
-	public void setGenre(String genre) {
-		this.genre = genre;
 	}
 
 	public String getName() {
@@ -97,72 +109,70 @@ public class Band implements Serializable {
 		this.xp = xp;
 	}
 
-	public User getEnUser() {
-		return this.enUser;
+	public List<Recording> getRecordings() {
+		return this.Recordings;
 	}
 
-	public void setEnUser(User enUser) {
-		this.enUser = enUser;
+	public void setRecordings(List<Recording> Recordings) {
+		this.Recordings = Recordings;
 	}
 
-	public Logo getEnLogo() {
-		return this.enLogo;
+	public Recording addRecording(Recording Recording) {
+		getRecordings().add(Recording);
+		Recording.setBand(this);
+
+		return Recording;
 	}
 
-	public void setEnLogo(Logo enLogo) {
-		this.enLogo = enLogo;
+	public Recording removeRecording(Recording Recording) {
+		getRecordings().remove(Recording);
+		Recording.setBand(null);
+
+		return Recording;
 	}
 
-	public List<Recording> getEnRecordings() {
-		return this.enRecordings;
+	public List<Rental> getRentals() {
+		return this.Rentals;
 	}
 
-	public void setEnRecordings(List<Recording> enRecordings) {
-		this.enRecordings = enRecordings;
+	public void setRentals(List<Rental> Rentals) {
+		this.Rentals = Rentals;
 	}
 
-	public Recording addEnRecording(Recording enRecording) {
-		getEnRecordings().add(enRecording);
-		enRecording.setEnBand(this);
+	public Rental addRental(Rental Rental) {
+		getRentals().add(Rental);
+		Rental.setBand(this);
 
-		return enRecording;
+		return Rental;
 	}
 
-	public Recording removeEnRecording(Recording enRecording) {
-		getEnRecordings().remove(enRecording);
-		enRecording.setEnBand(null);
+	public Rental removeRental(Rental Rental) {
+		getRentals().remove(Rental);
+		Rental.setBand(null);
 
-		return enRecording;
+		return Rental;
 	}
 
-	public List<Rental> getEnRentals() {
-		return this.enRentals;
+	public List<Sale> getSales() {
+		return this.Sales;
 	}
 
-	public void setEnRentals(List<Rental> enRentals) {
-		this.enRentals = enRentals;
+	public void setSales(List<Sale> Sales) {
+		this.Sales = Sales;
 	}
 
-	public Rental addEnRental(Rental enRental) {
-		getEnRentals().add(enRental);
-		enRental.setEnBand(this);
+	public Sale addSale(Sale Sale) {
+		getSales().add(Sale);
+		Sale.setBand(this);
 
-		return enRental;
+		return Sale;
 	}
 
-	public Rental removeEnRental(Rental enRental) {
-		getEnRentals().remove(enRental);
-		enRental.setEnBand(null);
+	public Sale removeSale(Sale Sale) {
+		getSales().remove(Sale);
+		Sale.setBand(null);
 
-		return enRental;
-	}
-
-	public Sale getEnSale() {
-		return this.enSale;
-	}
-
-	public void setEnSale(Sale enSale) {
-		this.enSale = enSale;
+		return Sale;
 	}
 
 }

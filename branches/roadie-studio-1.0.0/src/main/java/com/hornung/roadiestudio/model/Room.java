@@ -6,18 +6,17 @@ import java.util.List;
 
 
 /**
- * The persistent class for the EN_ROOM database table.
+ * The persistent class for the en_room database table.
  * 
  */
 @Entity
-@Table(name="EN_ROOM")
+@Table(name="en_room")
 @NamedQuery(name="Room.findAll", query="SELECT r FROM Room r")
 public class Room implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="EN_ROOM_CODROOM_GENERATOR" )
-	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="EN_ROOM_CODROOM_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="COD_ROOM")
 	private int codRoom;
 
@@ -28,16 +27,16 @@ public class Room implements Serializable {
 	private String name;
 
 	//bi-directional many-to-one association to Recording
-	@OneToMany(mappedBy="enRoom")
-	private List<Recording> enRecordings;
+	@OneToMany(mappedBy="Room")
+	private List<Recording> Recordings;
 
 	//bi-directional many-to-one association to Rental
-	@OneToMany(mappedBy="enRoom")
-	private List<Rental> enRentals;
+	@OneToMany(mappedBy="Room")
+	private List<Rental> Rentals;
 
-	//bi-directional one-to-one association to Sale
-	@OneToOne(mappedBy="enRoom")
-	private Sale enSale;
+	//bi-directional many-to-one association to Sale
+	@OneToMany(mappedBy="Room")
+	private List<Sale> Sales;
 
 	public Room() {
 	}
@@ -66,56 +65,70 @@ public class Room implements Serializable {
 		this.name = name;
 	}
 
-	public List<Recording> getEnRecordings() {
-		return this.enRecordings;
+	public List<Recording> getRecordings() {
+		return this.Recordings;
 	}
 
-	public void setEnRecordings(List<Recording> enRecordings) {
-		this.enRecordings = enRecordings;
+	public void setRecordings(List<Recording> Recordings) {
+		this.Recordings = Recordings;
 	}
 
-	public Recording addEnRecording(Recording enRecording) {
-		getEnRecordings().add(enRecording);
-		enRecording.setEnRoom(this);
+	public Recording addRecording(Recording Recording) {
+		getRecordings().add(Recording);
+		Recording.setRoom(this);
 
-		return enRecording;
+		return Recording;
 	}
 
-	public Recording removeEnRecording(Recording enRecording) {
-		getEnRecordings().remove(enRecording);
-		enRecording.setEnRoom(null);
+	public Recording removeRecording(Recording Recording) {
+		getRecordings().remove(Recording);
+		Recording.setRoom(null);
 
-		return enRecording;
+		return Recording;
 	}
 
-	public List<Rental> getEnRentals() {
-		return this.enRentals;
+	public List<Rental> getRentals() {
+		return this.Rentals;
 	}
 
-	public void setEnRentals(List<Rental> enRentals) {
-		this.enRentals = enRentals;
+	public void setRentals(List<Rental> Rentals) {
+		this.Rentals = Rentals;
 	}
 
-	public Rental addEnRental(Rental enRental) {
-		getEnRentals().add(enRental);
-		enRental.setEnRoom(this);
+	public Rental addRental(Rental Rental) {
+		getRentals().add(Rental);
+		Rental.setRoom(this);
 
-		return enRental;
+		return Rental;
 	}
 
-	public Rental removeEnRental(Rental enRental) {
-		getEnRentals().remove(enRental);
-		enRental.setEnRoom(null);
+	public Rental removeRental(Rental Rental) {
+		getRentals().remove(Rental);
+		Rental.setRoom(null);
 
-		return enRental;
+		return Rental;
 	}
 
-	public Sale getEnSale() {
-		return this.enSale;
+	public List<Sale> getSales() {
+		return this.Sales;
 	}
 
-	public void setEnSale(Sale enSale) {
-		this.enSale = enSale;
+	public void setSales(List<Sale> Sales) {
+		this.Sales = Sales;
+	}
+
+	public Sale addSale(Sale Sale) {
+		getSales().add(Sale);
+		Sale.setRoom(this);
+
+		return Sale;
+	}
+
+	public Sale removeSale(Sale Sale) {
+		getSales().remove(Sale);
+		Sale.setRoom(null);
+
+		return Sale;
 	}
 
 }

@@ -5,18 +5,17 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the EN_LOGO database table.
+ * The persistent class for the en_logo database table.
  * 
  */
 @Entity
-@Table(name="EN_LOGO")
+@Table(name="en_logo")
 @NamedQuery(name="Logo.findAll", query="SELECT l FROM Logo l")
 public class Logo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="EN_LOGO_CODLOGO_GENERATOR" )
-	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="EN_LOGO_CODLOGO_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="COD_LOGO")
 	private int codLogo;
 
@@ -29,11 +28,6 @@ public class Logo implements Serializable {
 
 	@Column(name="NAME")
 	private String name;
-
-	//bi-directional one-to-one association to Band
-	@OneToOne
-	@JoinColumn(name="COD_LOGO")
-	private Band enBand;
 
 	public Logo() {
 	}
@@ -68,14 +62,6 @@ public class Logo implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Band getEnBand() {
-		return this.enBand;
-	}
-
-	public void setEnBand(Band enBand) {
-		this.enBand = enBand;
 	}
 
 }

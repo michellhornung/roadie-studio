@@ -5,18 +5,17 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the EN_MERCHAN database table.
+ * The persistent class for the en_merchan database table.
  * 
  */
 @Entity
-@Table(name="EN_MERCHAN")
+@Table(name="en_merchan")
 @NamedQuery(name="Merchan.findAll", query="SELECT m FROM Merchan m")
 public class Merchan implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="EN_MERCHAN_CODMERCHAN_GENERATOR" )
-	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="EN_MERCHAN_CODMERCHAN_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="COD_MERCHAN")
 	private int codMerchan;
 
@@ -26,10 +25,10 @@ public class Merchan implements Serializable {
 	@Column(name="DESCRIPTION")
 	private String description;
 
-	//bi-directional one-to-one association to MerchanType
-	@OneToOne
-	@JoinColumn(name="COD_MERCHAN")
-	private MerchanType enMerchanType;
+	//bi-directional many-to-one association to MerchanType
+	@ManyToOne
+	@JoinColumn(name="COD_MERCHAN_TYPE")
+	private MerchanType MerchanType;
 
 	public Merchan() {
 	}
@@ -58,12 +57,12 @@ public class Merchan implements Serializable {
 		this.description = description;
 	}
 
-	public MerchanType getEnMerchanType() {
-		return this.enMerchanType;
+	public MerchanType getMerchanType() {
+		return this.MerchanType;
 	}
 
-	public void setEnMerchanType(MerchanType enMerchanType) {
-		this.enMerchanType = enMerchanType;
+	public void setMerchanType(MerchanType MerchanType) {
+		this.MerchanType = MerchanType;
 	}
 
 }

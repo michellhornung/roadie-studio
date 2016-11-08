@@ -6,18 +6,17 @@ import java.math.BigDecimal;
 
 
 /**
- * The persistent class for the EN_SALES database table.
+ * The persistent class for the en_sales database table.
  * 
  */
 @Entity
-@Table(name="EN_SALES")
+@Table(name="en_sales")
 @NamedQuery(name="Sale.findAll", query="SELECT s FROM Sale s")
 public class Sale implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="EN_SALES_CODSALES_GENERATOR" )
-	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="EN_SALES_CODSALES_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="COD_SALES")
 	private int codSales;
 
@@ -30,25 +29,25 @@ public class Sale implements Serializable {
 	@Column(name="VALUE")
 	private BigDecimal value;
 
-	//bi-directional one-to-one association to Band
-	@OneToOne
-	@JoinColumn(name="COD_SALES")
-	private Band enBand;
+	//bi-directional many-to-one association to Band
+	@ManyToOne
+	@JoinColumn(name="COD_BAND")
+	private Band Band;
 
-	//bi-directional one-to-one association to Room
-	@OneToOne
-	@JoinColumn(name="COD_SALES")
-	private Room enRoom;
+	//bi-directional many-to-one association to Room
+	@ManyToOne
+	@JoinColumn(name="COD_ROOM")
+	private Room Room;
 
-	//bi-directional one-to-one association to Stock
-	@OneToOne
-	@JoinColumn(name="COD_SALES")
-	private Stock enStock;
+	//bi-directional many-to-one association to Stock
+	@ManyToOne
+	@JoinColumn(name="COD_STOCK")
+	private Stock Stock;
 
-	//bi-directional one-to-one association to User
-	@OneToOne
-	@JoinColumn(name="COD_SALES")
-	private User enUser;
+	//bi-directional many-to-one association to User
+	@ManyToOne
+	@JoinColumn(name="COD_USER")
+	private User User;
 
 	public Sale() {
 	}
@@ -85,36 +84,36 @@ public class Sale implements Serializable {
 		this.value = value;
 	}
 
-	public Band getEnBand() {
-		return this.enBand;
+	public Band getBand() {
+		return this.Band;
 	}
 
-	public void setEnBand(Band enBand) {
-		this.enBand = enBand;
+	public void setBand(Band Band) {
+		this.Band = Band;
 	}
 
-	public Room getEnRoom() {
-		return this.enRoom;
+	public Room getRoom() {
+		return this.Room;
 	}
 
-	public void setEnRoom(Room enRoom) {
-		this.enRoom = enRoom;
+	public void setRoom(Room Room) {
+		this.Room = Room;
 	}
 
-	public Stock getEnStock() {
-		return this.enStock;
+	public Stock getStock() {
+		return this.Stock;
 	}
 
-	public void setEnStock(Stock enStock) {
-		this.enStock = enStock;
+	public void setStock(Stock Stock) {
+		this.Stock = Stock;
 	}
 
-	public User getEnUser() {
-		return this.enUser;
+	public User getUser() {
+		return this.User;
 	}
 
-	public void setEnUser(User enUser) {
-		this.enUser = enUser;
+	public void setUser(User User) {
+		this.User = User;
 	}
 
 }

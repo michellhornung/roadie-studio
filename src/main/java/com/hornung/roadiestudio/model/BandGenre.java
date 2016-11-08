@@ -3,6 +3,8 @@ package com.hornung.roadiestudio.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 
 /**
  * The persistent class for the en_band_genre database table.
@@ -19,6 +21,7 @@ public class BandGenre implements Serializable {
 	@Column(name="COD_BAND_GENRE")
 	private int codBandGenre;
 
+	@NotBlank(message = "Descrição é obrigatório.")
 	@Column(name="DESCRIPTION")
 	private String description;
 

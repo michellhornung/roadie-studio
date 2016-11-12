@@ -14,8 +14,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
 		auth.inMemoryAuthentication()
-			.withUser("joao").password("joao").roles("CREATE_USER").and()
-			.withUser("maria").password("maria").roles("CREATE_USER", "LIST_USER");
+			.withUser("joao").password("joao").roles("CREATE").and()
+			.withUser("maria").password("maria").roles("CREATE", "LIST_ALL", "EDIT");
 	}
 	
 	@Override
@@ -29,8 +29,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()
-				.antMatchers("/user/new").hasRole("CREATE_USER")
-				.antMatchers("/user/**").hasRole("LIST_USER")
+				.antMatchers("/user/new", "/band/new", "bandGenre/new").hasRole("CREATE")
+				.antMatchers("/user/edit", "/band/edit", "bandGenre/edit").hasRole("EDIT")
+				.antMatchers("/user/**", "/schedule/**", "/stock/**", "/merchan/**", "/report/**", "/rent/**", "/recording/**").hasRole("LIST_ALL")
 				.anyRequest()
 				.authenticated()
 				.and()

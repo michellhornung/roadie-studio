@@ -76,9 +76,13 @@
 	          <li><a href="#">Pagamentos</a></li>
 	        </ul>
 	      </li>
+	    
+		    <li>
+		    	<p class="navbar-text" th:text="${#authentication.name}"></p>
+		    </li>
 	      
 	      <li>
-	        <a href="#"><em class="fa  fa-sign-out"></em></a>
+	        <a th:href="@{/logout}"><em class="fa  fa-sign-out"></em></a>
 	      </li> 
 	    </ul>
 
@@ -90,20 +94,20 @@
 	
 	    	<nav class="aw-menu  js-menu">
 	      		<ul class="aw-menu__list">
-	      			<li class="aw-menu__item">
+	      			<li class="aw-menu__item" sec:authorize-url="/schedule">
 	          			<a>
 	          				<i class="fa  fa-fw  fa-calendar"></i>
 	          				<span>Agenda</span>
 	          			</a>
 	        		</li>
-	        		<li class="aw-menu__item">
+	        		<li class="aw-menu__item" sec:authorize-url="/user">
 	          			<a th:href="@{/user}">
 	          				<i class="fa  fa-fw  fa-users"></i>
 	          				<span>Usuários</span>
 	          			</a>
 	        		</li>
-	        		<li class="aw-menu__item">
-	          			<a >
+	        		<li class="aw-menu__item" sec:authorize-url="/band">
+	          			<a th:href="@{/band}">
 	          				<i class="fa  fa-fw  fa-music"></i>
 	          				<span>Banda</span>
 	          			</a>
@@ -112,7 +116,7 @@
 	          				<span>Gênero de Banda</span>
 	          			</a>
 	        		</li>
-	        		<li class="aw-menu__item">
+	        		<li class="aw-menu__item" sec:authorize-url="/stock">
 	          			<a >
 	          				<i class="fa  fa-fw  fa-shopping-cart"></i>
 	          				<span>Estoque</span>
@@ -124,45 +128,24 @@
 	          				<span>Propagandas</span>
 	          			</a>
 	        		</li>
-	        		<li class="aw-menu__item">
+	        		<li class="aw-menu__item" sec:authorize-url="/report">
 	          			<a >
 	          				<i class="fa  fa-fw  fa-bar-chart"></i>
 	          				<span>Relatórios</span>
 	          			</a>
 	        		</li>
-	        		<li class="aw-menu__item">
+	        		<li class="aw-menu__item" sec:authorize-url="/rent">
 	          			<a >
 	          				<i class="fa  fa-fw  fa-hourglass"></i>
 	          				<span>Locações</span>
 	          			</a>
 	        		</li>
-	        		<li class="aw-menu__item">
+	        		<li class="aw-menu__item" sec:authorize-url="/recording">
 	          			<a >
 	          				<i class="fa  fa-fw  fa-microphone"></i>
 	          				<span>Gravações</span>
 	          			</a>
 	        		</li>
-	        		<li class="aw-menu__item">
-          			<a th:href="@{/403}">
-          				<i class="fa  fa-fw  fa-arrow-circle-o-right"></i>
-          				<span>403</span>
-          			</a>
-	        		</li>
-	        		
-	        		<li class="aw-menu__item">
-          			<a th:href="@{/404}">
-          				<i class="fa  fa-fw  fa-arrow-circle-o-right"></i>
-          				<span>404</span>
-          			</a>
-	        		</li>
-	        		
-	        		<li class="aw-menu__item">
-          			<a th:href="@{/500}">
-          				<i class="fa  fa-fw  fa-arrow-circle-o-right"></i>
-          				<span>500</span>
-          			</a>
-	        		</li>
-	
 	      	</ul>
 	    	</nav>
 		</div>

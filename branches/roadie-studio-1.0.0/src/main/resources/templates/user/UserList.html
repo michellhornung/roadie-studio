@@ -73,7 +73,7 @@
 						<td th:text="${allUsers.lastName}"></td>
 						<td th:text="${allUsers.username}"></td>
 						<td th:text="${allUsers.email}"></td>
-						<td th:text="${allUsers.latestUpdate}"></td>					
+						<td th:text="${#dates.format(allUsers.latestUpdate, 'dd/MM/yyyy HH:mm')}"></td>								
 						<td class="text-center">
 							<a class="btn  btn-link  btn-xs" title="Editar"
 								th:href="@{/user/edit/{codUser}(codUser=${allUsers.codUser})}">

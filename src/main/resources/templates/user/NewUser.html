@@ -73,28 +73,19 @@
 					<input id="re-password" type="password" class="form-control"/>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('isActive')} ? has-error">
-					<label for="isActive" class="control-label">Ativa o usuário?</label>
-					<input id="isActive" type="checkbox" class="form-control" th:checked="*{isActive}"/>
+			<div class="row">								
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('RoleType')} ? has-error">
+					<label for="allRoles" class="control-label">Role</label>
+					<select id="allRoles" class="form-control" th:field="*{RoleType}">
+						<option value="">Selecione a role</option>
+						<option th:each="RoleType : ${allRoles}" th:value="${RoleType.codRoleType}" th:text="${RoleType.description}"></option>
+					</select>
 				</div>
-				
-			<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('RoleType')} ? has-error">
-				<label for="allRoles" class="control-label">Role</label>
-				<select id="allRoles" class="form-control" th:field="*{RoleType}">
-					<option value="">Selecione a role</option>
-					<option th:each="RoleType : ${allRoles}" th:value="${RoleType.codRoleType}" th:text="${RoleType.description}"></option>
-				</select>
-			</div>
 			</div>
 			
 						
  
 			<div class="row">
-				<div class=" col-sm-6 form-group" th:classappend="${#fields.hasErrors('photo')} ? has-error">
-					<label for="photo" class="control-label">Foto do perfil</label>
-					<input id="photo" type="file" class="form-control" th:field="*{photo}" accept=".jpg,.jpeg,.png"/>
-				</div>
 				
 				<div class=" col-sm-6 form-group" th:classappend="${#fields.hasErrors('latestUpdate')} ? has-error">
 					<label for="latestUpdate" class="control-label">Última atualização</label>

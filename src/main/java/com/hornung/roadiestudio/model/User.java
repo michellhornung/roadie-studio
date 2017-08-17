@@ -2,7 +2,6 @@ package com.hornung.roadiestudio.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -33,10 +32,6 @@ public class User implements Serializable {
 	@Column(name="FIRST_NAME")
 	private String firstName;
 
-	@NotNull(message = "Informe se usuário é ativo no sistema.")
-	@Column(name="IS_ACTIVE")
-	private byte isActive;
-
 	@NotBlank(message = "Sobrenome é obrigatório.")
 	@Column(name="LAST_NAME")
 	private String lastName;
@@ -48,10 +43,6 @@ public class User implements Serializable {
 	@NotBlank(message = "Senha é obrigatório.")
 	@Column(name="PASSWORD")
 	private String password;
-
-	@Lob
-	@Column(name="PHOTO")
-	private byte[] photo;
 
 	@NotBlank(message = "Username é obrigatório.")
 	@Column(name="USERNAME")
@@ -93,14 +84,6 @@ public class User implements Serializable {
 		this.firstName = firstName;
 	}
 
-	public byte getIsActive() {
-		return this.isActive;
-	}
-
-	public void setIsActive(byte isActive) {
-		this.isActive = isActive;
-	}
-
 	public String getLastName() {
 		return this.lastName;
 	}
@@ -123,14 +106,6 @@ public class User implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public byte[] getPhoto() {
-		return this.photo;
-	}
-
-	public void setPhoto(byte[] photo) {
-		this.photo = photo;
 	}
 
 	public String getUsername() {

@@ -1,166 +1,108 @@
 <!DOCTYPE html>
-<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-	<meta charset="UTF-8"/>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-	<title>Roadie Studio</title>
+<title>Roadie Studio</title>
 
-	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/vendors.min.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/algaworks.min.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/application.css}"/>
-	
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/layout/stylesheets/vendors.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/layout/stylesheets/algaworks.min.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/layout/stylesheets/application.css}" />
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 </head>
 <body>
 
-<div class="aw-layout-page">
-	
-	<nav class="navbar  navbar-fixed-top  navbar-default  js-sticky-reference" id="main-navbar">
-	  <div class="container-fluid">
+	<div class="aw-layout-page">
 
-	    <div class="navbar-header">
-	      <a class="navbar-brand  hidden-xs" href="#">
-	        ROADIE STUDIO
-	      </a>
+		<nav
+			class="navbar  navbar-fixed-top  navbar-default  js-sticky-reference"
+			id="main-navbar">
+			<div class="container-fluid">
 
-	      <ul class="nav  navbar-nav">
-	        <li>
-	          <a href="#" class="js-sidebar-toggle"><i class="fa  fa-bars"></i></a>
-	        </li>
-	      </ul>
-	    </div>
+				<div class="navbar-header">
+					<a class="navbar-brand  hidden-xs" href="#"> ROADIE STUDIO </a>
 
-	    <ul class="nav navbar-nav  navbar-right">
-	    
-	      <li>
-	        <a href="#" class="js-search-modal-trigger-show"><i class="fa  fa-search"></i></a>
-	      </li>
-	      
-	      <li class="dropdown">
-	        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-	          <i class="fa  fa-envelope"></i> <span class="label  label-danger  aw-label-corner">48</span>
-	        </a>
-	                  
-	        <ul class="dropdown-menu">
-	          <li><a href="javascript:;">Item 1</a></li>
-	          <li><a href="javascript:;">Item 2</a></li>
-	        </ul>
-	      </li>
-	      
-	      <li class="dropdown">
-	        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-	          <i class="fa  fa-user"></i>
-	        </a>
-	        
-	        <ul class="dropdown-menu">
-	          <li>
-	            <div class="aw-logged-user">
-	              <img src="https://api.adorable.io/avatars/80/joaodascouves" 
-	                width="80" height="80" alt="João das Couves" class="aw-logged-user__picture" />
-	              <span class="aw-logged-user__name">João das Couves</span>
-	            </div>
-	          </li>
-	          <li role="separator" class="divider"></li>
-	          <li><a href="#">Meu perfil</a></li>
-	          <li><a href="#">Alterar senha</a></li>
-	          <li><a href="#">Pagamentos</a></li>
-	        </ul>
-	      </li>
-	    
-		    <li>
-		    	<p class="navbar-text" th:text="${#authentication.name}"></p>
-		    </li>
-	      
-	      <li>
-	        <a th:href="@{/logout}"><em class="fa  fa-sign-out"></em></a>
-	      </li> 
-	    </ul>
+					<ul class="nav  navbar-nav">
+						<li><a href="#" class="js-sidebar-toggle"><i
+								class="fa  fa-bars"></i></a></li>
+					</ul>
+				</div>
 
-	  </div>
-	</nav>
-	
-	<aside class="aw-layout-sidebar  js-sidebar">
-		<div class="aw-layout-sidebar__content">
-	
-	    	<nav class="aw-menu  js-menu">
-	      		<ul class="aw-menu__list">
-	      			<li class="aw-menu__item" sec:authorize-url="/schedule">
-	          			<a>
-	          				<i class="fa  fa-fw  fa-calendar"></i>
-	          				<span>Agenda</span>
-	          			</a>
-	        		</li>
-	        		<li class="aw-menu__item" sec:authorize-url="/user">
-	          			<a th:href="@{/user}">
-	          				<i class="fa  fa-fw  fa-users"></i>
-	          				<span>Usuários</span>
-	          			</a>
-	        		</li>
-	        		<li class="aw-menu__item" sec:authorize-url="/band">
-	          			<a th:href="@{/band}">
-	          				<i class="fa  fa-fw  fa-music"></i>
-	          				<span>Banda</span>
-	          			</a>
-	          			<a th:href="@{/bandGenre}">
-	          				<i class="fa  fa-fw  fa-music"></i>
-	          				<span>Gênero de Banda</span>
-	          			</a>
-	        		</li>
-	        		<li class="aw-menu__item" sec:authorize-url="/stock">
-	          			<a >
-	          				<i class="fa  fa-fw  fa-shopping-cart"></i>
-	          				<span>Estoque</span>
-	          			</a>
-	        		</li>
-	        		<li class="aw-menu__item" sec:authorize-url="/merchan">
-	          			<a >
-	          				<i class="fa  fa-fw  fa-television"></i>
-	          				<span>Propagandas</span>
-	          			</a>
-	        		</li>
-	        		<li class="aw-menu__item" sec:authorize-url="/report">
-	          			<a >
-	          				<i class="fa  fa-fw  fa-bar-chart"></i>
-	          				<span>Relatórios</span>
-	          			</a>
-	        		</li>
-	        		<li class="aw-menu__item" sec:authorize-url="/rent">
-	          			<a >
-	          				<i class="fa  fa-fw  fa-hourglass"></i>
-	          				<span>Locações</span>
-	          			</a>
-	        		</li>
-	        		<li class="aw-menu__item" sec:authorize-url="/recording">
-	          			<a >
-	          				<i class="fa  fa-fw  fa-microphone"></i>
-	          				<span>Gravações</span>
-	          			</a>
-	        		</li>
-	      	</ul>
-	    	</nav>
-		</div>
-	</aside>
-	
-	<section class="aw-layout-content  js-content" layout:fragment="conteudo"></section>
-	
-	<footer class="aw-layout-footer  js-content">
-		<div class="container-fluid">
-			<span class="aw-footer-disclaimer">&copy; 2016 RoadieStudio. Todos os direitos reservados.</span>
-		</div>
-	</footer>
-</div>
-<script th:src="@{/layout/javascripts/vendors.min.js}"></script>
-<script th:src="@{/layout/javascripts/algaworks.min.js}"></script>
+				<ul class="nav navbar-nav  navbar-right">
+			
+					<li>
+						<p class="navbar-text" th:text="${#authentication.name}"></p>
+					</li>
+
+					<li><a th:href="@{/logout}"><em class="fa  fa-sign-out"></em></a>
+					</li>
+				</ul>
+
+			</div>
+		</nav>
+
+		<aside class="aw-layout-sidebar  js-sidebar">
+			<div class="aw-layout-sidebar__content">
+
+				<nav class="aw-menu  js-menu">
+					<ul class="aw-menu__list">
+						<li class="aw-menu__item" sec:authorize-url="/schedule"><a>
+								<i class="fa  fa-fw  fa-calendar"></i> <span>Agenda</span>
+						</a></li>
+						<li class="aw-menu__item" sec:authorize-url="/user"><a
+							th:href="@{/user}"> <i class="fa  fa-fw  fa-users"></i> <span>Usuários</span>
+						</a></li>
+						<li class="aw-menu__item" sec:authorize-url="/band"><a
+							th:href="@{/band}"> <i class="fa  fa-fw  fa-music"></i> <span>Banda</span>
+						</a> <a th:href="@{/bandGenre}"> <i class="fa  fa-fw  fa-music"></i>
+								<span>Gênero de Banda</span>
+						</a></li>
+						<li class="aw-menu__item" sec:authorize-url="/stock"><a>
+								<i class="fa  fa-fw  fa-shopping-cart"></i> <span>Estoque</span>
+						</a></li>
+						<li class="aw-menu__item" sec:authorize-url="/merchan"><a>
+								<i class="fa  fa-fw  fa-television"></i> <span>Propagandas</span>
+						</a></li>
+						<li class="aw-menu__item" sec:authorize-url="/report"><a>
+								<i class="fa  fa-fw  fa-bar-chart"></i> <span>Relatórios</span>
+						</a></li>
+						<li class="aw-menu__item" sec:authorize-url="/rent"><a>
+								<i class="fa  fa-fw  fa-hourglass"></i> <span>Locações</span>
+						</a></li>
+						<li class="aw-menu__item" sec:authorize-url="/recording"><a>
+								<i class="fa  fa-fw  fa-microphone"></i> <span>Gravações</span>
+						</a></li>
+					</ul>
+				</nav>
+			</div>
+		</aside>
+
+		<section class="aw-layout-content  js-content"
+			layout:fragment="conteudo"></section>
+
+		<footer class="aw-layout-footer  js-content">
+			<div class="container-fluid">
+				<span class="aw-footer-disclaimer">&copy; 2016 RoadieStudio.
+					Todos os direitos reservados.</span>
+			</div>
+		</footer>
+	</div>
+	<script th:src="@{/layout/javascripts/vendors.min.js}"></script>
+	<script th:src="@{/layout/javascripts/algaworks.min.js}"></script>
 
 </body>
 </html>

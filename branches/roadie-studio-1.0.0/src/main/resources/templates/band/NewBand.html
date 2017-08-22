@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/DefaultLayout">
+	
+<head>
+	<title>Cadastro de banda</title>
+</head>
+
+<body>
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1>
+				Cadastro de banda
+			</h1>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="alert  alert-success  alert-dismissible" role="alert" th:if="${not #strings.isEmpty(message)}" >
+			<button type="button" class="close" data-dismiss="alert" ><span aria-hidden="true">&times;</span></button>
+			<span th:text="${message}"></span>
+		</div>
+	
+		<form method="POST" th:object="${band}" class="form-vertical  js-form-loading" th:action="@{/band/new}">
+			<div class="alert  alert-danger  alert-dismissible" role="alert" th:if="${#fields.hasAnyErrors()}">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<th:block th:each="erro : ${#fields.detailedErrors()}">
+					<div>
+						<i class="fa  fa-exclamation-circle"></i> 
+						<span th:text="${erro.message}"></span>
+					</div>
+				</th:block>
+			</div>
+			
+			<input type="hidden" th:field="*{codBand}"/>
+			
+			<div class="row">
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('name')} ? has-error">
+					<label for="name" class="control-label">Nome da banda</label>
+					<input id="name" type="text" class="form-control" th:field="*{name}" autofocus="autofocus" />
+				</div>
+			
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('description')} ? has-error">
+					<label for="description" class="control-label">Descrição</label>
+					<input id="description" type="text" class="form-control" th:field="*{description}"/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-6  form-group" th:classappend="${#fields.hasErrors('xp')} ? has-error">
+					<label for="xp" class="control-label">XP</label>
+					<input id="xp" type="number" class="form-control" th:field="*{xp}" />
+				</div>
+				
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('BandGenre')} ? has-error">
+					<label for="allGenres" class="control-label">Gênero</label>
+					<select id="allGenres" class="form-control" th:field="*{BandGenre}">
+						<option value="">Selecione</option>
+						<option th:each="BandGenre : ${allGenres}" th:value="${BandGenre.codBandGenre}" th:text="${BandGenre.description}"></option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<button class="btn  btn-primary" type="submit">Salvar</button>
+			</div>
+	
+		</form>
+	</div>
+
+</section>
+</body>
+</html>

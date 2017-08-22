@@ -20,11 +20,10 @@ public class Band implements Serializable {
 	@Column(name="COD_BAND")
 	private int codBand;
 
-	@Column(name="COD_BAND_GENRE")
-	private int codBandGenre;
-
-	@Column(name="COD_LOGO")
-	private int codLogo;
+	//bi-directional many-to-one association to RoleType
+	@ManyToOne
+	@JoinColumn(name="COD_BAND_GENRE")
+	private BandGenre BandGenre;
 
 	@Column(name="COD_USER")
 	private int codUser;
@@ -59,22 +58,6 @@ public class Band implements Serializable {
 
 	public void setCodBand(int codBand) {
 		this.codBand = codBand;
-	}
-
-	public int getCodBandGenre() {
-		return this.codBandGenre;
-	}
-
-	public void setCodBandGenre(int codBandGenre) {
-		this.codBandGenre = codBandGenre;
-	}
-
-	public int getCodLogo() {
-		return this.codLogo;
-	}
-
-	public void setCodLogo(int codLogo) {
-		this.codLogo = codLogo;
 	}
 
 	public int getCodUser() {
@@ -173,6 +156,14 @@ public class Band implements Serializable {
 		Sale.setBand(null);
 
 		return Sale;
+	}
+
+	public BandGenre getBandGenre() {
+		return BandGenre;
+	}
+
+	public void setBandGenre(BandGenre bandGenre) {
+		BandGenre = bandGenre;
 	}
 
 }

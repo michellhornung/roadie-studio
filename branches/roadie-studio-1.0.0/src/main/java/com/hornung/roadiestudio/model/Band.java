@@ -24,10 +24,11 @@ public class Band implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="COD_BAND_GENRE")
 	private BandGenre BandGenre;
-
-	@Column(name="COD_USER")
-	private int codUser;
-
+	
+	@ManyToOne
+	@JoinColumn(name="COD_USER")
+	private User User;
+	
 	@Column(name="DESCRIPTION")
 	private String description;
 
@@ -60,13 +61,6 @@ public class Band implements Serializable {
 		this.codBand = codBand;
 	}
 
-	public int getCodUser() {
-		return this.codUser;
-	}
-
-	public void setCodUser(int codUser) {
-		this.codUser = codUser;
-	}
 
 	public String getDescription() {
 		return this.description;
@@ -164,6 +158,14 @@ public class Band implements Serializable {
 
 	public void setBandGenre(BandGenre bandGenre) {
 		BandGenre = bandGenre;
+	}
+
+	public User getUser() {
+		return User;
+	}
+
+	public void setUser(User user) {
+		User = user;
 	}
 
 }

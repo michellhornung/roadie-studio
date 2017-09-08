@@ -36,7 +36,7 @@
 				</th:block>
 			</div>
 			
-			<input type="hidden" th:field="*{codBand}"/>
+			<input type="hidden" th:field="*{User.codUser}"/>
 			
 			<div class="row">
 				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('name')} ? has-error">
@@ -61,6 +61,14 @@
 					<select id="allGenres" class="form-control" th:field="*{BandGenre}">
 						<option value="">Selecione</option>
 						<option th:each="BandGenre : ${allGenres}" th:value="${BandGenre.codBandGenre}" th:text="${BandGenre.description}"></option>
+					</select>
+				</div>
+				
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('User')} ? has-error">
+					<label for="allUser" class="control-label">Usuário</label>
+					<select id="allUser" class="form-control" th:field="*{User}">
+						<option value="">Selecione</option>
+						<option th:each="User : ${allUsers}" th:value="${User.codUser}" th:text="${User.username}"></option>
 					</select>
 				</div>
 			</div>

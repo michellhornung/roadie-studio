@@ -71,8 +71,9 @@
 						</a> <a th:href="@{/bandGenre}"> <i class="fa  fa-fw  fa-music"></i>
 								<span>Gênero de Banda</span>
 						</a></li>
-						<li class="aw-menu__item" sec:authorize-url="/stock"><a>
-								<i class="fa  fa-fw  fa-shopping-cart"></i> <span>Estoque</span>
+						<li class="aw-menu__item" sec:authorize-url="/stock"><a
+							th:href="@{/stock}"> <i class="fa  fa-fw  fa-shopping-cart"></i>
+								<span>Estoque</span>
 						</a></li>
 						<li class="aw-menu__item" sec:authorize-url="/merchan"><a>
 								<i class="fa  fa-fw  fa-television"></i> <span>Propagandas</span>
@@ -80,8 +81,8 @@
 						<li class="aw-menu__item" sec:authorize-url="/report"><a>
 								<i class="fa  fa-fw  fa-bar-chart"></i> <span>Relatórios</span>
 						</a></li>
-						<li class="aw-menu__item" sec:authorize-url="/rent"><a>
-								<i class="fa  fa-fw  fa-hourglass"></i> <span>Locações</span>
+						<li class="aw-menu__item" sec:authorize-url="/rent"><a> <i
+								class="fa  fa-fw  fa-hourglass"></i> <span>Locações</span>
 						</a></li>
 						<li class="aw-menu__item" sec:authorize-url="/recording"><a>
 								<i class="fa  fa-fw  fa-microphone"></i> <span>Gravações</span>

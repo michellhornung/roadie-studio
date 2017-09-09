@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/DefaultLayout">
+	
+<head>
+	<title>Cadastro de item no estoque</title>
+</head>
+
+<body>
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1>
+				Cadastro de item no estoque
+			</h1>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="alert  alert-success  alert-dismissible" role="alert" th:if="${not #strings.isEmpty(message)}" >
+			<button type="button" class="close" data-dismiss="alert" ><span aria-hidden="true">&times;</span></button>
+			<span th:text="${message}"></span>
+		</div>
+	
+		<form method="POST" th:object="${stock}" class="form-vertical  js-form-loading" th:action="@{/stock/new}">
+			<div class="alert  alert-danger  alert-dismissible" role="alert" th:if="${#fields.hasAnyErrors()}">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<th:block th:each="erro : ${#fields.detailedErrors()}">
+					<div>
+						<i class="fa  fa-exclamation-circle"></i> 
+						<span th:text="${erro.message}"></span>
+					</div>
+				</th:block>
+			</div>
+			
+			<input type="hidden" th:field="*{codStock}"/>
+			
+			<div class="row">
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('stock.StockType.name')} ? has-error">
+					<label for="name" class="control-label">Nome</label>
+					<input id="name" type="text" class="form-control" th:field="*{stock.StockType.name}" autofocus="autofocus" />
+				</div>
+			
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('stock.quantity')} ? has-error">
+					<label for="quantity" class="control-label">Quantidade</label>
+					<input id="quantity" type="number" class="form-control" th:field="*{stock.quantity}"/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-6  form-group" th:classappend="${#fields.hasErrors('stock.StockType.description')} ? has-error">
+					<label for="description" class="control-label">Descrição</label>
+					<input id="description" type="text" class="form-control" th:field="*{stock.StockType.description}" />
+				</div>
+				
+				<div class="col-sm-6  form-group" th:classappend="${#fields.hasErrors('stock.StockType.brand')} ? has-error">
+					<label for="brand" class="control-label">Marca</label>
+					<input id="brand" type="text" class="form-control" th:field="*{stock.StockType.brand}" />
+				</div>
+			</div>
+<!-- 			<div class="row">								 -->
+<!-- 				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('RoleType')} ? has-error"> -->
+<!-- 					<label for="allRoles" class="control-label">Role</label> -->
+<!-- 					<select id="allRoles" class="form-control" th:field="*{RoleType}"> -->
+						<option value="">Selecione a role</option>
+<!-- 						<option th:each="RoleType : ${allRoles}" th:value="${RoleType.codRoleType}" th:text="${RoleType.description}"></option> -->
+<!-- 					</select> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+			
+					
+			
+			<div class="form-group">
+				<button class="btn  btn-primary" type="submit">Salvar</button>
+			</div>
+	
+		</form>
+	</div>
+
+</section>
+</body>
+</html>

@@ -2,6 +2,10 @@ package com.hornung.roadiestudio.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.util.List;
 
 
@@ -20,10 +24,12 @@ public class Stock implements Serializable {
 	@Column(name="COD_STOCK")
 	private int codStock;
 
+	@NotNull(message = "Quantidade é obrigatório.")
 	@Column(name="QUANTITY")
 	private int quantity;
 
 	@Column(name="NAME")
+	@NotBlank(message = "Nome é obrigatório.")
 	private String name;
 
 	@Column(name="DESCRIPTION")

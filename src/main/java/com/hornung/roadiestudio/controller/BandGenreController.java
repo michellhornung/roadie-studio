@@ -56,7 +56,7 @@ public class BandGenreController {
 		}
 		bandGenreService.save(bandGenre);
 		attributes.addFlashAttribute("message", "Gênero de banda salvo com sucesso!");
-		return new ModelAndView("redirect:/bandGenre/new");
+		return new ModelAndView("redirect:/bandGenre");
 		
 	}
 

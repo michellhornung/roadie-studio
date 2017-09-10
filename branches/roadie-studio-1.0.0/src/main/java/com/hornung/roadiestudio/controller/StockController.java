@@ -62,7 +62,7 @@ public class StockController {
 	@RequestMapping("/delete/{codStock}")
 	public String delete(@PathVariable int codStock, RedirectAttributes attributes) {
 		stockService.delete(codStock);
-		attributes.addFlashAttribute("message", "Item " + "'" + codStock + "'" + " deletado com sucesso!");
+		attributes.addFlashAttribute("message", "Item deletado com sucesso!");
 		return "redirect:/stock";
 	}
 	

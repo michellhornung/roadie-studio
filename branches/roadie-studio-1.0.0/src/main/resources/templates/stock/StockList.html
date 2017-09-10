@@ -45,6 +45,7 @@
 						<th>Cód</th>
 						<th>Nome</th>
 						<th>Descrição</th>
+						<th>Marca</th>
 						<th>Quantidade</th>
 						<th class="table-pesq-produto-col-acoes">Ações</th>
 					</tr>
@@ -52,9 +53,10 @@
 				<tbody>
 					<tr th:each="allStock : ${allStock}"> 						
 						<td th:text="${allStock.codStock}"></td>
-						<td th:text="${allStock.StockType.name}"></td>
+						<td th:text="${allStock.name}"></td>
+						<td th:text="${allStock.description}"></td>
+						<td th:text="${allStock.StockType.brand}"></td>						
 						<td th:text="${allStock.quantity}"></td>
-						<td th:text="${allStock.description}"></td>						
 						<td class="text-center">
 							<a class="btn  btn-link  btn-xs" title="Editar"
 								th:href="@{/stock/edit/{codStock}(codStock=${allStock.codStock})}">

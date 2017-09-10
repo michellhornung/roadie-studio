@@ -23,12 +23,6 @@ public class StockType implements Serializable {
 	@Column(name="BRAND")
 	private String brand;
 
-	@Column(name="DESCRIPTION")
-	private String description;
-
-	@Column(name="NAME")
-	private String name;
-
 	//bi-directional many-to-one association to Stock
 	@OneToMany(mappedBy="StockType")
 	private List<Stock> Stocks;
@@ -51,23 +45,7 @@ public class StockType implements Serializable {
 	public void setBrand(String brand) {
 		this.brand = brand;
 	}
-
-	public String getDescription() {
-		return this.description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
+	
 	public List<Stock> getStocks() {
 		return this.Stocks;
 	}

@@ -2,6 +2,9 @@ package com.hornung.roadiestudio.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.util.List;
 
 
@@ -33,9 +36,11 @@ public class Band implements Serializable {
 	private String description;
 
 	@Column(name="NAME")
+	@NotBlank(message = "Nome da banda é obrigatório.")
 	private String name;
 
 	@Column(name="XP")
+	@NotBlank(message = "XP da banda é obrigatório.")
 	private int xp;
 
 	//bi-directional many-to-one association to Recording

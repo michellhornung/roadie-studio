@@ -2,6 +2,9 @@ package com.hornung.roadiestudio.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.util.List;
 
 
@@ -21,6 +24,7 @@ public class StockType implements Serializable {
 	private int codStockType;
 
 	@Column(name="BRAND")
+	@NotBlank(message = "Marca é obrigatório.")
 	private String brand;
 
 	//bi-directional many-to-one association to Stock

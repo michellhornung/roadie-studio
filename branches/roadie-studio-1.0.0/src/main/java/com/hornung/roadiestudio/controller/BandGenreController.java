@@ -63,7 +63,7 @@ public class BandGenreController {
 	@RequestMapping("/delete/{codBandGenre}")
 	public String delete(@PathVariable int codBandGenre, RedirectAttributes attributes) {
 		bandGenreService.delete(codBandGenre);
-		attributes.addFlashAttribute("message", "Gênero de banda " + "'" + codBandGenre + "'" + " deletado com sucesso!");
+		attributes.addFlashAttribute("message", "Gênero de banda deletado com sucesso!");
 		return "redirect:/bandGenre";
 	}
 	

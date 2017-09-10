@@ -20,12 +20,15 @@ public class Stock implements Serializable {
 	@Column(name="COD_STOCK")
 	private int codStock;
 
-	@Column(name="DESCRIPTION")
-	private String description;
-
 	@Column(name="QUANTITY")
 	private int quantity;
 
+	@Column(name="NAME")
+	private String name;
+
+	@Column(name="DESCRIPTION")
+	private String description;
+	
 	//bi-directional many-to-one association to Recording
 	@OneToMany(mappedBy="Stock")
 	private List<Recording> Recordings;
@@ -54,20 +57,32 @@ public class Stock implements Serializable {
 		this.codStock = codStock;
 	}
 
-	public String getDescription() {
-		return this.description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	public int getQuantity() {
 		return this.quantity;
 	}
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	public List<Recording> getRecordings() {
@@ -143,5 +158,7 @@ public class Stock implements Serializable {
 	public void setStockType(StockType StockType) {
 		this.StockType = StockType;
 	}
+
+
 
 }

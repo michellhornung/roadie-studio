@@ -39,40 +39,33 @@
 			<input type="hidden" th:field="*{codStock}"/>
 			
 			<div class="row">
-				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('stock.StockType.name')} ? has-error">
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('name')} ? has-error">
 					<label for="name" class="control-label">Nome</label>
-					<input id="name" type="text" class="form-control" th:field="*{stock.StockType.name}" autofocus="autofocus" />
+					<input id="name" type="text" class="form-control" th:field="*{name}" autofocus="autofocus" />
 				</div>
 			
-				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('stock.quantity')} ? has-error">
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('quantity')} ? has-error">
 					<label for="quantity" class="control-label">Quantidade</label>
-					<input id="quantity" type="number" class="form-control" th:field="*{stock.quantity}"/>
+					<input id="quantity" type="number" class="form-control" th:field="*{quantity}"/>
 				</div>
 			</div>
 			
 			<div class="row">
-				<div class="col-sm-6  form-group" th:classappend="${#fields.hasErrors('stock.StockType.description')} ? has-error">
+				<div class="col-sm-6  form-group" th:classappend="${#fields.hasErrors('description')} ? has-error">
 					<label for="description" class="control-label">Descrição</label>
-					<input id="description" type="text" class="form-control" th:field="*{stock.StockType.description}" />
+					<input id="description" type="text" class="form-control" th:field="*{description}" />
 				</div>
 				
-				<div class="col-sm-6  form-group" th:classappend="${#fields.hasErrors('stock.StockType.brand')} ? has-error">
-					<label for="brand" class="control-label">Marca</label>
-					<input id="brand" type="text" class="form-control" th:field="*{stock.StockType.brand}" />
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('StockType')} ? has-error">
+					<label for="allStockType" class="control-label">Marca</label>
+					<select id="allStockType" class="form-control" th:field="*{StockType}">
+						<option value="">Selecione a marca</option>
+						<option th:each="StockType : ${allStockType}" th:value="${StockType.codStockType}" th:text="${StockType.brand}"></option>
+					</select>
 				</div>
+				
 			</div>
-<!-- 			<div class="row">								 -->
-<!-- 				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('RoleType')} ? has-error"> -->
-<!-- 					<label for="allRoles" class="control-label">Role</label> -->
-<!-- 					<select id="allRoles" class="form-control" th:field="*{RoleType}"> -->
-						<option value="">Selecione a role</option>
-<!-- 						<option th:each="RoleType : ${allRoles}" th:value="${RoleType.codRoleType}" th:text="${RoleType.description}"></option> -->
-<!-- 					</select> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-			
 					
-			
 			<div class="form-group">
 				<button class="btn  btn-primary" type="submit">Salvar</button>
 			</div>

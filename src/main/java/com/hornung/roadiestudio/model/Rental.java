@@ -2,6 +2,8 @@ package com.hornung.roadiestudio.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.math.BigDecimal;
 
 
@@ -20,6 +22,7 @@ public class Rental implements Serializable {
 	@Column(name="COD_RENTAL")
 	private int codRental;
 
+	@NotBlank(message = "Descrição é obrigatório.")
 	@Column(name="DESCRIPTION")
 	private String description;
 

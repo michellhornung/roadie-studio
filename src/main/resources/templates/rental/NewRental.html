@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/DefaultLayout">
+	
+<head>
+	<title>Cadastro de aluguel</title>
+</head>
+
+<body>
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1>
+				Cadastro de aluguel
+			</h1>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="alert  alert-success  alert-dismissible" role="alert" th:if="${not #strings.isEmpty(message)}" >
+			<button type="button" class="close" data-dismiss="alert" ><span aria-hidden="true">&times;</span></button>
+			<span th:text="${message}"></span>
+		</div>
+	
+		<form method="POST" th:object="${rental}" class="form-vertical  js-form-loading" th:action="@{/rental/new}">
+			<div class="alert  alert-danger  alert-dismissible" role="alert" th:if="${#fields.hasAnyErrors()}">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<th:block th:each="erro : ${#fields.detailedErrors()}">
+					<div>
+						<i class="fa  fa-exclamation-circle"></i> 
+						<span th:text="${erro.message}"></span>
+					</div>
+				</th:block>
+			</div>
+			
+			<input type="hidden" th:field="*{codRental}"/>
+			
+			<div class="row">
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('description')} ? has-error">
+					<label for="description" class="control-label">Descrição</label>
+					<input id="description" type="text" class="form-control" th:field="*{description}" autofocus="autofocus" />
+				</div>
+		
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('Room.name')} ? has-error">
+					<label for="allRooms" class="control-label">Sala</label>
+					<select id="allRooms" class="form-control" th:field="*{Room}">
+						<option value="">Selecione</option>
+						<option th:each="Room : ${allRooms}" th:value="${Room.codRoom}" th:text="${Room.name}"></option>
+					</select>
+				</div>
+				
+				
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('Band.name')} ? has-error">
+					<label for="allBands" class="control-label">Banda</label>
+					<select id="allBands" class="form-control" th:field="*{Band}">
+						<option value="">Selecione</option>
+						<option th:each="Band : ${allBands}" th:value="${Band.codBand}" th:text="${Band.name}"></option>
+					</select>
+				</div>
+						
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('isToFix')} ? has-error">
+					<label for="isToFix" class="control-label">Algum conserto?</label>
+					<select id="isToFix" class="form-control" th:field="*{isToFix}">
+						<option value="0">Não</option>
+						<option value="1">Sim</option>						
+					</select>
+				</div>									
+			</div>
+			
+			<div class="row">				
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('isForShow')} ? has-error">
+					<label for="isForShow" class="control-label">É show?</label>
+					<select id="isForShow" class="form-control" th:field="*{isToFix}">
+						<option value="0">Não</option>
+						<option value="1">Sim</option>						
+					</select>
+				</div>
+				
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('isInstrument')} ? has-error">
+					<label for="isInstrument" class="control-label">Aluguel Instrumento?</label>
+					<select id="isInstrument" class="form-control" th:field="*{isInstrument}">						
+						<option value="0">Não</option>
+						<option value="1">Sim</option>						
+					</select>
+				</div>
+				
+			</div>
+			
+			<div class="row">
+				
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('hourQuantity')} ? has-error">
+					<label for="hourQuantity" class="control-label">Quantidade de Horas</label>
+					<input id="hourQuantity" type="number" class="form-control" th:field="*{hourQuantity}" />
+				</div>
+				
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('hourValue')} ? has-error">
+					<label for="hourValue" class="control-label">Valor da Hora</label>
+					<input id="hourValue" type="number" class="form-control" th:field="*{hourValue}" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<button class="btn  btn-primary" type="submit">Salvar</button>
+			</div>
+	
+		</form>
+	</div>
+
+</section>
+</body>
+</html>

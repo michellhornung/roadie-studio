@@ -60,37 +60,58 @@
 
 				<nav class="aw-menu  js-menu">
 					<ul class="aw-menu__list">
-						<li class="aw-menu__item" sec:authorize-url="/schedule"><a>
-								<i class="fa  fa-fw  fa-calendar"></i> <span>Agenda</span>
-						</a></li>
-						<li class="aw-menu__item" sec:authorize-url="/user"><a
-							th:href="@{/user}"> <i class="fa  fa-fw  fa-users"></i> <span>Usuários</span>
-						</a></li>
-						<li class="aw-menu__item" sec:authorize-url="/band"><a
-							th:href="@{/band}"> <i class="fa  fa-fw  fa-music"></i> <span>Banda</span>
-						</a> <a th:href="@{/bandGenre}"> <i class="fa  fa-fw  fa-music"></i>
+						<li class="aw-menu__item" sec:authorize-url="/schedule">
+							<a th:href="@{/schedule}">
+								<i class="fa  fa-fw  fa-calendar"></i> 
+								<span>Agenda</span>
+							</a>
+						</li>
+						<li class="aw-menu__item" sec:authorize-url="/user">
+							<a th:href="@{/user}"> 
+								<i class="fa  fa-fw  fa-users"></i> 
+								<span>Usuários</span>
+							</a>
+						</li>
+						<li class="aw-menu__item" sec:authorize-url="/band">
+						<a th:href="@{/band}"> 
+							<i class="fa  fa-fw  fa-music"></i> 
+							<span>Banda</span>
+						</a> 
+							<a th:href="@{/bandGenre}"> 
+							<i class="fa  fa-fw  fa-music"></i>
 								<span>Gênero de Banda</span>
-						</a></li>
-						<li class="aw-menu__item" sec:authorize-url="/stock"><a
-							th:href="@{/stock}"> <i class="fa  fa-fw  fa-shopping-cart"></i>
+							</a>
+						</li>
+						<li class="aw-menu__item" sec:authorize-url="/stock">
+							<a th:href="@{/stock}"> 
+							<i class="fa  fa-fw  fa-shopping-cart"></i>
 								<span>Estoque</span>
-						</a></li>
-<!-- 						<li class="aw-menu__item" sec:authorize-url="/merchan"><a> -->
-<!-- 								<i class="fa  fa-fw  fa-television"></i> <span>Propagandas</span> -->
-<!-- 						</a></li> -->
-						<li class="aw-menu__item" sec:authorize-url="/report"><a>
-								<i class="fa  fa-fw  fa-bar-chart"></i> <span>Relatórios</span>
-						</a></li>
-						<li class="aw-menu__item" sec:authorize-url="/rent"><a> <i
-								class="fa  fa-fw  fa-hourglass"></i> <span>Locações</span>
-						</a></li>
-						<li class="aw-menu__item" sec:authorize-url="/recording"><a>
-								<i class="fa  fa-fw  fa-microphone"></i> <span>Gravações</span>
-						</a></li>
-						<li class="aw-menu__item" sec:authorize-url="/room"><a
-							th:href="@{/room}"> <i class="fa  fa-fw  fa-smile-o"></i>
+							</a>
+						</li>
+						<li class="aw-menu__item" sec:authorize-url="/rent">
+							<a th:href="@{/rental}"> 
+								<i class="fa  fa-fw  fa-hourglass"></i> 
+								<span>Locações</span>
+							</a>
+						</li>
+						<li class="aw-menu__item" sec:authorize-url="/recording">
+							<a th:href="@{/recording}">
+								<i class="fa  fa-fw  fa-microphone"></i> 
+								<span>Gravações</span>
+							</a>
+						</li>
+						<li class="aw-menu__item" sec:authorize-url="/room">
+							<a th:href="@{/room}"> 
+								<i class="fa  fa-fw  fa-smile-o"></i>
 								<span>Salas</span>
-						</a></li>
+							</a>
+						</li>
+						<li class="aw-menu__item" sec:authorize-url="/report">
+							<a th:href="@{/report}">
+								<i class="fa  fa-fw  fa-bar-chart"></i> 
+								<span>Relatórios</span>
+							</a>
+						</li>
 					</ul>
 				</nav>
 			</div>
@@ -102,7 +123,9 @@
 		<footer class="aw-layout-footer  js-content">
 			<div class="container-fluid">
 				<span class="aw-footer-disclaimer">&copy; 2016 RoadieStudio.
-					Todos os direitos reservados.</span>
+					Todos os direitos reservados.					
+				</span>
+				
 			</div>
 		</footer>
 	</div>

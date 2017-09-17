@@ -70,7 +70,7 @@ public class BandController {
 	@RequestMapping("/delete/{codBand}")
 	public String delete(@PathVariable int codBand, RedirectAttributes attributes) {
 		bandService.delete(codBand);
-		attributes.addFlashAttribute("message", "Banda " + "'" + codBand + "'" + " deletado com sucesso!");
+		attributes.addFlashAttribute("message", "Banda deletada com sucesso!");
 		return "redirect:/band";
 	}
 	

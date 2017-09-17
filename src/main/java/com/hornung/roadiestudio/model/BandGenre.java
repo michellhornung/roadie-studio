@@ -2,8 +2,7 @@ package com.hornung.roadiestudio.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
-import org.hibernate.validator.constraints.NotBlank;
+import java.util.List;
 
 
 /**
@@ -21,9 +20,12 @@ public class BandGenre implements Serializable {
 	@Column(name="COD_BAND_GENRE")
 	private int codBandGenre;
 
-	@NotBlank(message = "Descrição é obrigatório.")
 	@Column(name="DESCRIPTION")
 	private String description;
+
+	//bi-directional many-to-one association to Band
+	@OneToMany(mappedBy="BandGenre")
+	private List<Band> Bands;
 
 	public BandGenre() {
 	}
@@ -42,6 +44,28 @@ public class BandGenre implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public List<Band> getBands() {
+		return this.Bands;
+	}
+
+	public void setBands(List<Band> Bands) {
+		this.Bands = Bands;
+	}
+
+	public Band addBand(Band Band) {
+		getBands().add(Band);
+		Band.setBandGenre(this);
+
+		return Band;
+	}
+
+	public Band removeBand(Band Band) {
+		getBands().remove(Band);
+		Band.setBandGenre(null);
+
+		return Band;
 	}
 
 }

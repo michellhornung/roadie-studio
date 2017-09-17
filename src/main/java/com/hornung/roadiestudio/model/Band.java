@@ -2,9 +2,6 @@ package com.hornung.roadiestudio.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
-import org.hibernate.validator.constraints.NotBlank;
-
 import java.util.List;
 
 
@@ -23,25 +20,24 @@ public class Band implements Serializable {
 	@Column(name="COD_BAND")
 	private int codBand;
 
-	//bi-directional many-to-one association to RoleType
-	@ManyToOne
-	@JoinColumn(name="COD_BAND_GENRE")
-	private BandGenre BandGenre;
-	
-	@ManyToOne
-	@JoinColumn(name="COD_USER")
-	private User User;
-	
 	@Column(name="DESCRIPTION")
 	private String description;
 
 	@Column(name="NAME")
-	@NotBlank(message = "Nome da banda é obrigatório.")
 	private String name;
 
 	@Column(name="XP")
-	@NotBlank(message = "XP da banda é obrigatório.")
 	private int xp;
+
+	//bi-directional many-to-one association to BandGenre
+	@ManyToOne
+	@JoinColumn(name="COD_BAND_GENRE")
+	private BandGenre BandGenre;
+
+	//bi-directional many-to-one association to User
+	@ManyToOne
+	@JoinColumn(name="COD_USER")
+	private User User;
 
 	//bi-directional many-to-one association to Recording
 	@OneToMany(mappedBy="Band")
@@ -66,7 +62,6 @@ public class Band implements Serializable {
 		this.codBand = codBand;
 	}
 
-
 	public String getDescription() {
 		return this.description;
 	}
@@ -89,6 +84,22 @@ public class Band implements Serializable {
 
 	public void setXp(int xp) {
 		this.xp = xp;
+	}
+
+	public BandGenre getBandGenre() {
+		return this.BandGenre;
+	}
+
+	public void setBandGenre(BandGenre BandGenre) {
+		this.BandGenre = BandGenre;
+	}
+
+	public User getUser() {
+		return this.User;
+	}
+
+	public void setUser(User User) {
+		this.User = User;
 	}
 
 	public List<Recording> getRecordings() {
@@ -155,22 +166,6 @@ public class Band implements Serializable {
 		Sale.setBand(null);
 
 		return Sale;
-	}
-
-	public BandGenre getBandGenre() {
-		return BandGenre;
-	}
-
-	public void setBandGenre(BandGenre bandGenre) {
-		BandGenre = bandGenre;
-	}
-
-	public User getUser() {
-		return User;
-	}
-
-	public void setUser(User user) {
-		User = user;
 	}
 
 }

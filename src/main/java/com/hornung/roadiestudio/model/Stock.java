@@ -2,10 +2,6 @@ package com.hornung.roadiestudio.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotBlank;
-
 import java.util.List;
 
 
@@ -24,17 +20,15 @@ public class Stock implements Serializable {
 	@Column(name="COD_STOCK")
 	private int codStock;
 
-	@NotNull(message = "Quantidade é obrigatório.")
+	@Column(name="DESCRIPTION")
+	private String description;
+
+	@Column(name="NAME")
+	private String name;
+
 	@Column(name="QUANTITY")
 	private int quantity;
 
-	@Column(name="NAME")
-	@NotBlank(message = "Nome é obrigatório.")
-	private String name;
-
-	@Column(name="DESCRIPTION")
-	private String description;
-	
 	//bi-directional many-to-one association to Recording
 	@OneToMany(mappedBy="Stock")
 	private List<Recording> Recordings;
@@ -63,32 +57,28 @@ public class Stock implements Serializable {
 		this.codStock = codStock;
 	}
 
-	public int getQuantity() {
-		return this.quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getQuantity() {
+		return this.quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public List<Recording> getRecordings() {
@@ -164,7 +154,5 @@ public class Stock implements Serializable {
 	public void setStockType(StockType StockType) {
 		this.StockType = StockType;
 	}
-
-
 
 }

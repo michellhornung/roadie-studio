@@ -2,9 +2,6 @@ package com.hornung.roadiestudio.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
-import org.hibernate.validator.constraints.NotBlank;
-
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +12,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="en_user")
-@NamedQuery(name="User.findAll", query="SELECT e FROM User e")
+@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -23,16 +20,13 @@ public class User implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="COD_USER")
 	private int codUser;
-	
-	@NotBlank(message = "E-mail é obrigatório.")
+
 	@Column(name="EMAIL")
 	private String email;
-	
-	@NotBlank(message = "Nome é obrigatório.")
+
 	@Column(name="FIRST_NAME")
 	private String firstName;
 
-	@NotBlank(message = "Sobrenome é obrigatório.")
 	@Column(name="LAST_NAME")
 	private String lastName;
 
@@ -40,17 +34,19 @@ public class User implements Serializable {
 	@Column(name="LATEST_UPDATE")
 	private Date latestUpdate;
 
-	@NotBlank(message = "Senha é obrigatório.")
 	@Column(name="PASSWORD")
 	private String password;
 
-	@NotBlank(message = "Username é obrigatório.")
 	@Column(name="USERNAME")
 	private String username;
-	
+
+	//bi-directional many-to-one association to Band
+	@OneToMany(mappedBy="User")
+	private List<Band> Bands;
+
 	//bi-directional many-to-one association to Sale
 	@OneToMany(mappedBy="User")
-	private List<Sale> sales;
+	private List<Sale> Sales;
 
 	//bi-directional many-to-one association to RoleType
 	@ManyToOne
@@ -115,27 +111,49 @@ public class User implements Serializable {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
+	public List<Band> getBands() {
+		return this.Bands;
+	}
+
+	public void setBands(List<Band> Bands) {
+		this.Bands = Bands;
+	}
+
+	public Band addBand(Band Band) {
+		getBands().add(Band);
+		Band.setUser(this);
+
+		return Band;
+	}
+
+	public Band removeBand(Band Band) {
+		getBands().remove(Band);
+		Band.setUser(null);
+
+		return Band;
+	}
+
 	public List<Sale> getSales() {
-		return this.sales;
+		return this.Sales;
 	}
 
-	public void setSales(List<Sale> sales) {
-		this.sales = sales;
+	public void setSales(List<Sale> Sales) {
+		this.Sales = Sales;
 	}
 
-	public Sale addSale(Sale sale) {
-		getSales().add(sale);
-		sale.setUser(this);
+	public Sale addSale(Sale Sale) {
+		getSales().add(Sale);
+		Sale.setUser(this);
 
-		return sale;
+		return Sale;
 	}
 
-	public Sale removeSale(Sale enSale) {
-		getSales().remove(enSale);
-		enSale.setUser(null);
+	public Sale removeSale(Sale Sale) {
+		getSales().remove(Sale);
+		Sale.setUser(null);
 
-		return enSale;
+		return Sale;
 	}
 
 	public RoleType getRoleType() {

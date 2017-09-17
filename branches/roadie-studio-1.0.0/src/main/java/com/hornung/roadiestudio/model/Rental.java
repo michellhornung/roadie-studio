@@ -15,11 +15,16 @@ import java.math.BigDecimal;
 public class Rental implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private RentalPK id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="COD_RENTAL")
+	private int codRental;
 
 	@Column(name="DESCRIPTION")
 	private String description;
+
+	@Column(name="HOUR_QUANTITY")
+	private BigDecimal hourQuantity;
 
 	@Column(name="HOUR_VALUE")
 	private BigDecimal hourValue;
@@ -51,12 +56,12 @@ public class Rental implements Serializable {
 	public Rental() {
 	}
 
-	public RentalPK getId() {
-		return this.id;
+	public int getCodRental() {
+		return this.codRental;
 	}
 
-	public void setId(RentalPK id) {
-		this.id = id;
+	public void setCodRental(int codRental) {
+		this.codRental = codRental;
 	}
 
 	public String getDescription() {
@@ -65,6 +70,14 @@ public class Rental implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public BigDecimal getHourQuantity() {
+		return this.hourQuantity;
+	}
+
+	public void setHourQuantity(BigDecimal hourQuantity) {
+		this.hourQuantity = hourQuantity;
 	}
 
 	public BigDecimal getHourValue() {

@@ -5,7 +5,7 @@
 	layout:decorator="layout/DefaultLayout">
 	
 <head>
-	<title>Cadastro de aluguel</title>
+	<title>Cadastro de gravação</title>
 </head>
 
 <body>
@@ -14,7 +14,7 @@
 	<div class="page-header">
 		<div class="container-fluid">
 			<h1>
-				Cadastro de aluguel
+				Cadastro de gravação
 			</h1>
 		</div>
 	</div>
@@ -25,7 +25,7 @@
 			<span th:text="${message}"></span>
 		</div>
 	
-		<form method="POST" th:object="${rental}" class="form-vertical  js-form-loading" th:action="@{/rental/new}">
+		<form method="POST" th:object="${recording}" class="form-vertical  js-form-loading" th:action="@{/recording/new}">
 			<div class="alert  alert-danger  alert-dismissible" role="alert" th:if="${#fields.hasAnyErrors()}">
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<th:block th:each="erro : ${#fields.detailedErrors()}">
@@ -36,7 +36,7 @@
 				</th:block>
 			</div>
 			
-			<input type="hidden" th:field="*{codRental}"/>
+			<input type="hidden" th:field="*{codRecording}"/>
 			
 			<div class="row">
 				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('description')} ? has-error">
@@ -58,7 +58,7 @@
 			<div class="row">
 				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('Band.name')} ? has-error">
 					<label for="allBands" class="control-label">Banda</label>
-					<select id="allBands" class="form-control" th:field="*{Band}">
+					<select id="allBands" class="form-control" th:field="*{Band}" required="required">
 						<option value="">Selecione</option>
 						<option th:each="Band : ${allBands}" th:value="${Band.codBand}" th:text="${Band.name}"></option>
 					</select>

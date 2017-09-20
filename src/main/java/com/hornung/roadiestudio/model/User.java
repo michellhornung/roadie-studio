@@ -2,6 +2,11 @@ package com.hornung.roadiestudio.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.util.Date;
 import java.util.List;
 
@@ -21,9 +26,11 @@ public class User implements Serializable {
 	@Column(name="COD_USER")
 	private int codUser;
 
+	@NotBlank(message = "E-mail é obrigatório.") @Email
 	@Column(name="EMAIL")
 	private String email;
 
+	@NotBlank(message = "Nome é obrigatório.")
 	@Column(name="FIRST_NAME")
 	private String firstName;
 
@@ -34,9 +41,11 @@ public class User implements Serializable {
 	@Column(name="LATEST_UPDATE")
 	private Date latestUpdate;
 
+	@NotBlank(message = "Senha é obrigatório.")
 	@Column(name="PASSWORD")
 	private String password;
 
+	@NotBlank(message = "Username é obrigatório.")
 	@Column(name="USERNAME")
 	private String username;
 
@@ -49,6 +58,7 @@ public class User implements Serializable {
 	private List<Sale> Sales;
 
 	//bi-directional many-to-one association to RoleType
+	@NotNull(message = "Role é obrigatório.")
 	@ManyToOne
 	@JoinColumn(name="COD_ROLE_TYPE")
 	private RoleType RoleType;

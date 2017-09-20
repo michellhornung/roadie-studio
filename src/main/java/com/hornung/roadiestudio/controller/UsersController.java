@@ -63,7 +63,7 @@ public class UsersController {
 	@RequestMapping("/delete/{codUser}")
 	public String delete(@PathVariable int codUser, RedirectAttributes attributes) {
 		userService.delete(codUser);
-		attributes.addFlashAttribute("message", "Usuário " + "'" + codUser + "'" + " deletado com sucesso!");
+		attributes.addFlashAttribute("message", "Usuário deletado com sucesso!");
 		return "redirect:/user";
 	}
 	

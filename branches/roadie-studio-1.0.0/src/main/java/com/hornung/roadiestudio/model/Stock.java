@@ -2,6 +2,8 @@ package com.hornung.roadiestudio.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 import java.util.List;
 
 
@@ -23,9 +25,11 @@ public class Stock implements Serializable {
 	@Column(name="DESCRIPTION")
 	private String description;
 
+	@NotNull(message="Nome é obrigatório.")
 	@Column(name="NAME")
 	private String name;
 
+	@NotNull(message="Quantidade é obrigatório.")
 	@Column(name="QUANTITY")
 	private int quantity;
 
@@ -42,6 +46,7 @@ public class Stock implements Serializable {
 	private List<Sale> Sales;
 
 	//bi-directional many-to-one association to StockType
+	@NotNull(message = "Marca é obrigatório.")
 	@ManyToOne
 	@JoinColumn(name="COD_STOCK_TYPE")
 	private StockType StockType;

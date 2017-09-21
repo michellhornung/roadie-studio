@@ -60,32 +60,16 @@
 
 				<nav class="aw-menu  js-menu">
 					<ul class="aw-menu__list">
+						<li class="aw-menu__item" sec:authorize-url="/home">
+							<a th:href="@{/home}">
+								<i class="fa  fa-fw fa fa-home"></i> 
+								<span>Home</span>
+							</a>
+						</li>
 						<li class="aw-menu__item" sec:authorize-url="/schedule">
 							<a th:href="@{/schedule}">
 								<i class="fa  fa-fw  fa-calendar"></i> 
 								<span>Agenda</span>
-							</a>
-						</li>
-						<li class="aw-menu__item" sec:authorize-url="/user">
-							<a th:href="@{/user}"> 
-								<i class="fa  fa-fw  fa-users"></i> 
-								<span>Usuários</span>
-							</a>
-						</li>
-						<li class="aw-menu__item" sec:authorize-url="/band">
-						<a th:href="@{/band}"> 
-							<i class="fa  fa-fw  fa-music"></i> 
-							<span>Banda</span>
-						</a> 
-							<a th:href="@{/bandGenre}"> 
-							<i class="fa  fa-fw  fa-music"></i>
-								<span>Gênero de Banda</span>
-							</a>
-						</li>
-						<li class="aw-menu__item" sec:authorize-url="/stock">
-							<a th:href="@{/stock}"> 
-							<i class="fa  fa-fw  fa-shopping-cart"></i>
-								<span>Estoque</span>
 							</a>
 						</li>
 						<li class="aw-menu__item" sec:authorize-url="/rent">
@@ -100,6 +84,29 @@
 								<span>Gravações</span>
 							</a>
 						</li>
+						<li class="aw-menu__item" sec:authorize-url="/user">
+							<a th:href="@{/user}"> 
+								<i class="fa  fa-fw  fa-users"></i> 
+								<span>Usuários</span>
+							</a>
+						</li>
+						<li class="aw-menu__item" sec:authorize-url="/band">
+						<a th:href="@{/band}"> 
+							<i class="fa  fa-fw  fa-music"></i> 
+							<span>Bandas</span>
+						</a> 
+							<a th:href="@{/bandGenre}"> 
+							<i class="fa  fa-fw  fa-music"></i>
+								<span>Gêneros de Banda</span>
+							</a>
+						</li>
+						<li class="aw-menu__item" sec:authorize-url="/stock">
+							<a th:href="@{/stock}"> 
+							<i class="fa  fa-fw  fa-shopping-cart"></i>
+								<span>Estoque</span>
+							</a>
+						</li>
+						
 						<li class="aw-menu__item" sec:authorize-url="/room">
 							<a th:href="@{/room}"> 
 								<i class="fa  fa-fw  fa-smile-o"></i>
@@ -130,7 +137,7 @@
 		</footer>
 	</div>
 	<script th:src="@{/layout/javascripts/vendors.min.js}"></script>
-	<script th:src="@{/layout/javascripts/algaworks.min.js}"></script>
+	<script th:src="@{/layout/javascripts/roadiestudio.min.js}"></script>
 
 </body>
 </html>

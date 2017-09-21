@@ -16,7 +16,7 @@
 			<div class="row">
 				<div class="col-xs-10">
 					<h1>
-						Salas
+						Lista de Salas
 					</h1>
 				</div>
 			
@@ -42,8 +42,7 @@
 				<tr>
 					<th>Cód</th>
 					<th>Nome</th>
-					<th>Descrição</th>			
-					<th>Livre?</th>		
+					<th>Descrição</th>					
 					<th class="table-pesq-produto-col-acoes">Ações</th>
 				</tr>
 			</thead>
@@ -52,14 +51,6 @@
 					<td th:text="${allRooms.codRoom}"></td>
 					<td th:text="${allRooms.name}"></td>
 					<td th:text="${allRooms.description}"></td>
-					
-					<td th:if="${allRooms.isFree} == 0">
-						<i class="fa  fa-fw  fa-thumbs-down" style="color: red"></i> Não 
-					</td>
-					<td th:if="${allRooms.isFree} == 1" >
-						<i class="fa  fa-fw  fa-thumbs-up" style="color: green"></i> Sim 
-					</td>
-					
 					<td class="text-center">
 						<a class="btn  btn-link  btn-xs" title="Editar"
 							th:href="@{/room/edit/{codRoom}(codRoom=${allRooms.codRoom})}">

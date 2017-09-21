@@ -11,7 +11,7 @@ public class SecurityController {
 	@RequestMapping("/login")
 	public String Login(@AuthenticationPrincipal User user) {
 		if (user != null) {
-			return ("redirect:/user/new");
+			return ("redirect:/user");
 		}
 		
 		return "Login";

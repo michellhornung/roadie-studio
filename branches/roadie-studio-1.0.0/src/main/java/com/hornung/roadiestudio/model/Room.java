@@ -26,9 +26,6 @@ public class Room implements Serializable {
 	@Column(name="NAME")
 	private String name;
 	
-	@Column(name="IS_FREE")
-	private byte isFree;
-
 	//bi-directional many-to-one association to Recording
 	@OneToMany(mappedBy="Room")
 	private List<Recording> Recordings;
@@ -68,14 +65,6 @@ public class Room implements Serializable {
 		this.name = name;
 	}
 
-	public byte getIsFree() {
-		return isFree;
-	}
-
-	public void setIsFree(byte isFree) {
-		this.isFree = isFree;
-	}
-	
 	public List<Recording> getRecordings() {
 		return this.Recordings;
 	}

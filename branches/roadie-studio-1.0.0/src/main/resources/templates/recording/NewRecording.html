@@ -104,6 +104,24 @@
 					<input id="hourValue" type="number" class="form-control" th:field="*{hourValue}" />
 				</div>
 			</div>
+			
+			
+			
+			
+			
+			<div class="row">
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('startDatetime')} ? has-error">
+					<label for="startDatetime" class="control-label">Horário Início</label>
+					<input class="form-control" name="startDatetime" id="startDatetime" type="text"
+                			th:value="${#dates.format(#dates.createNow() , 'dd/MM/yyyy HH:mm')}"/>
+				</div>
+				
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('endDatetime')} ? has-error">
+					<label for="endDatetime" class="control-label">Horário Término</label>
+					<input class="form-control" name="endDatetime" id="endDatetime" type="text"
+                			th:value="${#dates.format(#dates.createNow() , 'dd/MM/yyyy HH:mm')}" />
+				</div>
+			</div>
 
 			<div class="form-group">
 				<button class="btn  btn-primary" type="submit">Salvar</button>

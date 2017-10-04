@@ -5,6 +5,7 @@ import javax.persistence.*;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 
 /**
@@ -40,6 +41,14 @@ public class Rental implements Serializable {
 
 	@Column(name="IS_TO_FIX")
 	private byte isToFix;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="START_DATETIME")
+	private Date startDatetime;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="END_DATETIME")
+	private Date endDatetime;
 
 	//bi-directional many-to-one association to Band
 	@ManyToOne
@@ -137,6 +146,22 @@ public class Rental implements Serializable {
 
 	public void setStock(Stock Stock) {
 		this.Stock = Stock;
+	}
+
+	public Date getStartDatetime() {
+		return startDatetime;
+	}
+
+	public void setStartDatetime(Date startDatetime) {
+		this.startDatetime = startDatetime;
+	}
+
+	public Date getEndDatetime() {
+		return endDatetime;
+	}
+
+	public void setEndDatetime(Date endDatetime) {
+		this.endDatetime = endDatetime;
 	}
 
 }

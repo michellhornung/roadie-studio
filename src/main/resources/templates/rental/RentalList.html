@@ -16,14 +16,14 @@
 			<div class="row">
 				<div class="col-xs-10">
 					<h1>
-						Lista de aluguel de salas
+						Lista de locação de salas
 					</h1>
 				</div>
 			
 				<div class="col-xs-2">
 					<div class="aw-page-header-controls">
 						<a class="btn btn-primary" th:href="@{/rental/new}">
-							<i class="fa  fa-plus-circle"></i> <span class="hidden-xs  hidden-sm">Novo aluguel</span>
+							<i class="fa  fa-plus-circle"></i> <span class="hidden-xs  hidden-sm">Nova locação</span>
 						</a>
 					</div>
 				</div>
@@ -49,6 +49,8 @@
 					<th>Aluguel Instrumento?</th>
 					<th>Quantidade Horas</th>
 					<th>Valor Hora</th>
+					<th>Horário Início</th>
+					<th>Horário Término</th>
 					<th class="table-pesq-produto-col-acoes">Ações</th>
 				</tr>
 			</thead>
@@ -82,6 +84,9 @@
 					
 					<td th:text="${allRentals.hourQuantity}"></td>
 					<td th:text="${allRentals.hourValue}"></td>
+					
+					<td th:text="${#dates.format(allRentals.startDatetime, 'dd/MM/yyyy HH:mm')}"></td>
+					<td th:text="${#dates.format(allRentals.endDatetime, 'dd/MM/yyyy HH:mm')}"></td>
 					<td class="text-center">
 						<a class="btn  btn-link  btn-xs" title="Editar"
 							th:href="@{/rental/edit/{codRental}(codRental=${allRentals.codRental})}">

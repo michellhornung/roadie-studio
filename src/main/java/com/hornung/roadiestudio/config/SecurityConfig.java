@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()
-				.antMatchers("/user/new", "/band/new", "bandGenre/new").hasRole("CREATE")
+				.antMatchers("/user/new", "/band/new", "bandGenre/new", "/user", "/rental").hasRole("CREATE")
 				.antMatchers("/user/edit", "/band/edit", "bandGenre/edit").hasRole("EDIT")
 				.antMatchers("/home/**", "/band/**", "/bandGenre/**", "/user/**", "/schedule/**", 
 						"/stock/**", "/report/**", "/room/**",

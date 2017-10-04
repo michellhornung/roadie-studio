@@ -16,17 +16,17 @@
 			<div class="row">
 				<div class="col-xs-10">
 					<h1>
-						Lista de Salas
+						Home
 					</h1>
 				</div>
 			
-				<div class="col-xs-2">
+				<!-- <div class="col-xs-2">
 					<div class="aw-page-header-controls">
-						<a class="btn btn-primary" th:href="@{/room/new}">
+						<a class="btn btn-primary" th:href="@{/home/new}">
 							<i class="fa  fa-plus-circle"></i> <span class="hidden-xs  hidden-sm">Nova Sala</span>
 						</a>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
@@ -37,36 +37,24 @@
 		<span th:text="${message}"></span>
 	</div>
 	<div class="table-responsive">
+
+	<span onload="dataFormatada(1382086394000);"></span>
+
 		<table id="user-table" class="table  table-striped  table-bordered  table-hover  table-condensed  js-sticky-table">
 			<thead class="aw-table-header-solid">
 				<tr>
-					<th>Cód</th>
-					<th>Nome</th>
-					<th>Descrição</th>					
-					<th class="table-pesq-produto-col-acoes">Ações</th>
+					<th>Sala</th>
+					<th>Sala Livre?</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="allRooms : ${allRooms}"> 
-					<td th:text="${allRooms.codRoom}"></td>
 					<td th:text="${allRooms.name}"></td>
-					<td th:text="${allRooms.description}"></td>
-					<td class="text-center">
-						<a class="btn  btn-link  btn-xs" title="Editar"
-							th:href="@{/room/edit/{codRoom}(codRoom=${allRooms.codRoom})}">
-							<i class="glyphicon glyphicon-pencil"></i>
-						</a>
-						<a class="btn  btn-link  btn-xs" title="Excluir"
-							th:href="@{/room/delete/} + ${allRooms.codRoom}" 
-							onclick="return confirm('Deseja realmente deletar esta sala?');">
-							<i class="glyphicon glyphicon-remove"></i>
-						</a>
-					</td>
+					<td th:text="${allRooms.status}"></td>
 				</tr>
 				<tr th:if="${allRooms.empty}">
 					<td colspan="9">Nenhum registro encontrado</td>
 				</tr>
-				
 			</tbody>
 		</table>
 	</div>
@@ -75,4 +63,17 @@
 
 </section>
 </body>
+<script type="text/javascript">
+function dataFormatada(d) {
+    var data = new Date(d),
+        dia = data.getDate(),
+        mes = data.getMonth() + 1,
+        ano = data.getFullYear(),
+        hora = data.getHours(),
+        minutos = data.getMinutes(),
+        segundos = data.getSeconds();
+
+    return [dia, mes, ano].join('/') + ' ' + [hora, minutos, segundos].join(':');
+}
+</script>
 </html>

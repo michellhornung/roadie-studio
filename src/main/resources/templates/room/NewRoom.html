@@ -47,13 +47,6 @@
 					<label for="description" class="control-label">Descrição</label>
 					<input id="description" type="text" class="form-control" th:field="*{description}" autofocus="autofocus" />
 				</div>
-				<div class="col-sm-12 form-group" th:classappend="${#fields.hasErrors('isFree')} ? has-error">
-					<label for="isFree" class="control-label">Sala Livre?</label>
-					<select id="isFree" class="form-control" th:field="*{isFree}">
-						<option value="0">Não</option>
-						<option value="1">Sim</option>						
-					</select>
-				</div>				
 			</div>
 			
 			<div class="form-group">

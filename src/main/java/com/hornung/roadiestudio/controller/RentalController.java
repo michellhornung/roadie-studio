@@ -56,6 +56,9 @@ public class RentalController {
 		ModelAndView mv = new ModelAndView("/rental/NewRental");
 		List<Rental> allRentals = rentals.findAll();
 		mv.addObject("allRentals", allRentals);
+		
+		
+		
 		List<Room> allRooms = rooms.findAll();
 		mv.addObject("allRooms", allRooms);
 		//List<Stock> allStocks = stocks.findAll();
@@ -69,6 +72,10 @@ public class RentalController {
 	public ModelAndView save(@Valid Rental rental, BindingResult result, RedirectAttributes attributes) {
 		if (result.hasErrors()) {
 			return newRental(rental);
+		}
+		if (rental.getStartDatetime().equals(rental.getEndDatetime())) {
+			attributes.addFlashAttribute("message", "Horário inicio não pode ser igual a Horário final!");
+			return new ModelAndView("redirect:/rental");
 		}
 		rentalService.save(rental);
 		attributes.addFlashAttribute("message", "Aluguel salvo com sucesso!");

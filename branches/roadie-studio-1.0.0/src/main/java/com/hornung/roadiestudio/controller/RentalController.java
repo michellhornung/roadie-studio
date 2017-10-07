@@ -74,11 +74,11 @@ public class RentalController {
 			return newRental(rental);
 		}
 		if (rental.getStartDatetime().equals(rental.getEndDatetime())) {
-			attributes.addFlashAttribute("message", "Horário inicio não pode ser igual a Horário final!");
+			attributes.addFlashAttribute("error", "Horário inicio não pode ser igual a Horário final!");
 			return new ModelAndView("redirect:/rental");
 		}
 		rentalService.save(rental);
-		attributes.addFlashAttribute("message", "Aluguel salvo com sucesso!");
+		attributes.addFlashAttribute("message", "Locação salva com sucesso!");
 		return new ModelAndView("redirect:/rental");
 		
 	}
@@ -86,7 +86,7 @@ public class RentalController {
 	@RequestMapping("/delete/{codRental}")
 	public String delete(@PathVariable int codRental, RedirectAttributes attributes) {
 		rentalService.delete(codRental);
-		attributes.addFlashAttribute("message", "Aluguel deletado com sucesso!");
+		attributes.addFlashAttribute("message", "Locação deletada com sucesso!");
 		return "redirect:/rental";
 	}
 	

@@ -44,9 +44,6 @@
 					<th>Sala</th>					
 					<th>Banda</th>
 					<th>Descrição</th>
-					<th>Algum Conserto?</th>
-					<th>É Show?</th>
-					<th>Aluguel Instrumento?</th>
 					<th>Quantidade Horas</th>
 					<th>Valor Hora</th>
 					<th>Horário Início</th>
@@ -60,28 +57,6 @@
 					<td th:text="${allRecordings.Room.name}"></td>
 					<td th:text="${allRecordings.Band.name}"></td>
 					<td th:text="${allRecordings.description}"></td>
-					
-					<td th:if="${allRecordings.isToFix} == 0">
-						<i class="fa  fa-fw  fa-thumbs-down" style="color: red"></i> Não 
-					</td>
-					<td th:if="${allRecordings.isToFix} == 1" >
-						<i class="fa  fa-fw  fa-thumbs-up" style="color: green"></i> Sim 
-					</td>
-					
-					<td th:if="${allRecordings.isForShow} == 0">
-						<i class="fa  fa-fw  fa-thumbs-down" style="color: red"></i> Não 
-					</td>
-					<td th:if="${allRecordings.isForShow} == 1" >
-						<i class="fa  fa-fw  fa-thumbs-up" style="color: green"></i> Sim 
-					</td>
-					
-					<td th:if="${allRecordings.isInstrument} == 0">
-						<i class="fa  fa-fw  fa-thumbs-down" style="color: red"></i> Não
-					</td>
-					<td th:if="${allRecordings.isInstrument} == 1" >
-						<i class="fa  fa-fw  fa-thumbs-up" style="color: green"></i> Sim 
-					</td>
-					
 					<td th:text="${allRecordings.hourQuantity}"></td>
 					<td th:text="${allRecordings.hourValue}"></td>
 					<td th:text="${#dates.format(allRecordings.startDatetime, 'dd/MM/yyyy HH:mm')}"></td>

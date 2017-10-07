@@ -3,6 +3,7 @@ package com.hornung.roadiestudio.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -43,10 +44,12 @@ public class Rental implements Serializable {
 	private byte isToFix;
 	
 	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat (pattern="dd/MM/yyyy HH:mm")
 	@Column(name="START_DATETIME")
 	private Date startDatetime;
 	
 	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat (pattern="dd/MM/yyyy HH:mm")
 	@Column(name="END_DATETIME")
 	private Date endDatetime;
 

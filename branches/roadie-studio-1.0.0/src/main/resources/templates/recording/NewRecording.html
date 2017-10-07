@@ -56,7 +56,7 @@
 			</div>
 			
 			<div class="row">
-				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('Band.name')} ? has-error">
+				<div class="col-sm-12 form-group" th:classappend="${#fields.hasErrors('Band.name')} ? has-error">
 					<label for="allBands" class="control-label">Banda</label>
 					<select id="allBands" class="form-control" th:field="*{Band}" required="required">
 						<option value="">Selecione</option>
@@ -64,32 +64,6 @@
 					</select>
 				</div>
 						
-				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('isToFix')} ? has-error">
-					<label for="isToFix" class="control-label">Algum conserto?</label>
-					<select id="isToFix" class="form-control" th:field="*{isToFix}">
-						<option value="0">Não</option>
-						<option value="1">Sim</option>						
-					</select>
-				</div>									
-			</div>
-			
-			<div class="row">				
-				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('isForShow')} ? has-error">
-					<label for="isForShow" class="control-label">É show?</label>
-					<select id="isForShow" class="form-control" th:field="*{isForShow}">
-						<option value="0">Não</option>
-						<option value="1">Sim</option>						
-					</select>
-				</div>
-				
-				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('isInstrument')} ? has-error">
-					<label for="isInstrument" class="control-label">Aluguel Instrumento?</label>
-					<select id="isInstrument" class="form-control" th:field="*{isInstrument}">						
-						<option value="0">Não</option>
-						<option value="1">Sim</option>						
-					</select>
-				</div>
-				
 			</div>
 			
 			<div class="row">

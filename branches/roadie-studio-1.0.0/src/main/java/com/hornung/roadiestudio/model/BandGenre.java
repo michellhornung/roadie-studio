@@ -7,7 +7,6 @@ import java.util.List;
 
 /**
  * The persistent class for the en_band_genre database table.
- * 
  */
 @Entity
 @Table(name="en_band_genre")
@@ -23,7 +22,6 @@ public class BandGenre implements Serializable {
 	@Column(name="DESCRIPTION")
 	private String description;
 
-	//bi-directional many-to-one association to Band
 	@OneToMany(mappedBy="BandGenre")
 	private List<Band> Bands;
 

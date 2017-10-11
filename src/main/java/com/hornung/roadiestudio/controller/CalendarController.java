@@ -1,5 +1,11 @@
 package com.hornung.roadiestudio.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -11,10 +17,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.hornung.roadiestudio.model.Calendar;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hornung.roadiestudio.model.Recording;
 import com.hornung.roadiestudio.model.Rental;
 import com.hornung.roadiestudio.repository.Calendars;
@@ -34,16 +41,42 @@ public class CalendarController {
 	@Autowired
 	private Recordings recordings;
 	
+
 	@RequestMapping
 	public ModelAndView calendarList() {
 		ModelAndView mv = new ModelAndView("/calendar/CalendarList");
-		List<Calendar> allCalendars = calendars.findAll();
+		List<com.hornung.roadiestudio.model.Calendar> allCalendars = calendars.findAll();
 		mv.addObject("allCalendars", allCalendars);
 		return mv;
 	}
 	
+
+	@RequestMapping(value = "/getEventos.json", method = RequestMethod.GET)	
+	public @ResponseBody List<com.hornung.roadiestudio.model.Calendar> GetEventos() throws ParseException{
+		
+		List<com.hornung.roadiestudio.model.Calendar> eventos = calendars.findAll();
+		
+		String mesAtual = String.valueOf(Calendar.getInstance().get(Calendar.MONTH)+ 1);
+		
+		if(mesAtual.length() <2)
+			mesAtual = "0" + mesAtual;
+						
+		DateFormat df = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
+		
+		for(com.hornung.roadiestudio.model.Calendar c :eventos) {
+			 String start 	= df.format(c.getStartDatetime());
+			 String end 	= df.format(c.getEndDatetime());
+				            
+	         c.setStartDatetime(((Date)df.parse(start)));
+	         c.setEndDatetime(((Date)df.parse(end)));
+		}
+						
+		return eventos;
+		
+	}
+	
 	@RequestMapping("/new")
-	public ModelAndView newCalendar(Calendar calendar) {
+	public ModelAndView newCalendar(com.hornung.roadiestudio.model.Calendar calendar) {
 		ModelAndView mv = new ModelAndView("/calendar/NewCalendar");
 		List<Rental> allRentals =  rentals.findAll();
 		mv.addObject("allRentals", allRentals);
@@ -54,7 +87,7 @@ public class CalendarController {
 	}
 	
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
-	public ModelAndView save(@Valid Calendar calendar, BindingResult result, RedirectAttributes attributes) {
+	public ModelAndView save(@Valid com.hornung.roadiestudio.model.Calendar calendar, BindingResult result, RedirectAttributes attributes) {
 		if (result.hasErrors()) {
 			return newCalendar(calendar);
 		}
@@ -79,7 +112,7 @@ public class CalendarController {
 	
 	@GetMapping("/edit/{codCalendar}")
 	public ModelAndView editar(@PathVariable int codBand) {
-		Calendar calendar = calendars.findOne(codBand);
+		com.hornung.roadiestudio.model.Calendar calendar = calendars.findOne(codBand);
 		ModelAndView mv = newCalendar(calendar);
 		mv.addObject(calendar);
 		return mv;

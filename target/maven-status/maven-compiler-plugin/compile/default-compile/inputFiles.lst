@@ -21,6 +21,8 @@
 /home/andre/workspace/roadie/roadie-studio/src/main/java/com/hornung/roadiestudio/model/User.java
 /home/andre/workspace/roadie/roadie-studio/src/main/java/com/hornung/roadiestudio/service/BandService.java
 /home/andre/workspace/roadie/roadie-studio/src/main/java/com/hornung/roadiestudio/model/RentalPK.java
+/home/andre/workspace/roadie/roadie-studio/src/main/java/com/hornung/roadiestudio/model/Calendar.java
+/home/andre/workspace/roadie/roadie-studio/src/main/java/com/hornung/roadiestudio/controller/CalendarController.java
 /home/andre/workspace/roadie/roadie-studio/src/main/java/com/hornung/roadiestudio/service/RoomService.java
 /home/andre/workspace/roadie/roadie-studio/src/main/java/com/hornung/roadiestudio/repository/RolesType.java
 /home/andre/workspace/roadie/roadie-studio/src/main/java/com/hornung/roadiestudio/model/Room.java
@@ -29,6 +31,7 @@
 /home/andre/workspace/roadie/roadie-studio/src/main/java/com/hornung/roadiestudio/controller/SecurityController.java
 /home/andre/workspace/roadie/roadie-studio/src/main/java/com/hornung/roadiestudio/repository/Rooms.java
 /home/andre/workspace/roadie/roadie-studio/src/main/java/com/hornung/roadiestudio/service/BandGenreService.java
+/home/andre/workspace/roadie/roadie-studio/src/main/java/com/hornung/roadiestudio/repository/Calendars.java
 /home/andre/workspace/roadie/roadie-studio/src/main/java/com/hornung/roadiestudio/controller/RentalController.java
 /home/andre/workspace/roadie/roadie-studio/src/main/java/com/hornung/roadiestudio/config/SecurityConfig.java
 /home/andre/workspace/roadie/roadie-studio/src/main/java/com/hornung/roadiestudio/service/UserService.java
@@ -36,6 +39,7 @@
 /home/andre/workspace/roadie/roadie-studio/src/main/java/com/hornung/roadiestudio/controller/BandController.java
 /home/andre/workspace/roadie/roadie-studio/src/main/java/com/hornung/roadiestudio/repository/StockType.java
 /home/andre/workspace/roadie/roadie-studio/src/main/java/com/hornung/roadiestudio/service/StockService.java
+/home/andre/workspace/roadie/roadie-studio/src/main/java/com/hornung/roadiestudio/service/CalendarService.java
 /home/andre/workspace/roadie/roadie-studio/src/main/java/com/hornung/roadiestudio/repository/BandGenres.java
 /home/andre/workspace/roadie/roadie-studio/src/main/java/com/hornung/roadiestudio/controller/RecordingController.java
 /home/andre/workspace/roadie/roadie-studio/src/main/java/com/hornung/roadiestudio/model/RoleType.java

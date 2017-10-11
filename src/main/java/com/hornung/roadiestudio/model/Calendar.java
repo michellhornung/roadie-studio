@@ -44,8 +44,21 @@ public class Calendar implements Serializable {
 	@Column(name="END_DATETIME")
 	private Date endDatetime;
 
+	@Transient 
+	private Date endDate;
+	
+	@Transient 
+	private Date startDate;
+	
 	public Calendar() {
 		
+	}
+	
+	public Calendar(int id, String title, Date start, Date end) {
+		this.codCalendar = id;
+		this.description = title;
+		this.startDatetime = start;
+		this.endDatetime = end;
 	}
 
 	public int getCodCalendar() {

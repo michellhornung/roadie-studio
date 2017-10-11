@@ -44,13 +44,13 @@
 			<thead class="aw-table-header-solid">
 				<tr>
 					<th>Sala</th>
-					<th>Sala Livre?</th>
+					<!-- <th>Sala Livre?</th> -->
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="allRooms : ${allRooms}"> 
 					<td th:text="${allRooms.name}"></td>
-					<td th:text="${allRooms.status}"></td>
+					<!-- <td th:text="${allRooms.status}"></td> -->
 				</tr>
 				<tr th:if="${allRooms.empty}">
 					<td colspan="9">Nenhum registro encontrado</td>

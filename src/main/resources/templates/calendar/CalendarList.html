@@ -32,55 +32,13 @@
 	</div>
 
 	<div class="container-fluid">
-	<div class="alert  alert-success  alert-dismissible" role="alert" th:if="${not #strings.isEmpty(message)}" >
-		<button type="button" class="close" data-dismiss="alert" ><span aria-hidden="true">&times;</span></button>
-		<span th:text="${message}"></span>
-	</div>
-	<div class="table-responsive">
-		<table id="user-table" class="table  table-striped  table-bordered  table-hover  table-condensed  js-sticky-table">
-			<thead class="aw-table-header-solid">
-				<tr>
-					<th>Cód</th>
-					<th>Locação</th>
-					<th>Gravação</th>
-					<th>Descrição</th>
-					<th>Horário Início</th>
-					<th>Horário Término</th>
-					
-					<th class="table-pesq-produto-col-acoes">Ações</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="allCalendars : ${allCalendars}"> 
-					<td th:text="${allCalendars.codCalendar}"></td>
-					<td th:text="${allCalendars.rental.description}"></td>
-					<td th:text="${allCalendars.recording.description}"></td>
-					<td th:text="${allCalendars.description}"></td>
-					<td th:text="${#dates.format(allCalendars.startDatetime, 'dd/MM/yyyy HH:mm')}"></td>
-					<td th:text="${#dates.format(allCalendars.endDatetime, 'dd/MM/yyyy HH:mm')}"></td>
-					<td class="text-center">
-						<a class="btn  btn-link  btn-xs" title="Editar"
-							th:href="@{/calendar/edit/{codCalendar}(codCalendar=${allCalendars.codCalendar})}">
-							<i class="glyphicon glyphicon-pencil"></i>
-						</a>
-						<a class="btn  btn-link  btn-xs" title="Excluir"
-							th:href="@{/calendar/delete/} + ${allCalendars.codCalendar}" 
-							onclick="return confirm('Deseja realmente deletar o agendamento?');">
-							<i class="glyphicon glyphicon-remove"></i>
-						</a>
-					</td>
-				</tr>
-				<tr th:if="${allCalendars.empty}">
-					<td colspan="9">Nenhum registro encontrado</td>
-				</tr>
-				
-			</tbody>
-		</table>
-	</div>
-
-	<input id="calendarList" type="hidden" th:field="${allCalendars}"></input>
-	<div id="calendar"></div>
-
+		<div class="alert  alert-success  alert-dismissible" role="alert" th:if="${not #strings.isEmpty(message)}" >
+			<button type="button" class="close" data-dismiss="alert" ><span aria-hidden="true">&times;</span></button>
+			<span th:text="${message}"></span>
+		</div>
+		<div class="table-responsive">
+			<div id="calendar"></div>
+		</div>
 	</div>
 
 </section>

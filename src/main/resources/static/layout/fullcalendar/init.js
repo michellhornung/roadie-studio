@@ -27,10 +27,14 @@
 			editable: true,
 			eventLimit: true, // allow "more" link when too many events
 			lang:'pt-br',
-			
+			buttonText: {
+			    today: 'Hoje',
+			    month: 'Mês',
+			    week: 'Semana',
+			    day: 'Dia'
+			},
 			events: {
-				url: window.location.origin+'/calendar/getEventos.json'
+				url: '/calendar/getEventos.json'
 			}
 		});
-		
 	});

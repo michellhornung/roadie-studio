@@ -24,9 +24,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hornung.roadiestudio.model.Recording;
 import com.hornung.roadiestudio.model.Rental;
+import com.hornung.roadiestudio.model.dto.Events;
 import com.hornung.roadiestudio.repository.Calendars;
 import com.hornung.roadiestudio.repository.Recordings;
 import com.hornung.roadiestudio.repository.Rentals;
+
+import antlr.debug.Event;
 
 @Controller
 @RequestMapping("/calendar")
@@ -52,9 +55,10 @@ public class CalendarController {
 	
 
 	@RequestMapping(value = "/getEventos.json", method = RequestMethod.GET)	
-	public @ResponseBody List<com.hornung.roadiestudio.model.Calendar> GetEventos() throws ParseException{
+	public @ResponseBody List<Events> GetEventos() throws ParseException{
 		
-		List<com.hornung.roadiestudio.model.Calendar> eventos = calendars.findAll();
+		List<com.hornung.roadiestudio.model.Calendar> calendarList = calendars.findAll();
+		List<Events> eventsList = new ArrayList<Events>(0);
 		
 		String mesAtual = String.valueOf(Calendar.getInstance().get(Calendar.MONTH)+ 1);
 		
@@ -63,15 +67,25 @@ public class CalendarController {
 						
 		DateFormat df = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
 		
-		for(com.hornung.roadiestudio.model.Calendar c :eventos) {
-			 String start 	= df.format(c.getStartDatetime());
-			 String end 	= df.format(c.getEndDatetime());
-				            
-	         c.setStartDatetime(((Date)df.parse(start)));
-	         c.setEndDatetime(((Date)df.parse(end)));
+		for(com.hornung.roadiestudio.model.Calendar c :calendarList) {
+			
+			Events events = new Events();
+			
+			//titulo
+			events.setTitle(c.getDescription());
+			
+			//Hora inicial
+			events.setStart(df.format(c.getStartDatetime()));
+			events.getStart().replace(" ", "T");
+
+			//Hora final
+			events.setEnd(df.format(c.getEndDatetime()));
+			events.getEnd().replace(" ", "T");
+			 
+			eventsList.add(events);
 		}
 						
-		return eventos;
+		return eventsList;
 		
 	}
 	

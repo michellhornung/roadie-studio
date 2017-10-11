@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hornung.roadiestudio.model.Band;
+import com.hornung.roadiestudio.model.Calendar;
 import com.hornung.roadiestudio.model.Rental;
 import com.hornung.roadiestudio.model.Room;
 import com.hornung.roadiestudio.model.Stock;
@@ -73,10 +74,7 @@ public class RentalController {
 		if (result.hasErrors()) {
 			return newRental(rental);
 		}
-		if (rental.getStartDatetime().equals(rental.getEndDatetime())) {
-			attributes.addFlashAttribute("error", "Horário inicio não pode ser igual a Horário final!");
-			return new ModelAndView("redirect:/rental");
-		}
+			
 		rentalService.save(rental);
 		attributes.addFlashAttribute("message", "Locação salva com sucesso!");
 		return new ModelAndView("redirect:/rental");

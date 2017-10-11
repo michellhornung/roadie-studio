@@ -10,12 +10,14 @@
 
 <title>Roadie Studio</title>
 
-<link rel="stylesheet" type="text/css"
-	th:href="@{/layout/stylesheets/vendors.min.css}" />
-<link rel="stylesheet" type="text/css"
-	th:href="@{/layout/stylesheets/roadiestudio.min.css}" />
-<link rel="stylesheet" type="text/css"
-	th:href="@{/layout/stylesheets/application.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/vendors.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/roadiestudio.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/application.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/layout/fullcalendar/fullcalendar.min.css}"  />
+<link rel="stylesheet" type="text/css" th:href="@{/layout/fullcalendar/fullcalendar.print.min.css}"  media="print" />
+	
+	
+
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -139,6 +141,11 @@
 	</div>
 	<script th:src="@{/layout/javascripts/vendors.min.js}"></script>
 	<script th:src="@{/layout/javascripts/roadiestudio.min.js}"></script>
+	
+	<script th:src="@{/layout/fullcalendar/lib/moment.min.js}"></script>
+	<script th:src="@{/layout/fullcalendar/lib/jquery.min.js}"></script>
+	<script th:src="@{/layout/fullcalendar/fullcalendar.min.js}"></script>
+	<script th:src="@{/layout/fullcalendar/init.js}"></script>
 
 </body>
 </html>

@@ -43,22 +43,31 @@
 					<label for="description" class="control-label">Descrição</label>
 					<input id="description" type="text" class="form-control" th:field="*{description}"/>
 				</div>
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('description')} ? has-error">
+					
+					<label for="description" class="control-label">Tipo</label>
+					<select id="allType" class="form-control" th:field="*{Type}">
+						<option value="">Selecione</option>
+						<option th:each="Type : ${allTypes}" th:value="${Type}" th:text="${Type}"></option>
+					</select>
+					
+				</div>
 			</div>
 			
 			<div class="row">
-				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('Rental')} ? has-error">
-					<label for="allRental" class="control-label">Locação</label>
-					<select id="allGRental" class="form-control" th:field="*{Rental}">
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('Room')} ? has-error">
+					<label for="allRoom" class="control-label">Sala</label>
+					<select id="allRoom" class="form-control" th:field="*{Room}">
 						<option value="">Selecione</option>
-						<option th:each="Rental : ${allRentals}" th:value="${Rental.codRental}" th:text="${Rental.description}"></option>
+						<option th:each="Room : ${allRooms}" th:value="${Room.codRoom}" th:text="${Room.description}"></option>
 					</select>
 				</div>
 				
-				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('Recording')} ? has-error">
-					<label for="allRecording" class="control-label">Gravação</label>
-					<select id="allRecording" class="form-control" th:field="*{Recording}">
+				<div class="col-sm-6 form-group" th:classappend="${#fields.hasErrors('Band')} ? has-error">
+					<label for="allBand" class="control-label">Banda</label>
+					<select id="allBand" class="form-control" th:field="*{Band}">
 						<option value="">Selecione</option>
-						<option th:each="Recording : ${allRecordings}" th:value="${Recording.codRecording}" th:text="${Recording.description}"></option>
+						<option th:each="Band : ${allBands}" th:value="${Band.codBand}" th:text="${Band.description}"></option>
 					</select>
 				</div>
 			</div>

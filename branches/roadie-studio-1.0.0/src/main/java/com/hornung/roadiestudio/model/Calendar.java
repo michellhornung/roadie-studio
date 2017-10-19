@@ -23,13 +23,16 @@ public class Calendar implements Serializable {
 	@Column(name="COD_CALENDAR")
 	private int codCalendar;
 
+	@Column(name="TYPE")
+	private String type;
+	
 	@ManyToOne
-	@JoinColumn(name="COD_RENTAL")
-	private Rental rental;
+	@JoinColumn(name="COD_ROOM")
+	private Room room;
 
 	@ManyToOne
-	@JoinColumn(name="COD_RECORDING")
-	private Recording recording;
+	@JoinColumn(name="COD_BAND")
+	private Band band;
 	
 	@Column(name="DESCRIPTION")
 	private String description;
@@ -57,22 +60,6 @@ public class Calendar implements Serializable {
 		this.codCalendar = codCalendar;
 	}
 
-	public Rental getRental() {
-		return rental;
-	}
-
-	public void setRental(Rental rental) {
-		this.rental = rental;
-	}
-
-	public Recording getRecording() {
-		return recording;
-	}
-
-	public void setRecording(Recording recording) {
-		this.recording = recording;
-	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -97,16 +84,41 @@ public class Calendar implements Serializable {
 		this.endDatetime = endDatetime;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+
+	public Band getBand() {
+		return band;
+	}
+
+	public void setBand(Band band) {
+		this.band = band;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((band == null) ? 0 : band.hashCode());
 		result = prime * result + codCalendar;
-		result = prime * result + ((recording == null) ? 0 : recording.hashCode());
-		result = prime * result + ((rental == null) ? 0 : rental.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((endDatetime == null) ? 0 : endDatetime.hashCode());
+		result = prime * result + ((room == null) ? 0 : room.hashCode());
 		result = prime * result + ((startDatetime == null) ? 0 : startDatetime.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -119,17 +131,12 @@ public class Calendar implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Calendar other = (Calendar) obj;
+		if (band == null) {
+			if (other.band != null)
+				return false;
+		} else if (!band.equals(other.band))
+			return false;
 		if (codCalendar != other.codCalendar)
-			return false;
-		if (recording == null) {
-			if (other.recording != null)
-				return false;
-		} else if (!recording.equals(other.recording))
-			return false;
-		if (rental == null) {
-			if (other.rental != null)
-				return false;
-		} else if (!rental.equals(other.rental))
 			return false;
 		if (description == null) {
 			if (other.description != null)
@@ -141,12 +148,24 @@ public class Calendar implements Serializable {
 				return false;
 		} else if (!endDatetime.equals(other.endDatetime))
 			return false;
+		if (room == null) {
+			if (other.room != null)
+				return false;
+		} else if (!room.equals(other.room))
+			return false;
 		if (startDatetime == null) {
 			if (other.startDatetime != null)
 				return false;
 		} else if (!startDatetime.equals(other.startDatetime))
 			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
 		return true;
 	}
+
+
 
 }

@@ -21,6 +21,14 @@ public class Events {
 		this.url = url;
 		this.id = id;
 	}
+	
+	public Events(int id, String title, String start, String end) {
+		super();
+		this.title = title;
+		this.start = start;
+		this.end = end;
+		this.id = id;
+	}
 
 	public String getTitle() {
 		return title;

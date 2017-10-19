@@ -58,8 +58,9 @@ public class CalendarController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/setEventos.json", method = RequestMethod.GET, consumes="application/json")
-	private @ResponseBody List<Events> listaOpcoes(@RequestBody Events events) {
+	@ResponseBody
+	@RequestMapping(value = "/setEventos.json", method = RequestMethod.POST)
+	private List<Events> listaOpcoes(@RequestBody Events events) {
 		List<Events> eventsList = new ArrayList<Events>(0);
 		
 		

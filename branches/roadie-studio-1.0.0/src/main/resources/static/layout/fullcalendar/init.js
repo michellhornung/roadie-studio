@@ -48,7 +48,7 @@
 				}
 				
 				$.ajax({
-					type: 'GET',
+					type: 'POST',
                     url: '/calendar/setEventos.json',
                     contentType: 'application/json',
                     data: JSON.stringify(events),

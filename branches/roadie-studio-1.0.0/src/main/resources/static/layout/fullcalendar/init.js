@@ -35,6 +35,37 @@
 			},
 			events: {
 				url: '/calendar/getEventos.json'
+			},
+			eventClick: function(calEvent, jsEvent, view) {
+				
+				var title = prompt('Titulo do Evento:', calEvent.title, { buttons: { Ok: true, Cancel: false} });
+				
+				var events = {
+					"id":		calEvent.id,
+					"title": 	calEvent.title,
+					"start": 	calEvent.start._i,
+					"end":		calEvent.end._i
+				}
+				
+				$.ajax({
+					type: 'GET',
+                    url: '/calendar/setEventos.json',
+                    contentType: 'application/json',
+                    data: JSON.stringify(events),
+                    success: function(result) {
+                    	if (result.success) $("#feedback input").attr("value", ""); // clear all the input fields on success
+                                //$("#feedback_status").slideDown(250).text(result.message); // show status message with animation
+                        },
+                        error: function(req, status, error) {
+                        	alert("erro " + req.status +" "+ req.statusText);
+                        }
+                  });
+				
+				
+		        /*if (title){
+		        	calEvent.title = title;
+		            calendar.fullCalendar('updateEvent',calEvent);
+		        }*/
 			}
 		});
 	});

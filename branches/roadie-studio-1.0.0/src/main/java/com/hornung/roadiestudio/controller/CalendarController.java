@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,6 +58,15 @@ public class CalendarController {
 		return mv;
 	}
 
+	@RequestMapping(value = "/setEventos.json", method = RequestMethod.GET, consumes="application/json")
+	private @ResponseBody List<Events> listaOpcoes(@RequestBody Events events) {
+		List<Events> eventsList = new ArrayList<Events>(0);
+		
+		
+		
+		return eventsList;
+	}
+	
 	@RequestMapping(value = "/getEventos.json", method = RequestMethod.GET)	
 	public @ResponseBody List<Events> GetEventos() throws ParseException{
 		

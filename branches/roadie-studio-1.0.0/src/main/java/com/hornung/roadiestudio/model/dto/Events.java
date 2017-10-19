@@ -7,6 +7,7 @@ public class Events {
 	private String start;
 	private String end;
 	private String url;
+	private String editable = "true";
 	
 	public Events(){
 		
@@ -52,6 +53,14 @@ public class Events {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getEditable() {
+		return editable;
+	}
+
+	public void setEditable(String editable) {
+		this.editable = editable;
 	}
 	
 }

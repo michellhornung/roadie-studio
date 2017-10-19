@@ -1,11 +1,12 @@
 package com.hornung.roadiestudio.controller;
 
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -17,17 +18,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hornung.roadiestudio.model.Band;
 import com.hornung.roadiestudio.model.Recording;
 import com.hornung.roadiestudio.model.Rental;
+import com.hornung.roadiestudio.model.Room;
 import com.hornung.roadiestudio.model.dto.Events;
+import com.hornung.roadiestudio.repository.Bands;
 import com.hornung.roadiestudio.repository.Calendars;
-import com.hornung.roadiestudio.repository.Recordings;
-import com.hornung.roadiestudio.repository.Rentals;
+import com.hornung.roadiestudio.repository.Rooms;
 
 import antlr.debug.Event;
 
@@ -39,10 +43,10 @@ public class CalendarController {
 	private Calendars calendars;
 	
 	@Autowired 
-	private Rentals rentals;
+	private Rooms rooms;
 	
 	@Autowired
-	private Recordings recordings;
+	private Bands bands;
 	
 
 	@RequestMapping
@@ -52,7 +56,6 @@ public class CalendarController {
 		mv.addObject("allCalendars", allCalendars);
 		return mv;
 	}
-	
 
 	@RequestMapping(value = "/getEventos.json", method = RequestMethod.GET)	
 	public @ResponseBody List<Events> GetEventos() throws ParseException{
@@ -64,12 +67,15 @@ public class CalendarController {
 		
 		if(mesAtual.length() <2)
 			mesAtual = "0" + mesAtual;
-						
-		DateFormat df = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
+		
+		DateFormat df = new SimpleDateFormat ("yyyy-MM-dd HH:mm");
 		
 		for(com.hornung.roadiestudio.model.Calendar c :calendarList) {
 			
 			Events events = new Events();
+			
+			//id
+			events.setId(c.getCodCalendar());
 			
 			//titulo
 			events.setTitle(c.getDescription());
@@ -81,7 +87,7 @@ public class CalendarController {
 			//Hora final
 			events.setEnd(df.format(c.getEndDatetime()));
 			events.getEnd().replace(" ", "T");
-			 
+						 
 			eventsList.add(events);
 		}
 						
@@ -92,11 +98,19 @@ public class CalendarController {
 	@RequestMapping("/new")
 	public ModelAndView newCalendar(com.hornung.roadiestudio.model.Calendar calendar) {
 		ModelAndView mv = new ModelAndView("/calendar/NewCalendar");
-		List<Rental> allRentals =  rentals.findAll();
-		mv.addObject("allRentals", allRentals);
 		
-		List<Recording> allRecordings = recordings.findAll();
-		mv.addObject("allRecordings", allRecordings);
+		List<String> types = new ArrayList<String>(0);
+		types.add("Gravação");
+		types.add("Locação");
+		mv.addObject("allTypes", types);
+		
+		List<Room> allRooms =  rooms.findAll();
+		mv.addObject("allRooms", allRooms);
+		
+		List<Band> allBands = bands.findAll();
+		mv.addObject("allBands", allBands);
+		
+				
 		return mv;
 	}
 	
@@ -105,6 +119,8 @@ public class CalendarController {
 		if (result.hasErrors()) {
 			return newCalendar(calendar);
 		}
+		
+		calendar.setType(calendar.getType().equalsIgnoreCase("Locação") ? "L" : "G");
 		
 		if (calendar.getStartDatetime().equals(calendar.getEndDatetime())) {
 			attributes.addFlashAttribute("error", "Horário inicio não pode ser igual a Horário final!");

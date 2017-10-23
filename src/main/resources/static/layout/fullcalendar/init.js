@@ -42,16 +42,18 @@
 				$('#id').val(calEvent.id);
 				
 				//CAMPO TIPO
-				$('#type').val(calEvent.type);
+				$('#type').val(calEvent.type == 'L' ? 'Locação' : 'Gravação');
 				
 				//CAMPO DESCRICAO
 				$('#description').val(calEvent.title);
 				
-				//CAMPO DESCRICAO
-				$('#dtStart').val(calEvent.start.format("DD/MM/YYYY hh:mm"));
+				//CAMPO START
+				if (calEvent.start !== null && calEvent.start !== undefined)
+					$('#dtStart').val(calEvent.start.format("DD/MM/YYYY hh:mm"));
 				
-				//CAMPO DESCRICAO
-				$('#dtEnd').val(calEvent.end.format("DD/MM/YYYY hh:mm"));
+				//CAMPO END
+				if (calEvent.end !== null && calEvent.end !== undefined)
+					$('#dtEnd').val(calEvent.end.format("DD/MM/YYYY hh:mm"));
 								
 				//ABRE MODAL
 				$("#openModal").click();
@@ -103,9 +105,11 @@
 	            	
 	                },
 	            error: function(req, status, error) {
-	            	alert("erro " + req.status +" "+ req.statusText);
+	            	alert("ERRO AO TENTAR REMOVER O AGENDAMENTO " + $('#description').val());
 	            }
 	          });
+		    
+		    $("#closeModal").click();
 		    
 		});
 		

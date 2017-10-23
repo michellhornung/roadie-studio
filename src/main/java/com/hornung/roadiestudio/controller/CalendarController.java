@@ -67,8 +67,8 @@ public class CalendarController {
         		
 		if(calendar != null) {
 			
-			calendar.setType(events.getType());
 			calendar.setDescription(events.getTitle());
+			calendar.setType(events.getType().equalsIgnoreCase("Locação") ? "L" : "G");
 			
 			try {
 				

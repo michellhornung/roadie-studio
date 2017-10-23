@@ -59,13 +59,41 @@ public class CalendarController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/setEventos.json", method = RequestMethod.POST)
-	private List<Events> listaOpcoes(@RequestBody Events events) {
-		List<Events> eventsList = new ArrayList<Events>(0);
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	private String listaOpcoes(@RequestBody Events events) {
 		
+		com.hornung.roadiestudio.model.Calendar calendar = calendars.findOne(events.getId());
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        		
+		if(calendar != null) {
+			
+			calendar.setType(events.getType());
+			calendar.setDescription(events.getTitle());
+			
+			try {
+				
+				calendar.setEndDatetime((java.util.Date)formatter.parse(events.getEnd()));
+				calendar.setStartDatetime((java.util.Date)formatter.parse(events.getStart()));
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
+		calendars.save(calendar);
 		
-		return eventsList;
+		return "redirect:/calendar";
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public String delete(@RequestBody Events events, RedirectAttributes attributes) {
+		ModelAndView mv = new ModelAndView("/calendar/CalendarList");
+		
+		com.hornung.roadiestudio.model.Calendar calendar = calendars.findOne(events.getId());
+		calendars.delete(calendar.getCodCalendar());
+		attributes.addFlashAttribute("message", "Agendamento deletado com sucesso!");
+				
+		return "redirect:/calendar";
 	}
 	
 	@RequestMapping(value = "/getEventos.json", method = RequestMethod.GET)	
@@ -91,6 +119,9 @@ public class CalendarController {
 			//titulo
 			events.setTitle(c.getDescription());
 			
+			//tipo
+			events.setType(c.getType());
+			
 			//Hora inicial
 			events.setStart(df.format(c.getStartDatetime()));
 			events.getStart().replace(" ", "T");
@@ -98,7 +129,7 @@ public class CalendarController {
 			//Hora final
 			events.setEnd(df.format(c.getEndDatetime()));
 			events.getEnd().replace(" ", "T");
-						 
+			
 			eventsList.add(events);
 		}
 						
@@ -144,18 +175,4 @@ public class CalendarController {
 		
 	}
 
-	@RequestMapping("/delete/{codCalendar}")
-	public String delete(@PathVariable int codCalendar, RedirectAttributes attributes) {
-		calendars.delete(codCalendar);
-		attributes.addFlashAttribute("message", "Agendamento deletado com sucesso!");
-		return "redirect:/calendar";
-	}
-	
-	@GetMapping("/edit/{codCalendar}")
-	public ModelAndView editar(@PathVariable int codBand) {
-		com.hornung.roadiestudio.model.Calendar calendar = calendars.findOne(codBand);
-		ModelAndView mv = newCalendar(calendar);
-		mv.addObject(calendar);
-		return mv;
-	}
 }

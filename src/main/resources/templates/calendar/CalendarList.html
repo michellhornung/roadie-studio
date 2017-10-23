@@ -36,9 +36,73 @@
 			<button type="button" class="close" data-dismiss="alert" ><span aria-hidden="true">&times;</span></button>
 			<span th:text="${message}"></span>
 		</div>
+		
+		<button id="openModal" type="button" hidden="hidden" data-toggle="modal" data-target="#myModal">Launch modal</button>
+		
 		<div class="table-responsive">
 			<div id="calendar"></div>
 		</div>
+		
+		
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Agendamento</h4>
+		      </div>
+		      <div class="modal-body">
+		        
+		         <div class="row">
+					<div class="col-sm-6 form-group">
+						<label for="id" class="control-label">Código</label>
+						<input id="id" type="text" class="form-control" disabled="disabled"/>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-sm-6 form-group">
+						<label for="type" class="control-label">Tipo</label>
+						<input id="type" type="text" class="form-control" />
+					</div>
+				</div>
+		        
+		        <div class="row">
+					<div class="col-sm-6 form-group">
+						<label for="description" class="control-label">Descrição</label>
+						<input id="description" type="text" class="form-control" />
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-sm-6 form-group">
+						<label for="dtStart" class="control-label">Horário Início</label>
+						<input id="dtStart" type="text" class="form-control" />
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-sm-6 form-group">
+						<label for="dtEnd" class="control-label">Horário Término</label>
+						<input id="dtEnd" type="text" class="form-control" />
+					</div>
+				</div>
+		        	
+		       	<button id="submitModal" type="button" class="btn btn-primary">Alterar Evento</button>	        
+		      </div>
+		      <div class="modal-footer">
+		        <button id="closeModal" type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+		       
+		        <button id="removeModal" type="button" class="btn btn-danger">Remover Evento</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		
+		
+		
 	</div>
 
 </section>

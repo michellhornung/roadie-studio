@@ -38,34 +38,75 @@
 			},
 			eventClick: function(calEvent, jsEvent, view) {
 				
-				var title = prompt('Titulo do Evento:', calEvent.title, { buttons: { Ok: true, Cancel: false} });
+				//ID DO AGENDAMENTO
+				$('#id').val(calEvent.id);
 				
-				var events = {
-					"id":		calEvent.id,
-					"title": 	calEvent.title,
-					"start": 	calEvent.start._i,
-					"end":		calEvent.end._i
-				}
+				//CAMPO TIPO
+				$('#type').val(calEvent.type);
 				
-				$.ajax({
-					type: 'POST',
-                    url: '/calendar/setEventos.json',
-                    contentType: 'application/json',
-                    data: JSON.stringify(events),
-                    success: function(result) {
-                    	if (result.success) $("#feedback input").attr("value", ""); // clear all the input fields on success
-                                //$("#feedback_status").slideDown(250).text(result.message); // show status message with animation
-                        },
-                        error: function(req, status, error) {
-                        	alert("erro " + req.status +" "+ req.statusText);
-                        }
-                  });
+				//CAMPO DESCRICAO
+				$('#description').val(calEvent.title);
 				
+				//CAMPO DESCRICAO
+				$('#dtStart').val(calEvent.start.format("DD/MM/YYYY hh:mm"));
 				
-		        /*if (title){
-		        	calEvent.title = title;
-		            calendar.fullCalendar('updateEvent',calEvent);
-		        }*/
+				//CAMPO DESCRICAO
+				$('#dtEnd').val(calEvent.end.format("DD/MM/YYYY hh:mm"));
+								
+				//ABRE MODAL
+				$("#openModal").click();
 			}
 		});
+		
+		//EDITAR
+		$('#submitModal').click(function(){
+		    
+		    var events = {
+					"id":		$('#id').val(),
+					"title": 	$('#description').val(),
+					"type":		$('#type').val(),
+					"start": 	$('#dtStart').val(),
+					"end":		$('#dtEnd').val()
+			}
+		    
+		    $.ajax({
+				type: 'POST',
+	            url: '/calendar/edit',
+	            contentType: 'application/json',
+	            data: JSON.stringify(events),
+	            error: function(req, status, error) {
+	               	alert("ERRO AO TENTAR EDITAR O AGENDAMENTO " + $('#description').val());
+	            }
+	          });
+		    
+		    $("#closeModal").click();
+		    
+		});
+		
+		//REMOVER
+		$('#removeModal').click(function(){
+		    
+		    var events = {
+		    		"id":		$('#id').val(),
+					"title": 	$('#description').val(),
+					"type":		$('#type').val(),
+					"start": 	$('#dtStart').val(),
+					"end":		$('#dtEnd').val()
+			}
+		    
+		    $.ajax({
+				type: 'POST',
+	            url: '/calendar/delete',
+	            contentType: 'application/json',
+	            data: JSON.stringify(events),
+	            success: function(result) {
+	            	
+	                },
+	            error: function(req, status, error) {
+	            	alert("erro " + req.status +" "+ req.statusText);
+	            }
+	          });
+		    
+		});
+		
 	});

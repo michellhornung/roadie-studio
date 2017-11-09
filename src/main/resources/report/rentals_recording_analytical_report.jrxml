@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.3.final using JasperReports Library version 6.4.3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rentals" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="31dd784e-2d14-4878-b864-444a44ddadde">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="columns" hTextAlign="Left" vTextAlign="Middle" fontSize="10" isBold="true"/>
+	<style name="rows" vTextAlign="Middle" fontSize="10">
+		<pen lineWidth="1.0" lineStyle="Solid" lineColor="#CCCCCC"/>
+	</style>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="total" class="java.lang.String"/>
+	<field name="Data" class="java.lang.String"/>
+	<field name="Sala" class="java.lang.String"/>
+	<field name="Banda" class="java.lang.String"/>
+	<field name="title_report" class="java.lang.String"/>
+	<pageHeader>
+		<band height="20">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" uuid="0ad09778-bd0e-41cb-8763-bcb29c4a58cc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{title_report}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement style="columns" x="0" y="0" width="80" height="20" uuid="ecf28f92-29e0-4574-96bc-e76af0910506"/>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="columns" x="80" y="0" width="100" height="20" uuid="e1aad2c9-8f1f-4567-b1d2-7b372e347b7d"/>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="columns" x="180" y="0" width="138" height="20" uuid="467f60b4-63f4-43c6-b983-c4eb2fd6c99b"/>
+				<text><![CDATA[Sala]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="columns" x="318" y="0" width="237" height="20" uuid="27039feb-8641-4941-a0dc-e8e4e0561cd1"/>
+				<text><![CDATA[Banda]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="555" height="20" uuid="c5057a63-0b46-4345-beb3-639b003c4070"/>
+				<textField>
+					<reportElement style="rows" x="0" y="0" width="80" height="20" uuid="c775b050-5e3a-46b6-9d24-6f279e86e961">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="56b8f6fa-aaf0-445f-b8b5-5eedeaedbfb4"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="rows" x="80" y="0" width="100" height="20" uuid="eb41def0-0693-4cf0-b06f-b8becb4e038c">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3bd8248c-e759-4dfb-8d5f-31c2a7c1832f"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{Data}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="rows" x="180" y="0" width="138" height="20" uuid="bc9cd630-e045-4fb7-ba94-a5463f7bc3e8">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2c59f6b9-39ee-4f82-a1ad-1d6dcb0b5503"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{Sala}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="rows" x="318" y="0" width="237" height="20" uuid="37c78443-3bb5-4224-9075-e7b05a169ef3">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="938e4187-8a56-4d31-8d02-6c5e96d7ecbc"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{Banda}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

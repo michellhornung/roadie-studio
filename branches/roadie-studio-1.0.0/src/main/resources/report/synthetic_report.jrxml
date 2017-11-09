@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.3.final using JasperReports Library version 6.4.3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="synthetic_report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7e0f22b2-7c6a-4f11-9fa4-b07640d925a7">
+	<style name="columns" hTextAlign="Left" vTextAlign="Middle" fontSize="10" isBold="true"/>
+	<style name="rows" vTextAlign="Middle" fontSize="10">
+		<pen lineWidth="1.0" lineStyle="Solid" lineColor="#CCCCCC"/>
+	</style>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="init_date" class="java.lang.String"/>
+	<field name="end_date" class="java.lang.String"/>
+	<field name="totalRentals" class="java.lang.String"/>
+	<field name="totalRecording" class="java.lang.String"/>
+	<field name="totalStock" class="java.lang.String"/>
+	<field name="totalSales" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="20" uuid="2b672653-1611-4fde-9cdf-9cc1b92c8404"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Relatório Sintético]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="220" y="20" width="190" height="20" uuid="c79422eb-a729-42b8-9e10-5bfdbf4136be">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph lineSpacing="Double" leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{init_date} + " à " + $F{end_date}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="160" y="20" width="60" height="20" uuid="0c66f778-a286-486e-9617-b833013e5142">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[Período:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement style="columns" x="0" y="0" width="138" height="20" uuid="9b6c63b6-1922-4680-900a-477c46b6b952">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Locações]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="columns" x="276" y="0" width="138" height="20" uuid="b402e958-1c5b-4f76-ac3b-822fc8d82659">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Estoque]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="columns" x="414" y="0" width="140" height="20" uuid="fd44a4e7-33e2-47a9-abef-c0e1300e9abd">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Vendas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="columns" x="138" y="0" width="138" height="20" uuid="f904570e-222b-4990-bb4d-7d39e1748a31">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Gravações]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement style="rows" x="276" y="0" width="138" height="20" uuid="593336c5-0106-41ff-8d18-5fe7dbc3b70a"/>
+				<textFieldExpression><![CDATA[$F{totalStock}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="rows" x="138" y="0" width="138" height="20" uuid="1c72937b-5c5b-42c0-b5ad-b8dd1f87db09"/>
+				<textFieldExpression><![CDATA[$F{totalRecording}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="rows" x="0" y="0" width="138" height="20" uuid="911f0bdf-bbc4-4e72-aed6-65ef2943662a"/>
+				<textFieldExpression><![CDATA[$F{totalRentals}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="rows" x="414" y="0" width="140" height="20" uuid="dfdbc8c6-5d15-46a9-891d-c7a9f0a734cd"/>
+				<textFieldExpression><![CDATA[$F{totalSales}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="355" y="12" width="100" height="30" uuid="e13ee104-0a0f-4e44-b0ec-5cec2f1c34fc"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="455" y="12" width="100" height="30" uuid="905abc38-c5f4-4e3d-ba63-bc60104b157a"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

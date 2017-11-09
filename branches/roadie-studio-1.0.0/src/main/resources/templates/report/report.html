@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/DefaultLayout">
+
+	<head>
+		<title>Cadastro de usuário</title>
+	</head>
+
+	<body>
+		<section layout:fragment="conteudo">
+		
+			<div class="page-header">
+				<div class="container-fluid">
+					<h1>Cadastro de usuáriospo</h1>
+				</div>
+			</div>
+
+			<div class="container-fluid">
+				<form method="POST" class="form-vertical js-form-loading">
+					<div class="row">
+						<div class="col-sm-6 form-group" >
+							<label for="initDate" class="control-label">Data inicial</label>
+							<input id="initDate" type="text" class="form-control" autofocus="autofocus" />
+						</div>
+					
+						<div class="col-sm-6 form-group">
+							<label for="endDate" class="control-label">Data final</label>
+							<input id="endDate" type="text" class="form-control" />
+						</div>
+					</div>
+				</form>
+			</div>
+			
+		</section>
+	</body>
+	  <script>
+		  $(function() {
+		  	$( "#initDate" ).datepicker({
+		      changeMonth: true,
+		      changeYear: true,
+		      showOn: "button",
+		      buttonImage: "images/calendar.gif",
+		      buttonImageOnly: true,
+		      buttonText: "Selecione a data"
+		    });
+		  	
+		  	$( "#endDate" ).datepicker({
+		      changeMonth: true,
+		      changeYear: true,
+		      showOn: "button",
+		      buttonImage: "images/calendar.gif",
+		      buttonImageOnly: true,
+		      buttonText: "Selecione a data"
+		    });
+		  });
+	  </script>
+</html>

@@ -3,14 +3,16 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_analitico" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3fbc9a12-02b9-49f6-8334-7e443ff658c5">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<parameter name="subReportRentalRecording" class="java.io.InputStream"/>
-	<parameter name="subReportStockSales" class="java.io.InputStream"/>
+	<parameter name="subReportStock" class="java.io.InputStream"/>
+	<parameter name="subReportSales" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	<field name="rentalRecordingCollection" class="java.util.Collection"/>
-	<field name="stockSalesList" class="java.util.Collection"/>
-	<field name="init_date" class="java.lang.String"/>
-	<field name="end_date" class="java.lang.String"/>
+	<field name="rentalRecordingList" class="java.util.Collection"/>
+	<field name="stockList" class="java.util.Collection"/>
+	<field name="initDate" class="java.lang.String"/>
+	<field name="endDate" class="java.lang.String"/>
+	<field name="salesList" class="java.util.Collection"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -23,40 +25,53 @@
 				<text><![CDATA[Relatório Analítico]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="160" y="20" width="60" height="20" uuid="775ef72c-eb00-4b62-9d49-88be9b8a5629">
+				<reportElement x="160" y="20" width="64" height="20" uuid="775ef72c-eb00-4b62-9d49-88be9b8a5629">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle"/>
 				<text><![CDATA[Período:]]></text>
 			</staticText>
 			<textField>
-				<reportElement positionType="Float" x="220" y="20" width="190" height="20" uuid="f1a5351a-2a25-4ebe-89d8-423e6c98f7e9">
+				<reportElement positionType="Float" x="224" y="20" width="190" height="20" uuid="f1a5351a-2a25-4ebe-89d8-423e6c98f7e9">
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
 					<paragraph lineSpacing="Double" leftIndent="5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{init_date} + " à " + $F{end_date}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{initDate} + " à " + $F{endDate}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="50" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<subreport>
-				<reportElement x="0" y="0" width="555" height="50" uuid="91f87bfc-5b6f-4354-9972-8371dbfc3b46"/>
-				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{rentalRecordingCollection})]]></dataSourceExpression>
+				<reportElement x="0" y="0" width="555" height="20" uuid="91f87bfc-5b6f-4354-9972-8371dbfc3b46"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{rentalRecordingList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{subReportRentalRecording}]]></subreportExpression>
 			</subreport>
 		</band>
-		<band height="50">
+		<band height="20">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<subreport>
-				<reportElement x="0" y="0" width="555" height="50" uuid="bc0d8b7b-682d-47c2-a258-788a4bc0ea7b">
+				<reportElement x="0" y="0" width="555" height="20" uuid="bc0d8b7b-682d-47c2-a258-788a4bc0ea7b">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<printWhenExpression><![CDATA[!new ArrayList($F{stockSalesList}).isEmpty()]]></printWhenExpression>
+					<printWhenExpression><![CDATA[!$F{stockList}.isEmpty()]]></printWhenExpression>
 				</reportElement>
-				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{stockSalesList})]]></dataSourceExpression>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{stockList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{subReportStock}]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="20">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="20" uuid="3db699a6-865b-4267-b769-f875d60f96e7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA[!$F{salesList}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{salesList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{subReportSales}]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>
@@ -65,12 +80,12 @@
 			<textField>
 				<reportElement x="355" y="12" width="100" height="30" uuid="10c98f72-3a68-4e9f-b9a8-3856a0897e20"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Página	 " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
 				<reportElement x="455" y="12" width="100" height="30" uuid="a8408101-5944-48df-9196-4c49a7008bee"/>
 				<textElement textAlignment="Left"/>
-				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>

@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.util.Collection;
 
 import com.hornung.roadiestudio.util.Field;
-import com.hornung.roadiestudio.util.ForJasperReport;
+import com.hornung.roadiestudio.util.JrXml;
 import com.hornung.roadiestudio.util.SubReport;
 
-@ForJasperReport(jrxml = "analytical_report")
+@JrXml(name = "analytical_report")
 public class AnalyticalReport implements Serializable {
 
 	private static final long serialVersionUID = -5752528235383622280L;
@@ -24,7 +24,17 @@ public class AnalyticalReport implements Serializable {
 
 	@Field
 	@SubReport(parameterName = "subReportStockSales")
-	private Collection<StockSales> stockSalesList;
+	private Collection<Stock> stockList;
+
+	private Collection<Sales> salesList;
+
+	public AnalyticalReport() {
+	}
+
+	public AnalyticalReport(String initDate, String endDate) {
+		this.initDate = initDate;
+		this.endDate = endDate;
+	}
 
 	public String getInitDate() {
 		return initDate;
@@ -50,11 +60,20 @@ public class AnalyticalReport implements Serializable {
 		this.rentalRecordingList = rentalRecordingList;
 	}
 
-	public Collection<StockSales> getStockSalesList() {
-		return stockSalesList;
+	public Collection<Stock> getStockList() {
+		return stockList;
 	}
 
-	public void setStockSalesList(Collection<StockSales> stockSalesList) {
-		this.stockSalesList = stockSalesList;
+	public void setStockList(Collection<Stock> stockList) {
+		this.stockList = stockList;
+	}
+	
+	public Collection<Sales> getSalesList() {
+		return salesList;
+	}
+
+	public void setSalesList(Collection<Sales> sales) {
+		this.salesList = sales;
+		
 	}
 }

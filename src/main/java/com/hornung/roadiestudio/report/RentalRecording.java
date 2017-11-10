@@ -3,9 +3,9 @@ package com.hornung.roadiestudio.report;
 import java.io.Serializable;
 
 import com.hornung.roadiestudio.util.Field;
-import com.hornung.roadiestudio.util.ForJasperReport;
+import com.hornung.roadiestudio.util.JrXml;
 
-@ForJasperReport(jrxml = "rentals_recording_analytical_report")
+@JrXml(name = "rentals_recording_analytical_report")
 public class RentalRecording implements Serializable {
 
 	private static final long serialVersionUID = -6521999113934833432L;
@@ -24,6 +24,13 @@ public class RentalRecording implements Serializable {
 	
 	@Field
 	private String banda;
+	
+	public RentalRecording() {
+	}
+
+	public RentalRecording(String title) {
+		this.title = title;
+	}
 
 	public String getTitle() {
 		return title;

@@ -10,17 +10,17 @@
 		<![CDATA[]]>
 	</queryString>
 	<field name="total" class="java.lang.String"/>
-	<field name="Data" class="java.lang.String"/>
-	<field name="Sala" class="java.lang.String"/>
-	<field name="Banda" class="java.lang.String"/>
-	<field name="title_report" class="java.lang.String"/>
+	<field name="data" class="java.lang.String"/>
+	<field name="sala" class="java.lang.String"/>
+	<field name="banda" class="java.lang.String"/>
+	<field name="title" class="java.lang.String"/>
 	<pageHeader>
 		<band height="20">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField>
 				<reportElement x="0" y="0" width="555" height="20" uuid="0ad09778-bd0e-41cb-8763-bcb29c4a58cc"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{title_report}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -59,19 +59,19 @@
 					<reportElement style="rows" x="80" y="0" width="100" height="20" uuid="eb41def0-0693-4cf0-b06f-b8becb4e038c">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3bd8248c-e759-4dfb-8d5f-31c2a7c1832f"/>
 					</reportElement>
-					<textFieldExpression><![CDATA[$F{Data}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement style="rows" x="180" y="0" width="138" height="20" uuid="bc9cd630-e045-4fb7-ba94-a5463f7bc3e8">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2c59f6b9-39ee-4f82-a1ad-1d6dcb0b5503"/>
 					</reportElement>
-					<textFieldExpression><![CDATA[$F{Sala}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{sala}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement style="rows" x="318" y="0" width="237" height="20" uuid="37c78443-3bb5-4224-9075-e7b05a169ef3">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="938e4187-8a56-4d31-8d02-6c5e96d7ecbc"/>
 					</reportElement>
-					<textFieldExpression><![CDATA[$F{Banda}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{banda}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

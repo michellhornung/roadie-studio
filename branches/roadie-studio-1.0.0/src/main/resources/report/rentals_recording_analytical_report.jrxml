@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.4.3.final using JasperReports Library version 6.4.3  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rentals" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="31dd784e-2d14-4878-b864-444a44ddadde">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rentals" pageWidth="555" pageHeight="842" columnWidth="515" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="31dd784e-2d14-4878-b864-444a44ddadde">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
-	<style name="columns" hTextAlign="Left" vTextAlign="Middle" fontSize="10" isBold="true"/>
-	<style name="rows" vTextAlign="Middle" fontSize="10">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<style name="columns" mode="Opaque" backcolor="#CCCCCC" hTextAlign="Left" vTextAlign="Middle" fontSize="10" isBold="true">
+		<box leftPadding="5">
+			<pen lineWidth="0.5"/>
+		</box>
+	</style>
+	<style name="rows" mode="Opaque" vTextAlign="Middle" fontSize="10">
 		<pen lineWidth="1.0" lineStyle="Solid" lineColor="#CCCCCC"/>
+		<box leftPadding="5">
+			<pen lineWidth="0.5"/>
+		</box>
 	</style>
 	<queryString>
 		<![CDATA[]]>
@@ -18,8 +34,10 @@
 		<band height="20">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField>
-				<reportElement x="0" y="0" width="555" height="20" uuid="0ad09778-bd0e-41cb-8763-bcb29c4a58cc"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="0" y="0" width="515" height="20" uuid="0ad09778-bd0e-41cb-8763-bcb29c4a58cc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -40,15 +58,16 @@
 				<text><![CDATA[Sala]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="columns" x="318" y="0" width="237" height="20" uuid="27039feb-8641-4941-a0dc-e8e4e0561cd1"/>
+				<reportElement style="columns" x="318" y="0" width="197" height="20" uuid="27039feb-8641-4941-a0dc-e8e4e0561cd1"/>
 				<text><![CDATA[Banda]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="21" splitType="Stretch">
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<frame>
-				<reportElement x="0" y="0" width="555" height="20" uuid="c5057a63-0b46-4345-beb3-639b003c4070"/>
+				<reportElement x="0" y="0" width="515" height="20" uuid="c5057a63-0b46-4345-beb3-639b003c4070"/>
 				<textField>
 					<reportElement style="rows" x="0" y="0" width="80" height="20" uuid="c775b050-5e3a-46b6-9d24-6f279e86e961">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="56b8f6fa-aaf0-445f-b8b5-5eedeaedbfb4"/>
@@ -68,7 +87,7 @@
 					<textFieldExpression><![CDATA[$F{sala}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement style="rows" x="318" y="0" width="237" height="20" uuid="37c78443-3bb5-4224-9075-e7b05a169ef3">
+					<reportElement style="rows" x="318" y="0" width="197" height="20" uuid="37c78443-3bb5-4224-9075-e7b05a169ef3">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="938e4187-8a56-4d31-8d02-6c5e96d7ecbc"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[$F{banda}]]></textFieldExpression>

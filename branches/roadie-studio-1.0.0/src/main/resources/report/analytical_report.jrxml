@@ -20,8 +20,10 @@
 		<band height="40" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
-				<reportElement x="0" y="0" width="555" height="20" uuid="18b0f46c-364b-495b-b788-02a535c314f3"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="20" uuid="18b0f46c-364b-495b-b788-02a535c314f3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Relatório Analítico]]></text>
 			</staticText>
 			<staticText>

@@ -5,7 +5,7 @@
 	layout:decorator="layout/DefaultLayout">
 
 	<head>
-		<title>Cadastro de usuário</title>
+		<title>Relatórios</title>
 	</head>
 
 	<body>
@@ -13,21 +13,38 @@
 		
 			<div class="page-header">
 				<div class="container-fluid">
-					<h1>Cadastro de usuáriospo</h1>
+					<h1>Relatório analítico e sintético</h1>
 				</div>
 			</div>
 
 			<div class="container-fluid">
-				<form method="POST" class="form-vertical js-form-loading">
+				<form method="POST" th:object="${report}" class="form-vertical js-form-loading" th:action="@{/report}">
 					<div class="row">
 						<div class="col-sm-6 form-group" >
 							<label for="initDate" class="control-label">Data inicial</label>
-							<input id="initDate" type="text" class="form-control" autofocus="autofocus" />
+							<input id="initDate" type="date" th:field="*{initDate}" class="form-control" autofocus="autofocus" />
 						</div>
 					
 						<div class="col-sm-6 form-group">
 							<label for="endDate" class="control-label">Data final</label>
-							<input id="endDate" type="text" class="form-control" />
+							<input id="endDate" type="date" th:field="*{endDate}" class="form-control" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6 form-group" >
+							<label for="selectReport" class="control-label">Selecione o tipo: </label>
+							 <select th:field="*{type}">
+								  <option value="analitico">Análitico</option>
+								  <option value="sintetico">Sintético</option>
+							</select> 
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6 form-group" >
+							<button class="btn  btn-primary" type="submit">
+								Gerar PDF
+								<i class="fa fa-file-pdf-o "></i>
+							</button>
 						</div>
 					</div>
 				</form>
@@ -35,25 +52,5 @@
 			
 		</section>
 	</body>
-	  <script>
-		  $(function() {
-		  	$( "#initDate" ).datepicker({
-		      changeMonth: true,
-		      changeYear: true,
-		      showOn: "button",
-		      buttonImage: "images/calendar.gif",
-		      buttonImageOnly: true,
-		      buttonText: "Selecione a data"
-		    });
-		  	
-		  	$( "#endDate" ).datepicker({
-		      changeMonth: true,
-		      changeYear: true,
-		      showOn: "button",
-		      buttonImage: "images/calendar.gif",
-		      buttonImageOnly: true,
-		      buttonText: "Selecione a data"
-		    });
-		  });
-	  </script>
+
 </html>

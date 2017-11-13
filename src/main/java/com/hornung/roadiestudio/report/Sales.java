@@ -2,8 +2,8 @@ package com.hornung.roadiestudio.report;
 
 import java.io.Serializable;
 
-import com.hornung.roadiestudio.util.Field;
-import com.hornung.roadiestudio.util.JrXml;
+import com.hornung.roadiestudio.util.report.Field;
+import com.hornung.roadiestudio.util.report.JrXml;
 
 @JrXml(name = "sales_report")
 public class Sales implements Serializable {

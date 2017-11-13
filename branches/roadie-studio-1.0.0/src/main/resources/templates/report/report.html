@@ -34,8 +34,9 @@
 						<div class="col-sm-6 form-group" >
 							<label for="selectReport" class="control-label">Selecione o tipo: </label>
 							 <select th:field="*{type}">
-								  <option value="analitico">Análitico</option>
-								  <option value="sintetico">Sintético</option>
+							 	<option th:each="types : ${T(com.hornung.roadiestudio.report.Type).values()}"
+							 			th:value="${types}"
+							 			th:text="${types.description}"></option>
 							</select> 
 						</div>
 					</div>

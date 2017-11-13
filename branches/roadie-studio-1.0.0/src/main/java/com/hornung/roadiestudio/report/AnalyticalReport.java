@@ -3,9 +3,9 @@ package com.hornung.roadiestudio.report;
 import java.io.Serializable;
 import java.util.Collection;
 
-import com.hornung.roadiestudio.util.Field;
-import com.hornung.roadiestudio.util.JrXml;
-import com.hornung.roadiestudio.util.SubReport;
+import com.hornung.roadiestudio.util.report.Field;
+import com.hornung.roadiestudio.util.report.JrXml;
+import com.hornung.roadiestudio.util.report.SubReport;
 
 @JrXml(name = "analytical_report")
 public class AnalyticalReport implements Serializable {

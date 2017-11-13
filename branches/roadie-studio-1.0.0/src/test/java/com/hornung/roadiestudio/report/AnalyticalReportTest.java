@@ -1,22 +1,20 @@
 package com.hornung.roadiestudio.report;
 
-import java.io.ByteArrayInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
-import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
+import com.hornung.roadiestudio.util.report.JasperUtil;
+
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
+import net.sf.jasperreports.export.SimplePdfReportConfiguration;
 
 public class AnalyticalReportTest {
 
@@ -24,16 +22,15 @@ public class AnalyticalReportTest {
 	public void test() {
 		
 		try {
-			Map<String, Object> parameter = new HashMap<>();
+			InputStream jasper = JasperUtil.getJasperFile("analytical_report");
 			
-			InputStream jasper = this.getClass().getResourceAsStream("/report/analytical_report.jasper");
-			InputStream subReportRentalRecording = this.getClass().getResourceAsStream("/report/rentals_recording_analytical_report.jasper");
-			InputStream subReportStock = this.getClass().getResourceAsStream("/report/stock_report.jasper");
-			InputStream subReportSales = this.getClass().getResourceAsStream("/report/sales_report.jasper");
+			InputStream subReportRentalRecording = JasperUtil.getJasperFile("rentals_recording_analytical_report");
+			InputStream subReportStock = JasperUtil.getJasperFile("stock_report");
+			InputStream subReportSales = JasperUtil.getJasperFile("sales_report");
 			
-			parameter.put("subReportRentalRecording", subReportRentalRecording);
-			parameter.put("subReportStock", subReportStock);
-			parameter.put("subReportSales", subReportSales);
+			JasperUtil.setParameter("subReportRentalRecording", subReportRentalRecording);
+			JasperUtil.setParameter("subReportStock", subReportStock);
+			JasperUtil.setParameter("subReportSales", subReportSales);
 			
 			Collection<AnalyticalReport> analyticalReports = new ArrayList<>(0);
 			Collection<RentalRecording> rentalRecordings = new ArrayList<>(0);
@@ -73,15 +70,31 @@ public class AnalyticalReportTest {
 			
 			analyticalReports.add(analyticalReport);
 			
-			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(analyticalReports);
+			JasperUtil.setDataSource(analyticalReports);
+			JasperPrint print = JasperUtil.fillReport(jasper);
 			
-			JasperPrint print = JasperFillManager.fillReport(jasper, parameter, dataSource);
+//			byte[] pdf = JasperExportManager.exportReportToPdf(print);
+//			IOUtils.copy(new ByteArrayInputStream(pdf), new FileOutputStream("./target/relatorio_analitico.pdf"));
 			
-			byte[] pdf = JasperExportManager.exportReportToPdf(print);
+			JRPdfExporter exporter = new JRPdfExporter();
+			exporter.setExporterInput(new SimpleExporterInput(print));
+			exporter.setExporterOutput(new SimpleOutputStreamExporterOutput("./target/relatorio_analitico.pdf"));
 			
-			IOUtils.copy(new ByteArrayInputStream(pdf), new FileOutputStream("./target/relatorio_analitico.pdf"));
+			SimplePdfReportConfiguration reportConfig = new SimplePdfReportConfiguration();
+			reportConfig.setSizePageToContent(true);
+			reportConfig.setForceLineBreakPolicy(false);
+			 
+			SimplePdfExporterConfiguration exportConfig = new SimplePdfExporterConfiguration();
+			exportConfig.setEncrypted(true);
+			exportConfig.setAllowedPermissionsHint("PRINTING");
+			 
+			exporter.setConfiguration(reportConfig);
+			exporter.setConfiguration(exportConfig);
+			 
+			exporter.exportReport();
 			
-		} catch (JRException | IOException e) {
+			
+		} catch (JRException e) {
 			e.printStackTrace();
 		}
 		

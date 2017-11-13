@@ -1,4 +1,4 @@
-package com.hornung.roadiestudio.util;
+package com.hornung.roadiestudio.util.report;
 
 public @interface SubReport {
 

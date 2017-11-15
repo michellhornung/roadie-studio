@@ -59,7 +59,7 @@
 					<label for="allRoom" class="control-label">Sala</label>
 					<select id="allRoom" class="form-control" th:field="*{Room}">
 						<option value="">Selecione</option>
-						<option th:each="Room : ${allRooms}" th:value="${Room.codRoom}" th:text="${Room.description}"></option>
+						<option th:each="Room : ${allRooms}" th:value="${Room.codRoom}" th:text="${Room.name}"></option>
 					</select>
 				</div>
 				
@@ -67,7 +67,7 @@
 					<label for="allBand" class="control-label">Banda</label>
 					<select id="allBand" class="form-control" th:field="*{Band}">
 						<option value="">Selecione</option>
-						<option th:each="Band : ${allBands}" th:value="${Band.codBand}" th:text="${Band.description}"></option>
+						<option th:each="Band : ${allBands}" th:value="${Band.codBand}" th:text="${Band.name}"></option>
 					</select>
 				</div>
 			</div>
@@ -99,5 +99,12 @@
 	</div>
 
 </section>
+
+<script type="text/javascript">
+$(function () {
+    $('#startDatetime').datetimepicker();
+});
+</script>
+
 </body>
 </html>

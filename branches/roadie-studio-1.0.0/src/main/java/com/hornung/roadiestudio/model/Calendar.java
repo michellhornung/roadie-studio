@@ -46,11 +46,25 @@ public class Calendar implements Serializable {
 	@DateTimeFormat (pattern="dd/MM/yyyy HH:mm")
 	@Column(name="END_DATETIME")
 	private Date endDatetime;
-
+	
+	@Transient
+	private int status;
+	
+	@Transient
+	public Date dateTimeNow = new Date();
+	
+	@Transient
+	private boolean compare;
 		
 	public Calendar() {
 		
 	}
+	
+	public boolean compare() {
+		return endDatetime.equals(dateTimeNow) ||  endDatetime.after(dateTimeNow);
+	}
+	
+	
 	
 	public int getCodCalendar() {
 		return codCalendar;
@@ -106,6 +120,31 @@ public class Calendar implements Serializable {
 
 	public void setBand(Band band) {
 		this.band = band;
+	}
+	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public Date getDateTimeNow() {
+		return dateTimeNow;
+	}
+
+	public void setDateTimeNow(Date dateTimeNow) {
+		this.dateTimeNow = dateTimeNow;
+	}
+
+	public boolean isCompare() {
+		compare = endDatetime.equals(dateTimeNow) ||  endDatetime.after(dateTimeNow);
+		return compare;
+	}
+
+	public void setCompare(boolean compare) {
+		this.compare = compare;
 	}
 
 	@Override
@@ -165,6 +204,8 @@ public class Calendar implements Serializable {
 			return false;
 		return true;
 	}
+
+
 
 
 

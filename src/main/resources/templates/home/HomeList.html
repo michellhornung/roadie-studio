@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/DefaultLayout">
+	
+<head>
+	<title>RoadieStudio</title>
+</head>
+
+<body>
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10">
+					<h1>
+						HOME - Status das salas.
+						
+					</h1>
+						<span th:text="${#dates.format(today, 'dd/MM/yyyy HH:mm')}"></span>
+				</div>
+			
+				<div class="col-xs-2">
+					<div class="aw-page-header-controls">
+						<a class="btn btn-primary" th:href="@{/calendar/new}">
+							<i class="fa  fa-plus-circle"></i> <span class="hidden-xs  hidden-sm">Abrir ensaio</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="alert  alert-success  alert-dismissible" role="alert" th:if="${not #strings.isEmpty(message)}" >
+			<button type="button" class="close" data-dismiss="alert" ><span aria-hidden="true">&times;</span></button>
+			<span th:text="${message}"></span>
+		</div>
+		
+		<button id="openModal" type="button" hidden="hidden" data-toggle="modal" data-target="#myModal">Launch modal</button>
+		
+		
+		
+		<div class="table-responsive">
+		
+			<table id="user-table" class="table  table-striped  table-bordered  table-hover  table-condensed  js-sticky-table">
+				<thead class="aw-table-header-solid">
+					<tr>
+						<th>Livre?</th>
+						<th>Cód</th>
+						<th>Nome</th>
+						<th>Descrição</th>	
+						<th>Data Hora Início</th>
+						<th>Data Hora Fim</th>
+<!-- 						<th>Data Hora Atual</th> -->
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="allCalendars : ${allCalendars}"> 
+						<td th:if="${allCalendars.compare ==  true} ">
+							<i class="fa  fa-fw  fa-thumbs-down" style="color: red"></i> Não 
+						</td>
+						<td th:if="${allCalendars.compare == false} ">
+							<i class="fa  fa-fw  fa-thumbs-up" style="color: green"></i> Sim 
+						</td>	
+						<td th:text="${allCalendars.room.codRoom}"></td>
+						<td th:text="${allCalendars.room.name}"></td>
+						<td th:text="${allCalendars.room.description}"></td>
+						<td th:text="${#dates.format(allCalendars.startDatetime, 'dd/MM/yyyy HH:mm')}"></td>
+						<td th:text="${#dates.format(allCalendars.endDatetime, 'dd/MM/yyyy HH:mm')}"></td>
+<!-- 						<td th:text="${#dates.format(allCalendars.dateTimeNow, 'dd/MM/yyyy HH:mm')}"></td> -->
+						
+						
+					
+					</tr>
+					<tr th:if="${allCalendars.empty}">
+						<td colspan="9">Nenhum registro encontrado</td>
+					</tr>
+					
+				</tbody>
+			</table>
+		
+	</div>
+		
+		
+		
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Agendamento</h4>
+		      </div>
+		      <div class="modal-body">
+		        
+		         <div class="row">
+					<div class="col-sm-6 form-group">
+						<label for="id" class="control-label">Código</label>
+						<input id="id" type="text" class="form-control" disabled="disabled"/>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-sm-6 form-group">
+						<label for="type" class="control-label">Tipo</label>
+						<input id="type" type="text" class="form-control" />
+					</div>
+				</div>
+		        
+		        <div class="row">
+					<div class="col-sm-6 form-group">
+						<label for="description" class="control-label">Descrição</label>
+						<input id="description" type="text" class="form-control" />
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-sm-6 form-group">
+						<label for="dtStart" class="control-label">Horário Início</label>
+						<input id="dtStart" type="text" class="form-control" />
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-sm-6 form-group">
+						<label for="dtEnd" class="control-label">Horário Término</label>
+						<input id="dtEnd" type="text" class="form-control" />
+					</div>
+				</div>
+		        	
+		       	<button id="submitModal" type="button" class="btn btn-primary">Alterar Evento</button>	        
+		      </div>
+		      <div class="modal-footer">
+		        <button id="closeModal" type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+		       
+		        <button id="removeModal" type="button" class="btn btn-danger">Remover Evento</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		
+		
+		
+	</div>
+
+</section>
+</body>
+</html>

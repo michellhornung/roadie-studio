@@ -23,13 +23,12 @@ public class AnalyticalReport implements Serializable {
 	private Collection<RentalRecording> rentalRecordingList;
 
 	@Field
-	@SubReport(parameterName = "subReportStockSales")
+	@SubReport(parameterName = "subReportStock")
 	private Collection<Stock> stockList;
 
+	@Field
+	@SubReport(parameterName = "subReportSales")
 	private Collection<Sales> salesList;
-
-	public AnalyticalReport() {
-	}
 
 	public AnalyticalReport(String initDate, String endDate) {
 		this.initDate = initDate;
@@ -67,13 +66,13 @@ public class AnalyticalReport implements Serializable {
 	public void setStockList(Collection<Stock> stockList) {
 		this.stockList = stockList;
 	}
-	
+
 	public Collection<Sales> getSalesList() {
 		return salesList;
 	}
 
 	public void setSalesList(Collection<Sales> sales) {
 		this.salesList = sales;
-		
 	}
+
 }

@@ -1,5 +1,8 @@
 package com.hornung.roadiestudio.service;
 
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,10 @@ public class CalendarService {
 	
 	public void delete(int codCalendar) {
 		this.calendars.delete(codCalendar);
+	}
+	
+	public List<Calendar> findBy(Date initDate, Date endDate) {
+		return calendars.findByStartDatetimeGreaterThanEqualAndEndDatetimeLessThanEqual(initDate, endDate);
 	}
 
 }

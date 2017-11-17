@@ -1,5 +1,6 @@
 package com.hornung.roadiestudio.util.report;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.HashMap;
@@ -10,7 +11,9 @@ import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 public class JasperUtil {
 	
@@ -23,7 +26,6 @@ public class JasperUtil {
 	public static InputStream getJasperFile(String fileName) {
 		try {
 			InputStream jasper = JasperUtil.class.getResourceAsStream(String.format("/report/%s.jasper", fileName));
-			
 			return jasper;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -38,10 +40,15 @@ public class JasperUtil {
 	public static JasperPrint fillReport(InputStream jasper) {
 		JasperPrint jasperPrint = null;
 		try {
-			jasperPrint = JasperFillManager.fillReport(jasper, parameter, dataSource);
+			JasperReport report = (JasperReport) JRLoader.loadObject(jasper);
+			jasperPrint = JasperFillManager.fillReport(report, parameter, dataSource);
+			jasper.close();
 		} catch (JRException e) {
 			clearParameter();
+			e.printStackTrace();
 			throw new RuntimeException(e.getMessage(), e);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		clearParameter();
 		return jasperPrint;

@@ -33,26 +33,12 @@ public class AnalyticalReportTest {
 			JasperUtil.setParameter("subReportSales", subReportSales);
 			
 			Collection<AnalyticalReport> analyticalReports = new ArrayList<>(0);
-			Collection<RentalRecording> rentalRecordings = new ArrayList<>(0);
 			Collection<Stock> stocks = new ArrayList<>(0);
 			Collection<Sales> sales = new ArrayList<>(0);
 			
 			AnalyticalReport analyticalReport = new AnalyticalReport("01/11/2017", "10/11/2017");
 			
-			RentalRecording rental = new RentalRecording("Locações");
-			rental.setBanda("OffSpring");
-			rental.setData("02/11/2017");
-			rental.setTotal("2");
-			rental.setSala("Punk");
-			rentalRecordings.add(rental);
-			
-			RentalRecording recording = new RentalRecording("Gravações");
-			recording.setBanda("OffSpring");
-			recording.setData("03/11/2017");
-			recording.setTotal("5");
-			recording.setSala("push");
-			rentalRecordings.add(recording);
-			analyticalReport.setRentalRecordingList(rentalRecordings);
+			analyticalReport.setRentalRecordingList(getRentals());
 			
 			Stock stock = new Stock();
 			stock.setName("Coca-Cola");
@@ -99,5 +85,29 @@ public class AnalyticalReportTest {
 		}
 		
 	}
+	
+	private Collection<RentalRecording> getRentals() {
+		Collection<RentalRecording> rentalRecordings = new ArrayList<>(0);
+		for(int i = 0; i <= 3; i ++) {
+			RentalRecording rental = new RentalRecording("Locações");
+			rental.setBanda("Locacao " + i);
+			rental.setData("02/11/2017");
+			rental.setTotal("2");
+			rental.setSala("Punk");
+			rentalRecordings.add(rental);
+		}
+		
+		for(int i = 0; i <= 3; i++) {
+			RentalRecording recording = new RentalRecording("Gravações");
+			recording.setBanda("gravacao " + i);
+			recording.setData("03/11/2017");
+			recording.setTotal("5");
+			recording.setSala("push");
+			rentalRecordings.add(recording);
+		}
+		
+		return rentalRecordings;
+	}
+	
 
 }

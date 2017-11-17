@@ -21,6 +21,10 @@ public class UserService {
 	public void delete(int codUser) {
 		this.users.delete(codUser);
 	}
+	
+	public User findBy(String username, String password) {
+		return users.findByUsernameAndPassword(username, password);
+	}
 
 
 }

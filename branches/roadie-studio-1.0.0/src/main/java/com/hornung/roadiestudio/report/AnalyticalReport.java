@@ -1,6 +1,5 @@
 package com.hornung.roadiestudio.report;
 
-import java.io.Serializable;
 import java.util.Collection;
 
 import com.hornung.roadiestudio.util.report.Field;
@@ -8,15 +7,9 @@ import com.hornung.roadiestudio.util.report.JrXml;
 import com.hornung.roadiestudio.util.report.SubReport;
 
 @JrXml(name = "analytical_report")
-public class AnalyticalReport implements Serializable {
+public class AnalyticalReport extends AbstractReport {
 
-	private static final long serialVersionUID = -5752528235383622280L;
-
-	@Field
-	private String initDate;
-
-	@Field
-	private String endDate;
+	private static final long serialVersionUID = 6734466351170744648L;
 
 	@Field
 	@SubReport(parameterName = "subReportRentalRecording")
@@ -31,26 +24,9 @@ public class AnalyticalReport implements Serializable {
 	private Collection<Sales> salesList;
 
 	public AnalyticalReport(String initDate, String endDate) {
-		this.initDate = initDate;
-		this.endDate = endDate;
+		super(initDate, endDate);
 	}
-
-	public String getInitDate() {
-		return initDate;
-	}
-
-	public void setInitDate(String initDate) {
-		this.initDate = initDate;
-	}
-
-	public String getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
-	}
-
+	
 	public Collection<RentalRecording> getRentalRecordingList() {
 		return rentalRecordingList;
 	}

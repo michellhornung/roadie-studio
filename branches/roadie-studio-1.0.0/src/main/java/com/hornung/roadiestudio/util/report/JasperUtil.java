@@ -9,6 +9,7 @@ import java.util.Objects;
 
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -25,7 +26,9 @@ public class JasperUtil {
 
 	public static InputStream getJasperFile(String fileName) {
 		try {
-			InputStream jasper = JasperUtil.class.getResourceAsStream(String.format("/report/%s.jasper", fileName));
+			String jasperFile = String.format("/report/%s.jasper", fileName);
+			InputStream jasper = JasperUtil.class.getResourceAsStream(jasperFile);
+			compile(jasper, fileName);
 			return jasper;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -61,9 +64,26 @@ public class JasperUtil {
 	}
 	
 	private static void clearParameter() {
-		parameter.clear();
-		if(!parameter.isEmpty()) 
-			parameter = null;
+		if(Objects.nonNull(parameter)) {			
+			parameter.clear();
+			if(!parameter.isEmpty()) 
+				parameter = null;
+		}
+	}
+	
+	private static void compile(InputStream jasper, String fileName) {
+		try {
+			if(Objects.isNull(jasper)) {
+				String jrxmlFile = String.format("/report/%s.jrxml", fileName);
+				InputStream jrxml = JasperUtil.class.getResourceAsStream(jrxmlFile);
+				if(Objects.nonNull(jrxml))
+					JasperCompileManager.compileReport(jrxml);
+				else
+					throw new RuntimeException(new NullPointerException(String.format("Arquivo %s nao encontrado.", fileName)));
+			}
+		} catch (JRException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

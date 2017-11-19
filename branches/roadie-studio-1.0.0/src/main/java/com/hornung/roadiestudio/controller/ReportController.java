@@ -7,12 +7,13 @@ import java.util.Objects;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hornung.roadiestudio.model.dto.Report;
+import com.hornung.roadiestudio.report.Report;
 import com.hornung.roadiestudio.service.ReportService;
 
 import net.sf.jasperreports.engine.JRException;
@@ -34,8 +35,7 @@ public class ReportController implements Serializable {
 		
 		if(Objects.nonNull(report.getInitDate()) && Objects.nonNull(report.getEndDate())) {
 			
-			JasperPrint print = service.generate(report);
-			
+			JasperPrint print = service.generate(report);			
 			print(print, response);
 			
 			return mv;
@@ -47,9 +47,9 @@ public class ReportController implements Serializable {
 	private void print(JasperPrint print, HttpServletResponse response) {
 		try {
 			response.setContentType("application/x-pdf");
-			response.setHeader("Content-disposition", "inline; filename=relatorio_analitico.pdf");
-			
+			response.setHeader("Content-disposition", String.format("inline; filename=%s.pdf", print.getName()));
 			ServletOutputStream stream = response.getOutputStream();
+			
 			JasperExportManager.exportReportToPdfStream(print, stream);
 			
 			stream.flush();

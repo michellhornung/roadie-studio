@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
 import com.hornung.roadiestudio.model.Calendar;
 import com.hornung.roadiestudio.model.Recording;
 import com.hornung.roadiestudio.model.Rental;
-import com.hornung.roadiestudio.model.Sale;
-import com.hornung.roadiestudio.model.dto.Report;
 import com.hornung.roadiestudio.report.AnalyticalReport;
 import com.hornung.roadiestudio.report.RentalRecording;
+import com.hornung.roadiestudio.report.Report;
 import com.hornung.roadiestudio.report.Sales;
 import com.hornung.roadiestudio.report.Stock;
+import com.hornung.roadiestudio.report.SyntheticReport;
 import com.hornung.roadiestudio.report.Type;
 import com.hornung.roadiestudio.util.report.JasperUtil;
 
@@ -38,13 +38,11 @@ public class ReportService {
 		if(Type.ANALYTICAL.equals(report.getType())) {
 			return this.analytical(report);
 		} else {
-			return this.synthetical();
+			return this.synthetical(report);
 		}
 	}
 	
 	private JasperPrint analytical(Report report) {
-		Date start;
-		Date end;
 		try {
 			final InputStream jasper = JasperUtil.getJasperFile("analytical_report");
 			final InputStream subReportRentalRecording = JasperUtil.getJasperFile("rentals_recording_analytical_report");
@@ -55,8 +53,8 @@ public class ReportService {
 			JasperUtil.setParameter("subReportStock", subReportStock);
 			JasperUtil.setParameter("subReportSales", subReportSales);
 			
-			start = formatterDB.parse(report.getInitDate());
-			end = formatterDB.parse(report.getEndDate());
+			Date start = formatterDB.parse(report.getInitDate());
+			Date end = formatterDB.parse(report.getEndDate());
 			
 			Collection<AnalyticalReport> analyticalReports = new ArrayList<>(0);
 			
@@ -67,24 +65,28 @@ public class ReportService {
 			Collection<Sales> salesList = new ArrayList<>(0);
 			Collection<Stock> stockList = new ArrayList<>(0);
 			
-			for(Calendar calendar : calendars) {
-				this.populateRentalRecording(rentalRecordingList, calendar);
+			calendars.stream().forEach( 
+				(calendar) -> {
+					this.populateRentalRecording(rentalRecordingList, calendar);
 				
-				int size = calendar.getBand().getSales().size();
-				for(Sale sale : calendar.getBand().getSales()) {
-					Sales sales = new Sales();
-					sales.setName(sale.getName());
-					sales.setDescription(sale.getObservation());
-					sales.setValue(String.valueOf(sale.getValue()));
-					salesList.add(sales);
-					
-					Stock stock = new Stock();
-					stock.setName(sale.getStock().getName());
-					stock.setDate(formatter.format(calendar.getStartDatetime()));
-					stock.setTotal(String.valueOf(size));
-					stockList.add(stock);
+					int size = calendar.getBand().getSales().size();
+					calendar.getBand().getSales().stream().forEach(
+						(sale) -> {
+							Sales sales = new Sales();
+							sales.setName(sale.getName());
+							sales.setDescription(sale.getObservation());
+							sales.setValue(String.valueOf(sale.getValue()));
+							salesList.add(sales);
+							
+							Stock stock = new Stock();
+							stock.setName(sale.getStock().getName());
+							stock.setDate(formatter.format(calendar.getStartDatetime()));
+							stock.setTotal(String.valueOf(size));
+							stockList.add(stock);
+						}
+					);
 				}
-			}
+			);
 			
 			analyticalReport.setStockList(stockList);
 			analyticalReport.setSalesList(salesList);
@@ -100,10 +102,42 @@ public class ReportService {
 		} 
 	}
 	
-	private JasperPrint synthetical() {
-		InputStream jasper = JasperUtil.getJasperFile("synthetical_report");
+	private JasperPrint synthetical(Report report) {
+		InputStream jasper = JasperUtil.getJasperFile("synthetic_report");
 		
-		return JasperUtil.fillReport(jasper);
+		Collection<SyntheticReport> reports = new ArrayList<>(0);
+		
+		try {
+			Date start = formatterDB.parse(report.getInitDate());
+			Date end = formatterDB.parse(report.getEndDate());
+			
+			Collection<Calendar> calendars = calendarService.findBy(new java.sql.Date(start.getTime()), new java.sql.Date(end.getTime()));
+			
+			SyntheticReport syntheticReport = new SyntheticReport(report.getInitDate(), report.getEndDate());
+			
+			calendars.stream().forEach(
+				(calendar) -> {
+					
+					syntheticReport.setTotalRecording(Long.parseLong(String.valueOf(calendar.getRoom().getRecordings().size())));
+					syntheticReport.setTotalRentals(Long.parseLong(String.valueOf(calendar.getBand().getRentals().size())));
+					syntheticReport.setTotalSales(Long.parseLong(String.valueOf(calendar.getRoom().getSales().size())));
+					
+					calendar.getBand().getSales().stream().forEach(
+						(sale) -> {
+							long i = 0;
+							syntheticReport.setTotalStock(++i);
+						}
+					);
+				}
+			);
+			reports.add(syntheticReport);
+			
+			JasperUtil.setDataSource(reports);
+			return JasperUtil.fillReport(jasper);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+		}
 	}
 	
 	private Collection<RentalRecording> populateRentalRecording(Collection<RentalRecording> rentalRecordingList, Calendar calendar) {

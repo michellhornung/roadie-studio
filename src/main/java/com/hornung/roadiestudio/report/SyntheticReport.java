@@ -1,13 +1,11 @@
 package com.hornung.roadiestudio.report;
 
-import java.io.Serializable;
+import com.hornung.roadiestudio.util.report.JrXml;
 
-public class SyntheticReport implements Serializable {
+@JrXml(name = "synthetic_report")
+public class SyntheticReport extends AbstractReport {
 
-	private static final long serialVersionUID = -6816779404831328261L;
-	
-	private String initDate;
-	private String endDate;
+	private static final long serialVersionUID = 1228935048421731926L;
 	
 	private Long totalRentals;
 	private Long totalRecording;
@@ -18,26 +16,8 @@ public class SyntheticReport implements Serializable {
 	}
 
 	public SyntheticReport(String initDate, String endDate) {
-		this.initDate = initDate;
-		this.endDate = endDate;
+		super(initDate, endDate);
 	}
-
-	public String getInitDate() {
-		return initDate;
-	}
-
-	public void setInitDate(String initDate) {
-		this.initDate = initDate;
-	}
-
-	public String getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
-	}
-
 	public Long getTotalRentals() {
 		return totalRentals;
 	}

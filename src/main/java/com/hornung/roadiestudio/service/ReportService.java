@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hornung.roadiestudio.model.Calendar;
-import com.hornung.roadiestudio.model.Recording;
-import com.hornung.roadiestudio.model.Rental;
 import com.hornung.roadiestudio.report.AnalyticalReport;
 import com.hornung.roadiestudio.report.RentalRecording;
 import com.hornung.roadiestudio.report.Report;
@@ -59,6 +57,10 @@ public class ReportService {
 			Collection<AnalyticalReport> analyticalReports = new ArrayList<>(0);
 			
 			Collection<Calendar> calendars = calendarService.findBy(new java.sql.Date(start.getTime()), new java.sql.Date(end.getTime()));
+			
+			Long countRentals = calendarService.countBy(new java.sql.Date(start.getTime()), new java.sql.Date(end.getTime()), "L");
+			Long countRecording = calendarService.countBy(new java.sql.Date(start.getTime()), new java.sql.Date(end.getTime()), "G");
+			
 			AnalyticalReport analyticalReport = new AnalyticalReport(report.getInitDate(), report.getEndDate());
 			
 			Collection<RentalRecording> rentalRecordingList = new ArrayList<>(0);
@@ -67,7 +69,7 @@ public class ReportService {
 			
 			calendars.stream().forEach( 
 				(calendar) -> {
-					this.populateRentalRecording(rentalRecordingList, calendar);
+					this.populateRentalRecording(rentalRecordingList, calendar, countRentals, countRecording);
 				
 					int size = calendar.getBand().getSales().size();
 					calendar.getBand().getSales().stream().forEach(
@@ -112,14 +114,16 @@ public class ReportService {
 			Date end = formatterDB.parse(report.getEndDate());
 			
 			Collection<Calendar> calendars = calendarService.findBy(new java.sql.Date(start.getTime()), new java.sql.Date(end.getTime()));
+			Long countRentals = calendarService.countBy(new java.sql.Date(start.getTime()), new java.sql.Date(end.getTime()), "L");
+			Long countRecording = calendarService.countBy(new java.sql.Date(start.getTime()), new java.sql.Date(end.getTime()), "G");
 			
 			SyntheticReport syntheticReport = new SyntheticReport(report.getInitDate(), report.getEndDate());
 			
 			calendars.stream().forEach(
 				(calendar) -> {
 					
-					syntheticReport.setTotalRecording(Long.parseLong(String.valueOf(calendar.getRoom().getRecordings().size())));
-					syntheticReport.setTotalRentals(Long.parseLong(String.valueOf(calendar.getBand().getRentals().size())));
+					syntheticReport.setTotalRecording(countRecording);
+					syntheticReport.setTotalRentals(countRentals);
 					syntheticReport.setTotalSales(Long.parseLong(String.valueOf(calendar.getRoom().getSales().size())));
 					
 					calendar.getBand().getSales().stream().forEach(
@@ -140,38 +144,18 @@ public class ReportService {
 		}
 	}
 	
-	private Collection<RentalRecording> populateRentalRecording(Collection<RentalRecording> rentalRecordingList, Calendar calendar) {
+	private Collection<RentalRecording> populateRentalRecording(Collection<RentalRecording> rentalRecordingList, Calendar calendar, Long totalRentals, Long TotalRecording) {
 		
-		if("L".equals(calendar.getType())) {
-			RentalRecording rentals = new RentalRecording("Locações");
-			rentals.setSala(calendar.getRoom().getName());
-			rentals.setBanda(calendar.getBand().getName());
-			rentals.setData(formatter.format(calendar.getStartDatetime()));
-			rentalRecordingList.add(rentals);
-		} if("G".equals(calendar.getType())) {
-			RentalRecording record = new RentalRecording("Gravações");
-			record.setBanda(calendar.getBand().getName());
-			record.setSala(calendar.getRoom().getName());
-			record.setData(formatter.format(calendar.getStartDatetime()));
-			rentalRecordingList.add(record);
-		}
+		RentalRecording rentals = new RentalRecording("Agendamento");
+		rentals.setSala(calendar.getRoom().getName());
+		rentals.setBanda(calendar.getBand().getName());
+		rentals.setDataInicial(formatter.format(calendar.getStartDatetime()));
+		rentals.setDataFinal(formatter.format(calendar.getEndDatetime()));
+		rentals.setTipo("L".equalsIgnoreCase(calendar.getType()) ? "Locação" : "Gravação");
+		rentals.setTotal(String.format("Total de: Locações %s e Gravações %s", totalRentals, TotalRecording));
 		
-//		for(Rental rental : calendar.getRoom().getRentals()) {
-//			RentalRecording rentals = new RentalRecording("Locações");
-//			rentals.setBanda(rental.getBand().getName());
-//			rentals.setSala(rental.getRoom().getName());
-//			rentals.setTotal(String.valueOf(calendar.getRoom().getRentals().size()));
-//			rentals.setData(formatter.format(calendar.getStartDatetime()));
-//			rentalRecordingList.add(rentals);
-//		}
-//		
-//		for(Recording recording : calendar.getRoom().getRecordings()) {
-//			RentalRecording record = new RentalRecording("Gravações");
-//			record.setBanda(recording.getBand().getName());
-//			record.setSala(recording.getRoom().getName());
-//			record.setTotal(String.valueOf(calendar.getRoom().getRecordings().size()));
-//			rentalRecordingList.add(record);
-//		}
+		rentalRecordingList.add(rentals);
+		
 		return rentalRecordingList;
 	}
 	

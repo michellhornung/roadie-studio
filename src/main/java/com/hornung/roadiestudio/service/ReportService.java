@@ -141,22 +141,37 @@ public class ReportService {
 	}
 	
 	private Collection<RentalRecording> populateRentalRecording(Collection<RentalRecording> rentalRecordingList, Calendar calendar) {
-		for(Rental rental : calendar.getRoom().getRentals()) {
+		
+		if("L".equals(calendar.getType())) {
 			RentalRecording rentals = new RentalRecording("Locações");
-			rentals.setBanda(rental.getBand().getName());
-			rentals.setSala(rental.getRoom().getName());
-			rentals.setTotal(String.valueOf(calendar.getRoom().getRentals().size()));
+			rentals.setSala(calendar.getRoom().getName());
+			rentals.setBanda(calendar.getBand().getName());
 			rentals.setData(formatter.format(calendar.getStartDatetime()));
 			rentalRecordingList.add(rentals);
-		}
-		
-		for(Recording recording : calendar.getRoom().getRecordings()) {
+		} else if("G".equals(calendar.getType())) {
 			RentalRecording record = new RentalRecording("Gravações");
-			record.setBanda(recording.getBand().getName());
-			record.setSala(recording.getRoom().getName());
-			record.setTotal(String.valueOf(calendar.getRoom().getRecordings().size()));
+			record.setBanda(calendar.getBand().getName());
+			record.setSala(calendar.getRoom().getName());
+			record.setData(formatter.format(calendar.getStartDatetime()));
 			rentalRecordingList.add(record);
 		}
+		
+//		for(Rental rental : calendar.getRoom().getRentals()) {
+//			RentalRecording rentals = new RentalRecording("Locações");
+//			rentals.setBanda(rental.getBand().getName());
+//			rentals.setSala(rental.getRoom().getName());
+//			rentals.setTotal(String.valueOf(calendar.getRoom().getRentals().size()));
+//			rentals.setData(formatter.format(calendar.getStartDatetime()));
+//			rentalRecordingList.add(rentals);
+//		}
+//		
+//		for(Recording recording : calendar.getRoom().getRecordings()) {
+//			RentalRecording record = new RentalRecording("Gravações");
+//			record.setBanda(recording.getBand().getName());
+//			record.setSala(recording.getRoom().getName());
+//			record.setTotal(String.valueOf(calendar.getRoom().getRecordings().size()));
+//			rentalRecordingList.add(record);
+//		}
 		return rentalRecordingList;
 	}
 	

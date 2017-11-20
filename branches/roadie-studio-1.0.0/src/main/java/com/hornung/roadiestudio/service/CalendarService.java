@@ -25,7 +25,7 @@ public class CalendarService {
 	}
 	
 	public List<Calendar> findBy(Date initDate, Date endDate) {
-		return calendars.findByStartDatetimeGreaterThanEqualAndEndDatetimeLessThanEqual(initDate, endDate);
+		return calendars.findByStartDatetimeGreaterThanEqualAndEndDatetimeLessThanEqualOrderByStartDatetime(initDate, endDate);
 	}
 	
 	public Long countBy(Date initDate, Date endDate, String type) {

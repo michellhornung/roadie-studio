@@ -2,7 +2,9 @@ package com.hornung.roadiestudio.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Transient;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -25,14 +27,17 @@ public class Recording implements Serializable {
 	@Column(name="COD_RECORDING")
 	private int codRecording;
 
+	@NotBlank(message = "Descrição é obrigatório.")
 	@Column(name="DESCRIPTION")
 	private String description;
 	
+	@NotNull(message = "Banda é obrigatório.")
 	//bi-directional many-to-one association to Band
 	@ManyToOne
 	@JoinColumn(name="COD_BAND")
 	private Band Band;
 
+	@NotNull(message = "Sala é obrigatório.")
 	//bi-directional many-to-one association to Room
 	@ManyToOne
 	@JoinColumn(name="COD_ROOM")

@@ -34,6 +34,7 @@ public class User implements Serializable {
 	@Column(name="FIRST_NAME")
 	private String firstName;
 
+	@NotBlank(message = "Sobrenome é obrigatório.")
 	@Column(name="LAST_NAME")
 	private String lastName;
 

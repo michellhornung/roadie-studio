@@ -58,7 +58,7 @@
 			<div class="row">
 				<div class="col-sm-12 form-group" th:classappend="${#fields.hasErrors('Band.name')} ? has-error">
 					<label for="allBands" class="control-label">Banda</label>
-					<select id="allBands" class="form-control" th:field="*{Band}" required="required">
+					<select id="allBands" class="form-control" th:field="*{Band}">
 						<option value="">Selecione</option>
 						<option th:each="Band : ${allBands}" th:value="${Band.codBand}" th:text="${Band.name}"></option>
 					</select>

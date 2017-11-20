@@ -2,6 +2,9 @@ package com.hornung.roadiestudio.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.math.BigDecimal;
 
 
@@ -20,12 +23,14 @@ public class Sale implements Serializable {
 	@Column(name="COD_SALES")
 	private int codSales;
 
+	@NotBlank(message = "Nome é obrigatório.")
 	@Column(name="NAME")
 	private String name;
 
 	@Column(name="OBSERVATION")
 	private String observation;
 
+	@NotBlank(message = "Valor é obrigatório.")
 	@Column(name="VALUE")
 	private BigDecimal value;
 

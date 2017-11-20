@@ -2,7 +2,9 @@ package com.hornung.roadiestudio.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -26,22 +28,27 @@ public class Calendar implements Serializable {
 	@Column(name="TYPE")
 	private String type;
 	
+	@NotNull(message = "Sala é obrigatório.")
 	@ManyToOne
 	@JoinColumn(name="COD_ROOM")
 	private Room room;
 
+	@NotNull(message = "Banda é obrigatório.")
 	@ManyToOne
 	@JoinColumn(name="COD_BAND")
 	private Band band;
 	
+	@NotBlank(message = "Descrição é obrigatório.")
 	@Column(name="DESCRIPTION")
 	private String description;
 
+	@NotBlank(message = "Data inicial é obrigatório.")
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat (pattern="dd/MM/yyyy HH:mm")
 	@Column(name="START_DATETIME")
 	private Date startDatetime;
 	
+	@NotBlank(message = "Data final é obrigatório.")
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat (pattern="dd/MM/yyyy HH:mm")
 	@Column(name="END_DATETIME")

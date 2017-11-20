@@ -148,7 +148,7 @@ public class ReportService {
 			rentals.setBanda(calendar.getBand().getName());
 			rentals.setData(formatter.format(calendar.getStartDatetime()));
 			rentalRecordingList.add(rentals);
-		} else if("G".equals(calendar.getType())) {
+		} if("G".equals(calendar.getType())) {
 			RentalRecording record = new RentalRecording("Gravações");
 			record.setBanda(calendar.getBand().getName());
 			record.setSala(calendar.getRoom().getName());

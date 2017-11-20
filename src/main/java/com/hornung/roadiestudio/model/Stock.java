@@ -4,6 +4,9 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.util.List;
 
 
@@ -25,11 +28,11 @@ public class Stock implements Serializable {
 	@Column(name="DESCRIPTION")
 	private String description;
 
-	@NotNull(message="Nome é obrigatório.")
+	@NotBlank(message="Nome é obrigatório.")
 	@Column(name="NAME")
 	private String name;
 
-	@NotNull(message="Quantidade é obrigatório.")
+	@NotNull
 	@Column(name="QUANTITY")
 	private int quantity;
 

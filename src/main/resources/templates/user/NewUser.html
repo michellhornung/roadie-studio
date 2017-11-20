@@ -81,20 +81,14 @@
 						<option th:each="RoleType : ${allRoles}" th:value="${RoleType.codRoleType}" th:text="${RoleType.description}"></option>
 					</select>
 				</div>
-			</div>
-			
-						
- 
-			<div class="row">
 				
 				<div class=" col-sm-6 form-group" th:classappend="${#fields.hasErrors('latestUpdate')} ? has-error">
 					<label for="latestUpdate" class="control-label">Última atualização</label>
 					<input class="form-control" name="latestUpdate" id="latestUpdate" type="text" readonly="readonly"
                 			th:value="${#dates.format(#dates.createNow() , 'dd/MM/yyyy HH:mm')}" />
 				</div>
-				
-				
 			</div>
+
 			
 			<div class="form-group">
 				<button class="btn  btn-primary" type="submit">Salvar</button>

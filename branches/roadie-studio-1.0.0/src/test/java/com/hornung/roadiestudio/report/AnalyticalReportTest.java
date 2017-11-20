@@ -91,7 +91,7 @@ public class AnalyticalReportTest {
 		for(int i = 0; i <= 3; i ++) {
 			RentalRecording rental = new RentalRecording("Locações");
 			rental.setBanda("Locacao " + i);
-			rental.setData("02/11/2017");
+//			rental.setData("02/11/2017");
 			rental.setTotal("2");
 			rental.setSala("Punk");
 			rentalRecordings.add(rental);
@@ -100,7 +100,7 @@ public class AnalyticalReportTest {
 		for(int i = 0; i <= 3; i++) {
 			RentalRecording recording = new RentalRecording("Gravações");
 			recording.setBanda("gravacao " + i);
-			recording.setData("03/11/2017");
+//			recording.setData("03/11/2017");
 			recording.setTotal("5");
 			recording.setSala("push");
 			rentalRecordings.add(recording);

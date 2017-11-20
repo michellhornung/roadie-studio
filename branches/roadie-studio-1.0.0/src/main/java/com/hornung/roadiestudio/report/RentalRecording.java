@@ -17,13 +17,20 @@ public class RentalRecording implements Serializable {
 	private String total;
 	
 	@Field
-	private String data;
+	private String dataInicial;
+	
+	@Field
+	private String dataFinal;
 	
 	@Field
 	private String sala;
 	
 	@Field
 	private String banda;
+	
+	@Field
+	private String tipo;
+	
 	
 	public RentalRecording() {
 	}
@@ -47,15 +54,7 @@ public class RentalRecording implements Serializable {
 	public void setTotal(String total) {
 		this.total = total;
 	}
-
-	public String getData() {
-		return data;
-	}
-
-	public void setData(String data) {
-		this.data = data;
-	}
-
+	
 	public String getSala() {
 		return sala;
 	}
@@ -70,6 +69,30 @@ public class RentalRecording implements Serializable {
 
 	public void setBanda(String banda) {
 		this.banda = banda;
+	}
+
+	public String getDataInicial() {
+		return dataInicial;
+	}
+
+	public void setDataInicial(String dataInicial) {
+		this.dataInicial = dataInicial;
+	}
+
+	public String getDataFinal() {
+		return dataFinal;
+	}
+
+	public void setDataFinal(String dataFinal) {
+		this.dataFinal = dataFinal;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 }

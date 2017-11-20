@@ -2,6 +2,9 @@ package com.hornung.roadiestudio.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.util.List;
 
 
@@ -20,9 +23,11 @@ public class Room implements Serializable {
 	@Column(name="COD_ROOM")
 	private int codRoom;
 
+	@NotBlank(message = "Descrição é obrigatório.")
 	@Column(name="DESCRIPTION")
 	private String description;
 
+	@NotBlank(message = "Nome é obrigatório.")
 	@Column(name="NAME")
 	private String name;
 	

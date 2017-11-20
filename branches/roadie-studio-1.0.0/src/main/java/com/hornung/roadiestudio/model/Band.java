@@ -2,6 +2,11 @@ package com.hornung.roadiestudio.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.util.List;
 
 
@@ -20,9 +25,11 @@ public class Band implements Serializable {
 	@Column(name="COD_BAND")
 	private int codBand;
 
+	@NotBlank(message = "Descrição é obrigatório.")
 	@Column(name="DESCRIPTION")
 	private String description;
 
+	@NotBlank(message = "Nome é obrigatório.")
 	@Column(name="NAME")
 	private String name;
 
@@ -30,11 +37,13 @@ public class Band implements Serializable {
 	private int xp;
 
 	//bi-directional many-to-one association to BandGenre
+	@NotNull(message = "Gênero é obrigatório.")
 	@ManyToOne
 	@JoinColumn(name="COD_BAND_GENRE")
 	private BandGenre BandGenre;
 
 	//bi-directional many-to-one association to User
+	@NotNull(message = "Usuário é obrigatório.")
 	@ManyToOne
 	@JoinColumn(name="COD_USER")
 	private User User;

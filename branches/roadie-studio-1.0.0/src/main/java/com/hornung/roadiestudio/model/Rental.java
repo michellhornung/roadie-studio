@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -30,6 +31,7 @@ public class Rental implements Serializable {
 	@Column(name="COD_RENTAL")
 	private int codRental;
 	
+	@NotNull(message = "Sala é obrigatório.")
 	//bi-directional many-to-one association to Room
 	@ManyToOne
 	@JoinColumn(name="COD_ROOM")
@@ -40,6 +42,7 @@ public class Rental implements Serializable {
 	@JoinColumn(name="COD_STOCK")
 	private Stock Stock;
 	
+	@NotNull(message = "Banda é obrigatório.")
 	//bi-directional many-to-one association to Band
 	@ManyToOne
 	@JoinColumn(name="COD_BAND")

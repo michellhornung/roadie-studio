@@ -9,7 +9,7 @@ import com.hornung.roadiestudio.model.Calendar;
 
 public interface Calendars extends JpaRepository<Calendar, Integer>{
 
-	public List<Calendar> findByStartDatetimeGreaterThanEqualAndEndDatetimeLessThanEqual(Date start, Date end);
+	public List<Calendar> findByStartDatetimeGreaterThanEqualAndEndDatetimeLessThanEqualOrderByStartDatetime(Date start, Date end);
 	
 	public Long countIdByStartDatetimeGreaterThanEqualAndEndDatetimeLessThanEqualAndType(Date start, Date end, String type);
 	

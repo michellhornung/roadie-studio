@@ -14,8 +14,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
 		auth.inMemoryAuthentication()
-			.withUser("michell").password("michell").roles("CREATE").and()
-			.withUser("root").password("root").roles("CREATE", "LIST_ALL", "EDIT");
+			.withUser("michell").password("michell").roles("usr").and()
+			.withUser("root").password("root").roles("usr", "adm", "sup");
 	}
 	
 	@Override
@@ -31,11 +31,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 
 		http.authorizeRequests()
-				.antMatchers("/user/new", "/band/new", "bandGenre/new", "/user", "/rental").hasRole("CREATE")
-				.antMatchers("/user/edit", "/band/edit", "bandGenre/edit").hasRole("EDIT")
+				.antMatchers("/home", "/schedule", "/calendar/new", "/report").hasRole("usr")
+				.antMatchers("/user/edit", "/band/edit", "bandGenre/edit").hasRole("sup")
 				.antMatchers("/home/**", "/band/**", "/bandGenre/**", "/user/**", "/schedule/**", 
 						"/stock/**", "/report/**", "/room/**",
-						"/rental/**", "/recording/**").hasRole("LIST_ALL")
+						"/rental/**", "/recording/**").hasRole("adm")
 				.anyRequest()
 				.authenticated()
 				.and()

@@ -1,5 +1,10 @@
 package com.hornung.roadiestudio.config;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -7,16 +12,24 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+@Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
+	@Autowired
+	private DataSource dataSource;
+	
+	@Autowired
+	private Environment env;
+	
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-		auth.inMemoryAuthentication()
-			.withUser("michell").password("michell").roles("usr").and()
-			.withUser("root").password("root").roles("usr", "adm", "sup");
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {		
+		auth.jdbcAuthentication()
+			.dataSource(dataSource)
+				.usersByUsernameQuery(env.getProperty("usersByUsernameQuery"))
+				.authoritiesByUsernameQuery(env.getProperty("authoritiesByUsernameQuery"));
 	}
+		
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -28,22 +41,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		http.csrf().disable();
-
 		http.authorizeRequests()
-				.antMatchers("/home", "/schedule", "/calendar/new", "/report").hasRole("usr")
-				.antMatchers("/user/edit", "/band/edit", "bandGenre/edit").hasRole("sup")
+				.antMatchers("/home", "/schedule", "/calendar/new", "/report").hasAnyAuthority("USR", "ADM", "SUP")
+				.antMatchers("/user/edit", "/band/edit", "bandGenre/edit").hasAnyAuthority("SUP", "ADM", "USR")
 				.antMatchers("/home/**", "/band/**", "/bandGenre/**", "/user/**", "/schedule/**", 
 						"/stock/**", "/report/**", "/room/**",
-						"/rental/**", "/recording/**").hasRole("adm")
-				.anyRequest()
-				.authenticated()
-				.and()
+						"/rental/**", "/recording/**").hasAnyAuthority("ADM", "SUP", "USR")
+				.anyRequest().permitAll()
+			.and()
 			.formLogin()
-				.loginPage("/login").permitAll()
+				.loginPage("/login").usernameParameter("username").passwordParameter("password").permitAll()
 				.and()
-			.logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+			.and().exceptionHandling().accessDeniedPage("/403")
+			.and().csrf();
 				
 	}
 }

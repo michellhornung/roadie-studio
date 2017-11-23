@@ -5,6 +5,7 @@ import javax.persistence.*;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import java.util.Collection;
 import java.util.List;
 
 
@@ -42,6 +43,9 @@ public class Room implements Serializable {
 	//bi-directional many-to-one association to Sale
 	@OneToMany(mappedBy="Room")
 	private List<Sale> Sales;
+	
+	@OneToMany(mappedBy="room")
+	private Collection<Calendar> calendars;
 
 	public Room() {
 	}
@@ -134,6 +138,14 @@ public class Room implements Serializable {
 		Sale.setRoom(null);
 
 		return Sale;
+	}
+
+	public Collection<Calendar> getCalendars() {
+		return calendars;
+	}
+
+	public void setCalendars(Collection<Calendar> calendars) {
+		this.calendars = calendars;
 	}
 
 }

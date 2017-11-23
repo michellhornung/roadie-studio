@@ -42,11 +42,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.authorizeRequests()
-				.antMatchers("/home", "/schedule", "/calendar/new", "/report").hasAnyAuthority("USR", "ADM", "SUP")
-				.antMatchers("/user/edit", "/band/edit", "bandGenre/edit").hasAnyAuthority("SUP", "ADM", "USR")
+				.antMatchers("/home", "/report").hasAnyAuthority("usr", "adm")
+				.antMatchers("/home", "/user/edit", "/band/edit", "bandGenre/edit").hasAnyAuthority("sup", "adm")
 				.antMatchers("/home/**", "/band/**", "/bandGenre/**", "/user/**", "/schedule/**", 
 						"/stock/**", "/report/**", "/room/**",
-						"/rental/**", "/recording/**").hasAnyAuthority("ADM", "SUP", "USR")
+						"/rental/**", "/recording/**").hasAnyAuthority("adm", "sup", "usr")
 				.anyRequest().permitAll()
 			.and()
 			.formLogin()

@@ -42,13 +42,11 @@ public class Calendar implements Serializable {
 	@Column(name="DESCRIPTION")
 	private String description;
 
-	@NotBlank(message = "Data inicial é obrigatório.")
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat (pattern="dd/MM/yyyy HH:mm")
 	@Column(name="START_DATETIME")
 	private Date startDatetime;
 	
-	@NotBlank(message = "Data final é obrigatório.")
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat (pattern="dd/MM/yyyy HH:mm")
 	@Column(name="END_DATETIME")

@@ -33,15 +33,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
+	
 		web.ignoring()
-				.antMatchers("/layout/**", "/static/**");
+				.antMatchers("/layout/**");
 	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.headers().cacheControl().disable();
-		http.authorizeRequests()				
-				.antMatchers("/**").hasAnyAuthority("adm", "sup", "usr")
+
+		http.authorizeRequests()
+				.antMatchers("/home").hasAnyAuthority("usr", "adm", "sup")
+				.antMatchers("/report").hasAnyAuthority("usr", "adm")
+				.antMatchers("/user/edit", "/band/edit", "bandGenre/edit").hasAnyAuthority("sup", "adm")
+				.antMatchers("/schedule/**", "/stock/**", "/room/**", "/rental/**", "/recording/**", "/calendar/**").hasAuthority("adm")
 				.anyRequest().permitAll()
 			.and()
 			.formLogin()
